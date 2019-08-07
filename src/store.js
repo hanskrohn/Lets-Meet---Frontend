@@ -1,19 +1,34 @@
-import { createStore } from 'redux'
+import { createStore, compose, applyMiddleware } from 'redux'
+import history from './history'
+import ReduxThunk from 'redux-thunk'
+
 
 const initialState = {
-    count: 0
+    username: '',
+    name: '',
+    email: '',
+    country: '',
+    city: '',
+    password: '',
+    bio: '',
 }
 
 const reducer = ( state, action ) => {
     switch(action.type){
-        case 'INCREMENT_COUNT':
-            return {count: state.count + 1}          
+        case 'SIGN_UP':
+            history.push('/sign-in')
+        break        
     }
     return state
 }
 
-export const store = createStore(
-    reducer, 
-    initialState,
+const middleware = compose(
+    applyMiddleware(ReduxThunk),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
+
+export const store = createStore(
+    reducer,
+    initialState,
+    middleware
 )
