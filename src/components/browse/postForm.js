@@ -2,18 +2,18 @@ import React from 'react'
 import history from '../../history'
 import styled from 'styled-components'
 
-const PostForm = () => {
+const PostForm = (props) => {
     return(
         <div> 
             <Div>
-                <form>
-                    <Title placeholder="Title"/>
-                    <Address placeholder="Address"/>
-                    <Number placeholder = "Size Limit" type = "Number"/>
-                    <Date type = "date"/>
-                    <Time type = "Time"/>
-                    <TextArea placeholder = "Description"/>
-                    <Button><strong style = {{fontSize: '15px'}}> Create Meeting</strong> </Button>
+                <form onSubmit = { (e) => props.createPost(e) }>
+                    <Title placeholder = "Title" name = "Title"/>
+                    <Address placeholder = "Address" name ="Address"/>
+                    <Number placeholder = "Size Limit" type = "Number" name = "Number"/>
+                    <Date name = "Date"/>
+                    <Time placeholder = "Time" type = "time" name = "Time"/>
+                    <TextArea placeholder = "Description" name = "Description"/>
+                    <Button  ><strong style = {{fontSize: '15px'}}> Create Meeting</strong></Button>
                 </form>
             </Div>
         </div>

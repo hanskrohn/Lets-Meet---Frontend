@@ -14,7 +14,6 @@ const mapDispatchToProps = {
       'city': e.target['city'].value,
       'password': e.target['password'].value,
       'bio': e.target['bio'].value
-
     }
     let errors = validate(response)
     console.log(errors)

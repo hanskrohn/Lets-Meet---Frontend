@@ -4,23 +4,18 @@ import ReduxThunk from 'redux-thunk'
 
 
 const initialState = {
-    username: '',
-    name: '',
-    email: '',
-    country: '',
-    city: '',
-    password: '',
-    bio: '',
+
+    post: []
 }
 
 const reducer = ( state, action ) => {
     switch(action.type){
-        case 'SIGN_UP':
-            history.push('/sign-in')
-        break   
-        case 'LOG_IN':
-            history.push('/') 
-        break   
+        case 'CREATE_POST':
+            state = {
+                ...state,
+                post: state.post.concat(action.payload)
+            }
+        break
     }
     return state
 }

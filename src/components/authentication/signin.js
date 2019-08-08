@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import history from '../../history'
 import './Signin.css'
 
 const mapDispatchToProps = {
@@ -15,13 +16,15 @@ const mapDispatchToProps = {
             'Content-Type':'application/json'
         },
         body:JSON.stringify(response)
-        }).then(user => {
+        }).then(res => res.json())
+        .then(user => {
         console.log(user)
         if(user.statusText === "Internal Server Error"){
             alert('Username or Email already taken. Please select another.')
         }
         else{
-            dispatch({type: 'LOG_IN'})
+            localStorage.setItem('token', user.auth_token)
+            history.push('/')
         }
         })
           

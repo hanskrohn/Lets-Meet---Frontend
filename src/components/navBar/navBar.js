@@ -23,7 +23,7 @@ const NavBar = withRouter(() => (
             <Nav.Link style = {{height: '10vh', fontSize: '5vh', paddingTop: '1vh', color: 'black', display: 'inline-block' }} href="#pricing"><i class="glyphicon glyphicon-search"></i></Nav.Link>
            
             
-            <Nav.Link style = {{height: '10vh', fontSize: '5vh', paddingTop: '1vh', color: 'black', display: 'inline-block' }} href="#pricing"><i class="glyphicon glyphicon-user"></i></Nav.Link>
+            <Nav.Link style = {{height: '10vh', fontSize: '5vh', paddingTop: '1vh', color: 'black', display: 'inline-block' }} href="/profile"><i class="glyphicon glyphicon-user"></i></Nav.Link>
            
       </Navbar>
      
