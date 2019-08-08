@@ -1,19 +1,20 @@
 import React from 'react'
 import {PostForm} from './postForm'
+import {Posts} from './posts'
 import { connect } from 'react-redux'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import styled from 'styled-components'
+
 import './Browse.css'
 
 
 class Browse extends React.Component {
-    componentDidMount(){
 
-    }
     createPost = e =>{
         e.preventDefault()
-        console.log(e.target)
+        console.log("this is e", e.target)
         const data = {
             'Title': e.target['Title'].value,
             'Address': e.target['Address'].value,
@@ -22,6 +23,7 @@ class Browse extends React.Component {
             'Time': e.target['Time'].value,
             'Description': e.target['Description'].value
         }
+        document.post.reset()
         console.log('daddyy', data)
         fetch('http://localhost:3000/createPost',{
             method: 'POST',
@@ -39,16 +41,20 @@ class Browse extends React.Component {
         .catch( err => console.log('this be our err', err))
     }
     render(){
+        console.log(" current user" , this.props.currentUser)
         return(
                 <Container style ={{maxWidth: '100%'}}>
                     <Row style={{height: '90vh'}}>
-                        <Col style ={{boxShadow: '0 0 25px '}} sm = {3}>
+                        <Col style ={{boxShadow: '0 0 25px'}} sm = {3}>
                             <div style = {{marginTop: '20%'}}>
                                 <PostForm createPost = {this.createPost}/>
-                                
                             </div>
                         </Col>
-                        <Col sm = {9}>{this.props.post[2] ? this.props.post[2].description : null}</Col>
+                        <Col  sm = {9}>
+                            <div style = {{marginTop: '3%'}}>
+                                {this.props.post ? <Div> {this.props.post.map((item) => <Posts item = {item}/> ) }</Div>: null}   
+                            </div>
+                        </Col>
                     </Row>
                 </Container>
         )
@@ -57,9 +63,9 @@ class Browse extends React.Component {
 }
 
 const mapStateToProps = state => ({
-        post: state.post
-}
-)
+        post: state.post,
+        currentUser: state.currentUser
+})
 
 const mapDispatchToProps = {
     createPost: data => {
@@ -69,3 +75,6 @@ const mapDispatchToProps = {
 
 export default connect(mapStateToProps, mapDispatchToProps)(Browse)
 
+const Div = styled.div`
+    border: 2px solid #ccc;
+`

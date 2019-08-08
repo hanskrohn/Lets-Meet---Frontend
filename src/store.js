@@ -4,11 +4,34 @@ import ReduxThunk from 'redux-thunk'
 
 
 const initialState = {
-
-    post: []
+    currentUser: {},
+    post: [
+        {
+        description: 'description',
+        address: 'address',
+        limit: 5,
+        user_id: 1,
+        date: 'date',
+        time: 'time',
+        title: 'title',
+        id: 1
+    },
+    {
+        description: 'description',
+        address: 'address',
+        limit: 5,
+        user_id: 1,
+        date: 'date',
+        time: 'time',
+        title: 'title',
+        id: 2
+    }  
+]
 }
 
+
 const reducer = ( state, action ) => {
+    console.log(action)
     switch(action.type){
         case 'CREATE_POST':
             state = {
@@ -16,7 +39,14 @@ const reducer = ( state, action ) => {
                 post: state.post.concat(action.payload)
             }
         break
+        case 'CURRENT_USER':
+            state = {
+                ...state,
+                currentUser: action.payload
+            }
+        break
     }
+    console.log(state)
     return state
 }
 
@@ -24,6 +54,21 @@ const middleware = compose(
     applyMiddleware(ReduxThunk),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
+
+if(localStorage.getItem('token')){
+    fetch('http://localhost:3000/current_user', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}` 
+        }
+    })
+    .then(res => res.json())
+    .then(user =>{
+        store.dispatch({type: 'CURRENT_USER', payload: user})
+    })
+    
+}
 
 export const store = createStore(
     reducer,

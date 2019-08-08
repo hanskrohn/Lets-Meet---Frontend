@@ -6,14 +6,14 @@ const PostForm = (props) => {
     return(
         <div> 
             <Div>
-                <form onSubmit = { (e) => props.createPost(e) }>
+                <form onSubmit = { (e) => props.createPost(e) } name = "post">
                     <Title placeholder = "Title" name = "Title"/>
                     <Address placeholder = "Address" name ="Address"/>
                     <Number placeholder = "Size Limit" type = "Number" name = "Number"/>
                     <Date name = "Date"/>
                     <Time placeholder = "Time" type = "time" name = "Time"/>
                     <TextArea placeholder = "Description" name = "Description"/>
-                    <Button  ><strong style = {{fontSize: '15px'}}> Create Meeting</strong></Button>
+                    <Button style = {{outline: 'none'}} ><strong style = {{fontSize: '15px'}}> Create Meeting</strong></Button>
                 </form>
             </Div>
         </div>
@@ -34,6 +34,7 @@ const Button = styled.button`
     border: 2px solid #ccc;
     color: #0177F9;
     transition: 0.25s all ease-out;
+    
     &:hover {
         background-color: #0177F9; /* Green */
         color: white;

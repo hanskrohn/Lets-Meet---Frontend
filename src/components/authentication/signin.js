@@ -19,7 +19,7 @@ const mapDispatchToProps = {
         }).then(res => res.json())
         .then(user => {
         console.log(user)
-        if(user.statusText === "Internal Server Error"){
+        if(user.message === "Login Failed"){
             alert('Username or Email already taken. Please select another.')
         }
         else{
