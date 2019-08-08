@@ -17,7 +17,10 @@ const reducer = ( state, action ) => {
     switch(action.type){
         case 'SIGN_UP':
             history.push('/sign-in')
-        break        
+        break   
+        case 'LOG_IN':
+            history.push('/') 
+        break   
     }
     return state
 }

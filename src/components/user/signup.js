@@ -3,17 +3,6 @@ import { connect } from 'react-redux'
 import './Signup.css'
 
 
-const mapStateToProps = state => {
-  return{
-    username: state.username,
-    name: state.name,
-    email: state.email,
-    country: state.country,
-    city: state.city,
-    username: state.username,
-    bio: state.bio,
-  }
-}
 const mapDispatchToProps = {
   handleSubmit: (e) => dispatch => {
     e.preventDefault()
@@ -82,7 +71,7 @@ const validate = (data) => {
   return errors
 
 }
-const SignupForm = connect(mapStateToProps, mapDispatchToProps)((props) => {
+const SignupForm = connect(null, mapDispatchToProps)((props) => {
         return(
             <div className="login-page">
                 <h1 ><strong>Welcome to Let's Meet</strong></h1>
@@ -96,7 +85,7 @@ const SignupForm = connect(mapStateToProps, mapDispatchToProps)((props) => {
                         <input name = "password" type="password" placeholder="password" />
                         <input name = "bio" type="bio" placeholder="Tell us About Yourself" />
                         <button style={{"border-radius": "7px"}}>login</button>
-                        <p className="message">Not registered? <a href = "/sign-up">Create an account</a></p>
+                        <p className="message">Already registered? <a href="/sign-in">Sign In</a></p>
                     </form>
                 </div>
            </div>
