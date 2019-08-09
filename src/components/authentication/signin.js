@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import history from '../../history'
+
 import './Signin.css'
 
 const mapDispatchToProps = {
@@ -41,7 +42,7 @@ const SigninForm = connect(null, mapDispatchToProps)((props) => {
                     <input name = "username" type="username" placeholder="Username"/>
                     <input name = "password" type="password" placeholder="password" />
                     <button style={{"border-radius": "7px"}}>login</button>
-                    <p className="message">Already registered? <a href="/sign-in">Sign In</a></p>
+                    <p className="message">Not registered? <a onClick={()=>history.push('/sign-up')}>Sign Up</a></p>
                 </form>
             </div>
        </div>

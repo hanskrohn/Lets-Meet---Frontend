@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import {Profile} from './profile.js'
 import { connect } from 'react-redux'
-
+import styled from 'styled-components'
 
 
 class ProfilePage extends React.Component {
@@ -13,10 +13,10 @@ class ProfilePage extends React.Component {
         return(
                 <Container style ={{maxWidth: '100%'}}>
                     <Row style={{height: '90vh'}}>
-                        <Col style ={{boxShadow: '0 0 25px '}} sm = {3}>
-                            <div style = {{marginTop: '20%'}}>
+                        <Col style = {{padding: '0'}} sm = {3}>
+                        <DivStyle>
                                 <Profile user = {this.props.currentUser}/>
-                            </div>
+                        </DivStyle>   
                         </Col>
                         <Col sm = {9}>2 of 2</Col>
                     </Row>
@@ -34,3 +34,13 @@ const mapStateToProps = state => ({
 
 
 export default connect(mapStateToProps)(ProfilePage)
+
+const DivStyle = styled.div`
+    resize: none;
+    box-shadow: 0 0 25px;
+    position: fixed;
+    width: 25%;
+    top: 0;
+    height: 100%;
+
+`

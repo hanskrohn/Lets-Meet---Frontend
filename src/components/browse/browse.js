@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import styled from 'styled-components'
 
+
 import './Browse.css'
 
 
@@ -45,13 +46,15 @@ class Browse extends React.Component {
         return(
                 <Container style ={{maxWidth: '100%'}}>
                     <Row style={{height: '90vh'}}>
-                        <Col style ={{boxShadow: '0 0 25px'}} sm = {3}>
-                            <div style = {{marginTop: '20%'}}>
+                        <Col  sm = {3} style = {{padding: '0'}}>
+                            <DivStyle>
+                                
                                 <PostForm createPost = {this.createPost}/>
-                            </div>
+                            </DivStyle>    
+                            
                         </Col>
                         <Col  sm = {9}>
-                            <div style = {{marginTop: '3%'}}>
+                            <div style = {{marginTop: '10%'}}>
                                 {this.props.post ? <Div> {this.props.post.map((item) => <Posts item = {item}/> ) }</Div>: null}   
                             </div>
                         </Col>
@@ -77,4 +80,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(Browse)
 
 const Div = styled.div`
     border: 2px solid #ccc;
+`
+const DivStyle = styled.div`
+    resize: none;
+    box-shadow: 0 0 25px;
+    position: fixed;
+    width: 25%;
+    top: 0;
+    height: 100%;
+
 `

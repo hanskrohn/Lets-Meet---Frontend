@@ -4,8 +4,8 @@ import styled from 'styled-components'
 
 const PostForm = (props) => {
     return(
-        <div> 
-            <Div>
+        <div style ={{paddingLeft: '5%'}}>
+            <Div >
                 <form onSubmit = { (e) => props.createPost(e) } name = "post">
                     <Title placeholder = "Title" name = "Title"/>
                     <Address placeholder = "Address" name ="Address"/>
@@ -19,11 +19,16 @@ const PostForm = (props) => {
         </div>
     )
 }
+
 const Div = styled.div`
     border: 2px solid #ccc;
     resize: none;
     height: 530px;
     box-shadow: 0 0 50px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    position: fixed;
+    width: 22%;
+    top: 16%;
+    
 `
 const Button = styled.button`
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
@@ -34,6 +39,7 @@ const Button = styled.button`
     border: 2px solid #ccc;
     color: #0177F9;
     transition: 0.25s all ease-out;
+    
     
     &:hover {
         background-color: #0177F9; /* Green */
@@ -53,6 +59,7 @@ const TextArea = styled.textarea`
     font-size: 16px;
     resize: none;
     margin-bottom: 5px;
+   
 `
 const Title = styled.input`
     margin-top: 3%;
@@ -66,6 +73,7 @@ const Title = styled.input`
     font-size: 16px;
     resize: none;
     margin-bottom: 5px;
+    
 `
 const Address = styled.input`
     width: 94%;

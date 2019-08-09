@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import history from '../../history'
 import './Signup.css'
 
 
@@ -30,7 +31,7 @@ const mapDispatchToProps = {
             alert('Username or Email already taken. Please select another.')
           }
           else{
-            dispatch({type: 'SIGN_UP'})
+            history.push('/sign-in')
           }
         })
         
@@ -83,8 +84,8 @@ const SignupForm = connect(null, mapDispatchToProps)((props) => {
                         <input name = "city" type="city" placeholder="City" />
                         <input name = "password" type="password" placeholder="password" />
                         <input name = "bio" type="bio" placeholder="Tell us About Yourself" />
-                        <button style={{"border-radius": "7px"}}>login</button>
-                        <p className="message">Already registered? <a href="/sign-in">Sign In</a></p>
+                        <button style={{"border-radius": "7px"}}>Sign Up</button>
+                        <p className="message">Already registered? <a onClick={()=>history.push('/sign-in')}>Sign In</a></p>
                     </form>
                 </div>
            </div>
