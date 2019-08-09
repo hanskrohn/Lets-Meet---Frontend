@@ -20,7 +20,7 @@ const NavBar = withRouter(({ history }) => (
             <Navbar.Brand style = {{ fontSize: '5vh', paddingTop: '1vh', color: 'black', display: 'inline-block' }} >Navbar</Navbar.Brand>
            
             
-            <Nav.Link style = {{ fontSize: '5vh', paddingTop: '1vh', color: 'black', display: 'inline-block' }} href="#pricing"><i class="glyphicon glyphicon-search"></i></Nav.Link>
+            <Nav.Link style = {{ fontSize: '5vh', paddingTop: '1vh', color: 'black', display: 'inline-block' }} onClick={()=>history.push('/search')}><i class="glyphicon glyphicon-search"></i></Nav.Link>
            
             
             <Nav.Link style = {{ fontSize: '5vh', paddingTop: '1vh', color: 'black', display: 'inline-block' }} onClick={()=>history.push('/profile')}><i class="glyphicon glyphicon-user"></i></Nav.Link>

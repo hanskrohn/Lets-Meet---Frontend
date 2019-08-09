@@ -7,6 +7,7 @@ import Signup from './components/authentication/signup.js'
 import Browse from './components/browse/browse.js'
 import NavBar from './components/navBar/navBar.js'
 import ProfilePage from './components/users/profilePage.js'
+import SearchPage from './components/search/searchPage.js'
 
 
 
@@ -19,6 +20,7 @@ const App = () => {
         <Route exact path = "/sign-in" component = {Signin}></Route>
         <Route exact path = "/" component = {Browse}></Route>
         <Route exaxt path = '/profile' component = {ProfilePage}></Route>
+        <Route exaxt path = '/search' component = {SearchPage}></Route>
     </Router>
   );
 }

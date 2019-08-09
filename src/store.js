@@ -26,7 +26,8 @@ const initialState = {
         title: 'title',
         id: 2
     }  
-]
+], 
+    users: []
 }
 
 
@@ -43,6 +44,12 @@ const reducer = ( state, action ) => {
             state = {
                 ...state,
                 currentUser: action.payload
+            }
+        break
+        case 'GET_USERS':
+            state = {
+                ...state,
+                users: action.payload
             }
         break
     }
@@ -66,6 +73,20 @@ if(localStorage.getItem('token')){
     .then(res => res.json())
     .then(user =>{
         store.dispatch({type: 'CURRENT_USER', payload: user})
+    })
+    
+}
+if(localStorage.getItem('token')){
+    fetch('http://localhost:3000/users', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}` 
+        }
+    })
+    .then(res => res.json())
+    .then(user =>{
+        store.dispatch({type: 'GET_USERS', payload: user})
     })
     
 }
