@@ -12,10 +12,10 @@ class ProfilePage extends React.Component {
         let users;
         if(this.state.search){   
           users = this.props.users.filter( (user)=>{
-            return user.name.toLowerCase().includes(this.state.search)
+            return user.username.toLowerCase().includes(this.state.search)
           })
         }
-        console.log(" this is users", users)
+        
         return(
                 <Container style ={{maxWidth: '100%', paddingTop: '120px'}}>
                     <div>

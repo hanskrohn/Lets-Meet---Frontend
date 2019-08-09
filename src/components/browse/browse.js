@@ -36,7 +36,6 @@ class Browse extends React.Component {
         })
         .then( res => res.json())
         .then( post =>{
-            console.log(post);
             this.props.createPost(post);
         })
         .catch( err => console.log('this be our err', err))

@@ -5,18 +5,20 @@ import styled from 'styled-components'
 
 class User extends React.Component  {
     render(){
-        console.log(this.props)
+        console.log(" this is the props" , this.props)
         return(
-            <div style = {{paddingTop: '3%'}} > 
-                <Div >
-                    <div style = {{ width: '10%'}}>
-                        <Img src = {this.props.user.profile_img}/>
-                    </div>  
-                    <div>
-                        <h3 style = {{paddingTop: '25px'}}>{this.props.user.username}</h3>
-                    </div>
-                </Div>
-            </div>
+            
+                 <div style = {{paddingTop: '3%'}} > 
+                    <Div >
+                        <div style = {{ width: '10%'}}>
+                            <Img src = {this.props.user.profile_img}/>
+                        </div>  
+                        <div>
+                            <h3 style = {{paddingTop: '25px'}}>{this.props.user.username}</h3>
+                        </div>
+                    </Div>
+                </div>
+      
         )
     }
 }
