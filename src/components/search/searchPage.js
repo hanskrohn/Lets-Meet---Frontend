@@ -9,15 +9,30 @@ class ProfilePage extends React.Component {
         search: ''
     }
     render(){
-        console.log(this.props)
+        let users;
+        if(this.state.search){   
+          users = this.props.users.filter( (user)=>{
+            return user.name.toLowerCase().includes(this.state.search)
+          })
+        }
+        console.log(" this is users", users)
         return(
-                <Container style ={{maxWidth: '100%'}}>
+                <Container style ={{maxWidth: '100%', paddingTop: '120px'}}>
                     <div>
                         <Search name = "search" placeholder = "Search" onChange = { (e) => this.setState({search: e.target.value}) }/>
                     </div>
-                    <div>
-                        <Div>
-                           <User search = {this.state.search}/> 
+                    <div style ={{paddingBottom: '50px'}}>
+                        <Div >
+                            
+                                { this.state.search !== "" 
+                                    ? 
+                                        <div style = {{ paddingBottom: '3%'}}> 
+                                            {users.map((user) => < User  user = {user} />)}
+                                        </div> 
+                                    : 
+                                        null
+                                }
+                            
                         </Div>
                     </div>
                 </Container>
@@ -28,7 +43,8 @@ class ProfilePage extends React.Component {
 
 const mapStateToProps = state => ({
     post: state.post,
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    users: state.users
 })
 
 
@@ -36,7 +52,6 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps)(ProfilePage)
 
 const Search = styled.input`
-    margin-top: 8%;
     width: 90%;
     padding: 12px 20px;
     box-sizing: border-box;
@@ -51,11 +66,12 @@ const Search = styled.input`
 `
 const Div = styled.div`
     margin-top: 3%;
-    box-shadow: 0 0 25px;
+    box-shadow: 0 0 50px 0 rgba(0,0,0,0.4), 0 0px 20px 0 rgba(0,0,0,0.19);
     width: 86%;
     margin-left: 7%;
     margin-right: 7%;
     height: 100%;
+    
 `
 
 
