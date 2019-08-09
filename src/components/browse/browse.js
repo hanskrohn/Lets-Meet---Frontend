@@ -54,7 +54,7 @@ class Browse extends React.Component {
                             
                         </Col>
                         <Col  sm = {9}>
-                            <div style = {{marginTop: '10%'}}>
+                            <div style = {{paddingTop: '120px', paddingBottom: '20px'}}>
                                 {this.props.post ? <Div> {this.props.post.map((item) => <Posts item = {item}/> ) }</Div>: null}   
                             </div>
                         </Col>
