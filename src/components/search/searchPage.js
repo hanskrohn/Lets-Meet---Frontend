@@ -19,7 +19,7 @@ class ProfilePage extends React.Component {
         return(
                 <Container style ={{maxWidth: '100%', paddingTop: '120px'}}>
                     <div>
-                        <Search name = "search" placeholder = "Search" onChange = { (e) => this.setState({search: e.target.value}) }/>
+                        <Search  autocomplete= "off" name = "search" placeholder = "Search" onChange = { (e) => this.setState({search: e.target.value}) }/>
                     </div>
                     <div style ={{paddingBottom: '50px'}}>
                         <Div >
@@ -63,6 +63,7 @@ const Search = styled.input`
     margin-bottom: 5px;
     margin-left: 5%;
     margin-right: 5%;
+   
 `
 const Div = styled.div`
     margin-top: 3%;

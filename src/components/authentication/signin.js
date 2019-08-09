@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import history from '../../history'
-
 import './Signin.css'
 
 const mapDispatchToProps = {
@@ -28,9 +27,34 @@ const mapDispatchToProps = {
             history.push('/')
         }
         })
-          
+        fetch('http://localhost:3000/current_user', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}` 
+            }
+        })
+        .then(res => res.json())
+        .then(user =>{
+            dispatch({type: 'GET_USERS', payload: user})
+        })
+        
+        fetch('http://localhost:3000/users', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}` 
+            }
+        })
+        .then(res => res.json())
+        .then(user =>{
+            dispatch({type: 'CURRENT_USER', payload: user})
+        })
+        
         
     }
+
+    
 }
 
 const SigninForm = connect(null, mapDispatchToProps)((props) => {
@@ -49,4 +73,5 @@ const SigninForm = connect(null, mapDispatchToProps)((props) => {
     )
 })
 
-export default SigninForm
+
+export default (SigninForm)

@@ -25,6 +25,66 @@ const initialState = {
         time: 'time',
         title: 'title',
         id: 2
+    },
+    {
+        description: 'description',
+        address: 'address',
+        limit: 5,
+        user_id: 1,
+        date: 'date',
+        time: 'time',
+        title: 'title',
+        id: 2
+    }  ,
+    {
+        description: 'description',
+        address: 'address',
+        limit: 5,
+        user_id: 1,
+        date: 'date',
+        time: 'time',
+        title: 'title',
+        id: 2
+    }  ,
+    {
+        description: 'description',
+        address: 'address',
+        limit: 5,
+        user_id: 1,
+        date: 'date',
+        time: 'time',
+        title: 'title',
+        id: 2
+    }  ,
+    {
+        description: 'description',
+        address: 'address',
+        limit: 5,
+        user_id: 1,
+        date: 'date',
+        time: 'time',
+        title: 'title',
+        id: 2
+    }  ,
+    {
+        description: 'description',
+        address: 'address',
+        limit: 5,
+        user_id: 1,
+        date: 'date',
+        time: 'time',
+        title: 'title',
+        id: 2
+    }  ,
+    {
+        description: 'description',
+        address: 'address',
+        limit: 5,
+        user_id: 1,
+        date: 'date',
+        time: 'time',
+        title: 'title',
+        id: 2
     }  
 ], 
     users: []
@@ -75,8 +135,6 @@ if(localStorage.getItem('token')){
         store.dispatch({type: 'CURRENT_USER', payload: user})
     })
     
-}
-if(localStorage.getItem('token')){
     fetch('http://localhost:3000/users', {
         method: 'GET',
         headers: {
