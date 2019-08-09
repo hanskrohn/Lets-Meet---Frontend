@@ -9,7 +9,7 @@ import {UserPosts} from './userPosts.js'
 
 class ProfilePage extends React.Component {
     render(){
-        console.log(this.props)
+        console.log("my posts ", this.props)
         return(
                 <Container style ={{maxWidth: '100%'}}>
                     <Row style={{height: '90vh'}}>
@@ -22,31 +22,31 @@ class ProfilePage extends React.Component {
                             <Hub> 
                                 <Row >
                                     <Col >
-                                        <div style = {{paddingTop: '120px', marginLeft: '90px'}}>
+                                        <div style = {{paddingTop: '120px', paddingLeft: '40%'}}>
                                             <div style = {{fontSize: '75px'}}>
                                                 <strong> 16</strong>
                                             </div>
-                                            <div style = {{fontSize: '25px',  marginLeft: '15px' }}>
+                                            <div style = {{fontSize: '25px'   }}>
                                                 <strong>Post</strong>
                                             </div>
                                         </div>
                                     </Col>
                                     <Col >
-                                        <div style = {{paddingTop: '120px', marginLeft: '60px'}}>
+                                        <div style = {{paddingTop: '120px', paddingLeft: '30%'}}>
                                             <div style = {{fontSize: '75px'}}>
                                                 <strong> 16</strong>
                                             </div>
-                                            <div style = {{fontSize: '25px',  marginLeft: '-9px' }}>
+                                            <div style = {{fontSize: '25px' }}>
                                                 <strong>Followers</strong>
                                             </div>
                                         </div>
                                     </Col>
                                     <Col >
-                                        <div style = {{paddingTop: '120px', marginLeft: '30px'}}>
+                                        <div style = {{paddingTop: '120px', paddingLeft: '25%'}}>
                                             <div style = {{fontSize: '75px'}}>
                                                 <strong> 16</strong>
                                             </div>
-                                            <div style = {{fontSize: '25px',  marginLeft: '-7px' }}>
+                                            <div style = {{fontSize: '25px' }}>
                                                 <strong>Following</strong>
                                             </div>
                                         </div>
@@ -54,7 +54,7 @@ class ProfilePage extends React.Component {
                                 </Row>
                             </Hub>
                             <PostContainer>
-                                {this.props.post ? this.props.post.map((post) => <UserPosts post = {post}/> ) : null}
+                                {this.props.usersPost ? this.props.usersPost.map((post) => <UserPosts post = {post}/> ) : null}
                             </PostContainer>
                         </Col>
                     </Row>
@@ -65,7 +65,7 @@ class ProfilePage extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    post: state.post,
+    usersPost: state.usersPost,
     currentUser: state.currentUser
 })
 

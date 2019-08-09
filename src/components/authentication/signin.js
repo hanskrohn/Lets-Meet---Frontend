@@ -51,6 +51,17 @@ const mapDispatchToProps = {
             dispatch({type: 'CURRENT_USER', payload: user})
         })
         
+        fetch('http://localhost:3000/usersPost', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}` 
+            }
+        })
+        .then(res => res.json())
+        .then(user =>{
+            dispatch({type: 'USERS_POSTS', payload: user})
+        })
         
     }
 

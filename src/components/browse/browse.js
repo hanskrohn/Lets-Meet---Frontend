@@ -17,12 +17,12 @@ class Browse extends React.Component {
         e.preventDefault()
         console.log("this is e", e.target)
         const data = {
-            'Title': e.target['Title'].value,
-            'Address': e.target['Address'].value,
-            'Number': e.target['Number'].value,
-            'Date': e.target['Date'].value,
-            'Time': e.target['Time'].value,
-            'Description': e.target['Description'].value
+            'title': e.target['Title'].value,
+            'address': e.target['Address'].value,
+            'number': e.target['Number'].value,
+            'date': e.target['Date'].value,
+            'time': e.target['Time'].value,
+            'description': e.target['Description'].value
         }
         document.post.reset()
         console.log('daddyy', data)
@@ -38,7 +38,7 @@ class Browse extends React.Component {
         .then( post =>{
             this.props.createPost(post);
         })
-        .catch( err => console.log('this be our err', err))
+        
     }
     render(){
         console.log(" current user" , this.props.currentUser)
@@ -72,7 +72,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
     createPost: data => {
         return { payload: data, type: 'CREATE_POST' }
-    }
+    }  
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Browse)

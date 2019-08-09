@@ -6,97 +6,23 @@ import ReduxThunk from 'redux-thunk'
 const initialState = {
     currentUser: {},
     post: [
-        {
-        description: 'description',
-        address: 'address',
-        limit: 5,
-        user_id: 1,
-        date: 'date',
-        time: 'time',
-        title: 'title',
-        id: 1
-    },
-    {
-        description: 'description',
-        address: 'address',
-        limit: 5,
-        user_id: 1,
-        date: 'date',
-        time: 'time',
-        title: 'title',
-        id: 2
-    },
-    {
-        description: 'description',
-        address: 'address',
-        limit: 5,
-        user_id: 1,
-        date: 'date',
-        time: 'time',
-        title: 'title',
-        id: 2
-    }  ,
-    {
-        description: 'description',
-        address: 'address',
-        limit: 5,
-        user_id: 1,
-        date: 'date',
-        time: 'time',
-        title: 'title',
-        id: 2
-    }  ,
-    {
-        description: 'description',
-        address: 'address',
-        limit: 5,
-        user_id: 1,
-        date: 'date',
-        time: 'time',
-        title: 'title',
-        id: 2
-    }  ,
-    {
-        description: 'description',
-        address: 'address',
-        limit: 5,
-        user_id: 1,
-        date: 'date',
-        time: 'time',
-        title: 'title',
-        id: 2
-    }  ,
-    {
-        description: 'description',
-        address: 'address',
-        limit: 5,
-        user_id: 1,
-        date: 'date',
-        time: 'time',
-        title: 'title',
-        id: 2
-    }  ,
-    {
-        description: 'description',
-        address: 'address',
-        limit: 5,
-        user_id: 1,
-        date: 'date',
-        time: 'time',
-        title: 'title',
-        id: 2
-    }  
-], 
+       
+    ], 
+    usersPost: [
+
+    ],
     users: []
 }
 
 
 const reducer = ( state, action ) => {
     console.log(action)
+    console.log(state)
     switch(action.type){
         case 'CREATE_POST':
             state = {
                 ...state,
+                usersPost: [action.payload, ...state.usersPost],
                 post: state.post.concat(action.payload)
             }
         break
@@ -110,6 +36,12 @@ const reducer = ( state, action ) => {
             state = {
                 ...state,
                 users: action.payload
+            }
+        break
+        case 'USERS_POSTS':
+            state = {
+                ...state,
+                usersPost: state.usersPost.concat(action.payload)
             }
         break
     }
@@ -145,6 +77,18 @@ if(localStorage.getItem('token')){
     .then(res => res.json())
     .then(user =>{
         store.dispatch({type: 'GET_USERS', payload: user})
+    })
+
+    fetch('http://localhost:3000/usersPost', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}` 
+        }
+    })
+    .then(res => res.json())
+    .then(user =>{
+        store.dispatch({type: 'USERS_POSTS', payload: user})
     })
     
 }
