@@ -4,7 +4,6 @@ import history from '../../history'
 import styled from 'styled-components'
 
 const Profile = (props) => {
-    console.log(props)
     return(
         
         <div style ={{paddingLeft: '5%'}}> 
@@ -19,27 +18,27 @@ const Profile = (props) => {
                 </div>
                 <br></br>
                 <div>
-                    <h1 style = {{fontSize: '600%'}}>{props.user.username}</h1>
+                    <h1 style = {{fontSize: '400%'}}>{props.user.username}</h1>
                 </div>
                 <br></br>
                 <div>
-                    <h3>{props.user.name}</h3>
+                    <h4>{props.user.name}</h4>
                 </div>
                 <br></br>
                 <div>
-                    <h3>{props.user.email}</h3>
+                    <h4>{props.user.email}</h4>
                 </div>
                 <br></br>
                 <div>
-                    <h3>{props.user.country}</h3>
+                    <h4>{props.user.country}</h4>
                 </div>
                 <br></br>
                 <div>
-                    <h3>{props.user.city}</h3>
+                    <h4>{props.user.city}</h4>
                 </div>
                 <br></br>
                 <div>
-                    <h3>{props.user.bio}</h3>
+                    <h4>{props.user.bio}</h4>
                 </div>
             </Div>
         </div>

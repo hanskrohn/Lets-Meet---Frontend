@@ -5,25 +5,24 @@ import ReduxThunk from 'redux-thunk'
 
 const initialState = {
     currentUser: {},
-    post: [
-       
-    ], 
-    usersPost: [
-
-    ],
-    users: []
+    post: [], 
+    usersPost: [],
+    chosenUserPost: [],
+    users: [],
+    followers: [],
+    following: [],
+    chosenUser: {},
+    chosenUserPost: []
 }
 
 
 const reducer = ( state, action ) => {
-    console.log(action)
-    console.log(state)
     switch(action.type){
         case 'CREATE_POST':
             state = {
                 ...state,
                 usersPost: [action.payload, ...state.usersPost],
-                post: state.post.concat(action.payload)
+                post: [action.payload, ...state.post]
             }
         break
         case 'CURRENT_USER':
@@ -44,8 +43,31 @@ const reducer = ( state, action ) => {
                 usersPost: state.usersPost.concat(action.payload)
             }
         break
+        case 'GET_FOLLOWERS':
+            state = {
+                ...state,
+                followers: action.payload
+            }
+        break
+        case 'GET_FOLLOWING':
+            state = {
+                ...state,
+                following: action.payload
+            }
+        break
+        case 'SET_USER':
+            state = {
+                ...state,
+                chosenUser: action.payload
+            }
+        break
+        case 'CHOSEN_USER_POST':
+            state = {
+                ...state,
+                chosenUserPost: action.payload
+            }
+        break
     }
-    console.log(state)
     return state
 }
 
@@ -65,30 +87,6 @@ if(localStorage.getItem('token')){
     .then(res => res.json())
     .then(user =>{
         store.dispatch({type: 'CURRENT_USER', payload: user})
-    })
-    
-    fetch('http://localhost:3000/users', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('token')}` 
-        }
-    })
-    .then(res => res.json())
-    .then(user =>{
-        store.dispatch({type: 'GET_USERS', payload: user})
-    })
-
-    fetch('http://localhost:3000/usersPost', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('token')}` 
-        }
-    })
-    .then(res => res.json())
-    .then(user =>{
-        store.dispatch({type: 'USERS_POSTS', payload: user})
     })
     
 }

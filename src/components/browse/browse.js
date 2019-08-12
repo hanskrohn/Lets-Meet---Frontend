@@ -19,7 +19,7 @@ class Browse extends React.Component {
         const data = {
             'title': e.target['Title'].value,
             'address': e.target['Address'].value,
-            'number': e.target['Number'].value,
+            'limit': e.target['limit'].value,
             'date': e.target['Date'].value,
             'time': e.target['Time'].value,
             'description': e.target['Description'].value
@@ -41,7 +41,6 @@ class Browse extends React.Component {
         
     }
     render(){
-        console.log(" current user" , this.props.currentUser)
         return(
                 <Container style ={{maxWidth: '100%'}}>
                     <Row style={{height: '90vh'}}>

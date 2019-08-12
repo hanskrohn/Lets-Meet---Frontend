@@ -9,7 +9,7 @@ const PostForm = (props) => {
                 <form onSubmit = { (e) => props.createPost(e) } name = "post">
                     <Title placeholder = "Title" name = "Title"/>
                     <Address placeholder = "Address" name ="Address"/>
-                    <Number placeholder = "Size Limit" type = "Number" name = "Number"/>
+                    <Number placeholder = "Size Limit" type = "Number" name = "limit"/>
                     <Date name = "Date"/>
                     <Time placeholder = "Time" type = "time" name = "Time"/>
                     <TextArea placeholder = "Description" name = "Description"/>

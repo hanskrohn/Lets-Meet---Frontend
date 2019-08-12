@@ -10,13 +10,11 @@ class UserPosts extends React.Component {
     }
 
     handleView = () =>{
-        console.log("in here")
             this.setState({
                 viewDescription: !this.state.viewDescription
             })
     }
     render(){
-        console.log(" what i want", this.props)
         return(
         <div> 
             <CardDiv>
