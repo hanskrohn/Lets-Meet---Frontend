@@ -75,7 +75,7 @@ class ProfilePage extends React.Component {
                             <Hub> 
                                 <Row >
                                     <Col >
-                                        <div style = {{paddingTop: '120px', paddingLeft: '40%'}}>
+                                        <div style = {{paddingTop: '100px', paddingLeft: '40%'}}>
                                             <div style = {{fontSize: '75px'}}>
                                                 <strong> 16</strong>
                                             </div>
@@ -85,7 +85,7 @@ class ProfilePage extends React.Component {
                                         </div>
                                     </Col>
                                     <Col >
-                                        <div style = {{paddingTop: '120px', paddingLeft: '30%'}}>
+                                        <div style = {{paddingTop: '100px', paddingLeft: '30%'}}>
                                             <div style = {{fontSize: '75px'}}>
                                                 <strong></strong>
                                             </div>
@@ -95,7 +95,7 @@ class ProfilePage extends React.Component {
                                         </div>
                                     </Col>
                                     <Col >
-                                        <div style = {{paddingTop: '120px', paddingLeft: '25%'}}>
+                                        <div style = {{paddingTop: '100px', paddingLeft: '25%'}}>
                                             <div style = {{fontSize: '75px'}}>
                                                 <strong></strong>
                                             </div>
@@ -142,7 +142,7 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage)
 
 const PostContainer = styled.div`
-    padding-top: 320px;
+    padding-top: 310px;
 `
 
 const DivStyle = styled.div`

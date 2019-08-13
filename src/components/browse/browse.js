@@ -40,6 +40,19 @@ class Browse extends React.Component {
         })
         
     }
+    componentDidMount(){
+        fetch('http://localhost:3000/visiblePost', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}` 
+            }
+        })
+        .then(res => res.json())
+        .then(user =>{
+            this.props.getPost(user)
+        })
+    }
     render(){
         console.log("props", this.props)
         return(
@@ -72,7 +85,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
     createPost: data => {
         return { payload: data, type: 'CREATE_POST' }
-    }  
+    },
+    getPost: data => {
+        return {type: 'GET_POST', payload: data}
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Browse)

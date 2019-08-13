@@ -73,6 +73,15 @@ const reducer = ( state, action ) => {
                 ...state,
                 post: action.payload
             }
+        break
+        case 'UNFOLLOW_USER':
+            let following = state.following.filter( (user) => {
+                return user!==action.payload
+            })
+            state = {
+                ...state,
+                following: following
+            }
     }
     return state
 }
@@ -93,19 +102,7 @@ if(localStorage.getItem('token')){
     .then(res => res.json())
     .then(user =>{
         store.dispatch({type: 'CURRENT_USER', payload: user})
-    })
-    
-    fetch('http://localhost:3000/visiblePost', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('token')}` 
-        }
-    })
-    .then(res => res.json())
-    .then(user =>{
-        store.dispatch({type: 'GET_POST', payload: user})
-    })
+    }) 
 }
 
 export const store = createStore(

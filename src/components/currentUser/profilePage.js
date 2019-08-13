@@ -10,6 +10,8 @@ import history from '../../history.js'
 
 const ProfilePage = (props) => {
 
+
+    
     useEffect(() => {
         if (props.currentUser) {
             fetch(`http://localhost:3000/followers/${props.currentUser.id}`, {
@@ -56,13 +58,21 @@ const ProfilePage = (props) => {
                 <Col style={{ padding: '0' }} sm={3}>
                     <DivStyle>
                         <Profile user={props.currentUser} />
+                        <SignOut>
+                            <Btn  onClick={() => {
+                                localStorage.clear()
+                                props.history.push('/sign-in')}
+                            }>
+                                <h3><strong>Sign-Out</strong></h3>
+                            </Btn>
+                        </SignOut>
                     </DivStyle>
                 </Col>
                 <Col sm={9}>
                     <Hub>
                         <Row >
                             <Col >
-                                <div style={{ paddingTop: '120px', paddingLeft: '40%' }}>
+                                <div style={{ paddingTop: '100px', paddingLeft: '40%' }}>
                                     <div style={{ fontSize: '75px' }}>
                                         <strong> 16</strong>
                                     </div>
@@ -72,7 +82,7 @@ const ProfilePage = (props) => {
                                 </div>
                             </Col>
                             <Col >
-                                <div style={{ paddingTop: '120px', paddingLeft: '30%', cursor: 'pointer' }} onClick={() => history.push('/followers')}>
+                                <div style={{ paddingTop: '100px', paddingLeft: '30%', cursor: 'pointer' }} onClick={() => history.push('/followers')}>
                                     <div style={{ fontSize: '75px' }}>
                                         <strong>{props.followers.length > 0 ? props.followers.length : 0}</strong>
                                     </div>
@@ -82,7 +92,7 @@ const ProfilePage = (props) => {
                                 </div>
                             </Col>
                             <Col >
-                                <div style={{ paddingTop: '120px', paddingLeft: '25%', cursor: 'pointer' }} onClick={() => history.push('/following')}>
+                                <div style={{ paddingTop: '100px', paddingLeft: '25%', cursor: 'pointer' }} onClick={() => history.push('/following')}>
                                     <div style={{ fontSize: '75px' }}>
                                         <strong>{props.following.length > 0 ? props.following.length : 0}</strong>
                                     </div>
@@ -125,9 +135,22 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage)
 
 const PostContainer = styled.div`
-    padding-top: 320px;
+    padding-top: 310px;
 `
-
+const SignOut = styled.div`
+    border: 2px solid #ccc;
+    position: absolute;
+    bottom: 0;
+    height: 50px;
+    width: 100%;
+`
+const Btn = styled.button`
+    height: 50px;
+    margin-right: 3%;
+    background-color: white;
+    color: #000;
+    width: 100%;
+`
 const DivStyle = styled.div`
     resize: none;
     box-shadow: 0 0 25px;
@@ -138,7 +161,7 @@ const DivStyle = styled.div`
 
 `
 const Hub = styled.div`
-    height: 300px;
+    height: 285px;
     position: absolute;
     box-shadow: 0 0 25px;
     width: 70%;

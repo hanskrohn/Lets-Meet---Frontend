@@ -35,6 +35,18 @@ class ProfilePage extends React.Component {
 
     }
 
+    unfollow = (user) =>{
+        console.log(user)
+        fetch(`http://localhost:3000/unfollow/${user.id}`,{
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}` 
+            }
+        })
+
+    }
+
 
     render(){
         let users;
@@ -55,7 +67,7 @@ class ProfilePage extends React.Component {
                                 { this.state.search !== "" 
                                     ? 
                                         <div style = {{ paddingBottom: '3%'}}> 
-                                            {users.map((user) => < User follow = {this.follow} user = {user} />)}
+                                            {users.map((user) => < User follow = {this.follow} unfollow = {this.unfollow} user = {user} />)}
                                         </div> 
                                     : 
                                         null

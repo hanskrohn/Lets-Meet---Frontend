@@ -4,13 +4,13 @@ import history from '../../history'
 import './Signin.css'
 
 const mapDispatchToProps = {
-    handleSubmit: (e) => dispatch => {
+    handleSubmit: (e) => async dispatch => {
       e.preventDefault()
       const response = {
         'username': e.target['username'].value,
         'password': e.target['password'].value,
       }
-        fetch('http://localhost:3000/login',{
+        await fetch('http://localhost:3000/login',{
         method: 'POST',
         headers:{
             'Content-Type':'application/json'
@@ -28,7 +28,20 @@ const mapDispatchToProps = {
         }
         })
                 
-        fetch('http://localhost:3000/current_user', {
+        await fetch('http://localhost:3000/current_user', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}` 
+            }
+        })
+        .then(res => res.json())
+        .then(user =>{
+            console.log(localStorage.getItem('token'))
+            dispatch({type: 'CURRENT_USER', payload: user})
+        })
+        
+        await fetch('http://localhost:3000/users', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -38,18 +51,6 @@ const mapDispatchToProps = {
         .then(res => res.json())
         .then(user =>{
             dispatch({type: 'GET_USERS', payload: user})
-        })
-        
-        fetch('http://localhost:3000/users', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}` 
-            }
-        })
-        .then(res => res.json())
-        .then(user =>{
-            dispatch({type: 'CURRENT_USER', payload: user})
         })
         
         

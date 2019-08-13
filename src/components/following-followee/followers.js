@@ -9,6 +9,31 @@ class Followers extends React.Component {
         search: ''
     }
   
+    follow = (user) =>{
+        console.log(user)
+        fetch(`http://localhost:3000/follow/${user.id}`,{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}` 
+            },
+            body: JSON.stringify(user)
+        })
+
+    }
+
+    unfollow = (user) =>{
+        console.log(user)
+        fetch(`http://localhost:3000/unfollow/${user.id}`,{
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}` 
+            }
+        })
+        this.props.unfollow(user)
+
+    }
 
 
     render(){
@@ -27,7 +52,7 @@ class Followers extends React.Component {
                     <div style ={{paddingBottom: '50px'}}>
                         <Div >
                             <div style = {{ paddingBottom: '3%'}}> 
-                                {this.props.followers.map((user) => < User follow = {this.follow} user = {user} />)}
+                                {this.props.followers.map((user) => < User follow = {this.follow} unfollow = {this.unfollow} user = {user} />)}
                             </div> 
                         </Div>
                     </div>
@@ -46,6 +71,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps ={
     getUser: data => {
         return {type: 'GET_USERS', payload: data}
+    },
+    unfollow: data => {
+        return {type: 'UNFOLLOW_USER', payload: data}
     }
 }
 

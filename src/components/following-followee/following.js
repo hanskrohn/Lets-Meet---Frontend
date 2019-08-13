@@ -12,13 +12,13 @@ class Following extends React.Component {
     unfollow = (user) =>{
         console.log(user)
         fetch(`http://localhost:3000/unfollow/${user.id}`,{
-            method: 'POST',
+            method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem('token')}` 
-            },
-            body: JSON.stringify(user)
+            }
         })
+        this.props.unfollow(user)
 
     }
 
@@ -57,6 +57,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps ={
     getUser: data => {
         return {type: 'GET_USERS', payload: data}
+    },
+    unfollow: data => {
+        return {type: 'UNFOLLOW_USER', payload: data}
     }
 }
 
