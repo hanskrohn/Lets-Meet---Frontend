@@ -22,14 +22,32 @@ class Posts extends React.Component {
         <div> 
             <CardDiv>
                 <Card>
-                    <Card.Header style ={{fontSize: '25px'}}>{this.props.item.title}</Card.Header>
+                    <Card.Header style ={{fontSize: '25px'}}>
+                        <Div>
+                            <div style ={{flex: '82'}}>
+                                {this.props.item.title}
+                            </div>
+                            <div style ={{height: '40px', width: '2px', backgroundColor: '#B0B0B0'}}> </div>
+                            <div style ={{flex: '8', paddingLeft: '5%', color: 'red'}}> 
+                                <i class="glyphicon glyphicon-bookmark"></i>
+                            </div>
+                            <div style ={{height: '40px', width: '2px', backgroundColor: '#B0B0B0'}}> </div>
+                            <div style ={{flex: '8', paddingLeft: '5%'}}> 
+                            <i class="glyphicon glyphicon-comment"></i>
+                            </div>
+                            
+                        </Div>
+                    </Card.Header>
                     {this.state.viewDescription
                         ?
                         <Card.Body>
                             <Card.Text style ={{fontSize: '16px'}}>Address: {this.props.item.address}</Card.Text>
                             <Card.Text style ={{fontSize: '16px'}}>Address: {this.props.item.time}</Card.Text>
                             <Card.Text style ={{fontSize: '16px'}}>Address: {this.props.item.date}</Card.Text>
-                            <Button onClick = { () => this.handleView() } className = "float-right" style = {{paddingLeft: '4%', paddingRight: '4%'}} ><strong style = {{fontSize: '15px'}}>Back</strong></Button>
+                            <div style ={{height: '2px', width: '100%', backgroundColor: '#B0B0B0'}}> </div>
+                                <div style ={{paddingTop: '2%'}}>
+                                    <h3 className = "float-right" onClick = { () => this.handleView() }><strong style = {{fontSize: '15px'}}>Back</strong></h3>
+                                </div>
                         </Card.Body>
                         :
                         <Card.Body>
@@ -41,8 +59,10 @@ class Posts extends React.Component {
                             <Card.Text style ={{fontSize: '16px'}}>
                                 Spots: {this.props.item.limit}
                             </Card.Text>
-                            
-                            <Button onClick = { () => this.handleView() }className = "float-right" variant="primary"><strong style = {{fontSize: '15px'}}>View Details</strong></Button>
+                                <div style ={{height: '2px', width: '100%', backgroundColor: '#B0B0B0'}}> </div>
+                                <div style ={{paddingTop: '2%'}}>
+                                    <h3 className = "float-right" onClick = { () => this.handleView() }><strong style = {{fontSize: '15px'}}>View Details</strong></h3>
+                                </div>
                         </Card.Body>
                     }
                 </Card>
@@ -71,4 +91,9 @@ const Button = styled.button`
         color: white;
     }
 `
+
+const Div = styled.div`
+    display: flex;
+`
+
 export {Posts}

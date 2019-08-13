@@ -38,8 +38,9 @@ class UserPosts extends React.Component {
                             <Card.Text style ={{fontSize: '16px'}}>
                                 Spots: {this.props.post.limit}
                             </Card.Text>
-                            
-                            <Button onClick = { () => this.handleView() }className = "float-right" variant="primary"><strong style = {{fontSize: '15px'}}>View Details</strong></Button>
+                            <div>
+                                <Button onClick = { () => this.handleView() }className = "float-right" variant="primary"><strong style = {{fontSize: '15px'}}>View Details</strong></Button>
+                            </div>
                         </Card.Body>
                     }
                 </Card>
