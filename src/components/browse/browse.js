@@ -41,6 +41,7 @@ class Browse extends React.Component {
         
     }
     render(){
+        console.log("props", this.props)
         return(
                 <Container style ={{maxWidth: '100%'}}>
                     <Row style={{height: '90vh'}}>

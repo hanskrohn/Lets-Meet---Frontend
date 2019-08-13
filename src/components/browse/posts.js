@@ -17,7 +17,7 @@ class Posts extends React.Component {
             })
     }
     render(){
-        console.log(this.props)
+        console.log("in psots", this.props)
         return(
         <div> 
             <CardDiv>

@@ -4,10 +4,31 @@ import styled from 'styled-components'
 
 
 class User extends React.Component  {
+
+    state = {
+        follow: false
+    }
+
+    componentWillMount(){
+   fetch(`http://localhost:3000/isFollowing/${this.props.user.id}`,{
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem('token')}` 
+                        }
+                    })
+    .then(res => res.json())
+    .then( data => {
+
+        this.setState({
+            follow: data
+        })
+    })
+   }
+
     render(){
-        console.log(" this is the props" , this.props)
+        console.log(this.state.follow)
         return(
-            
                  <div style = {{paddingTop: '3%'}} > 
                     <Div >
                         <div style = {{ width: '10%'}}>
@@ -19,7 +40,12 @@ class User extends React.Component  {
                             </div>
                         </NameDiv>
                         <div style = {{marginLeft: '550px', paddingTop: '10px' }}>
-                            <Button onClick = {() => this.props.follow(this.props.user)} style = {{outline: 'none'}} ><strong style = {{fontSize: '15px'}}>Follow</strong></Button>
+                            {this.state.follow 
+                            ? 
+                                <Button onClick = {() => this.props.follow(this.props.user)} style = {{outline: 'none'}} ><strong style = {{fontSize: '15px'}}>Follow</strong></Button>
+                            :
+                            null
+                            }
                         </div>
                     </Div>
                 </div>

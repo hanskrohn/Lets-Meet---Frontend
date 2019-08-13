@@ -17,6 +17,7 @@ const initialState = {
 
 
 const reducer = ( state, action ) => {
+    console.log("action", action)
     switch(action.type){
         case 'CREATE_POST':
             state = {
@@ -67,6 +68,11 @@ const reducer = ( state, action ) => {
                 chosenUserPost: action.payload
             }
         break
+        case 'GET_POST':
+            state = {
+                ...state,
+                post: action.payload
+            }
     }
     return state
 }
@@ -89,6 +95,17 @@ if(localStorage.getItem('token')){
         store.dispatch({type: 'CURRENT_USER', payload: user})
     })
     
+    fetch('http://localhost:3000/visiblePost', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}` 
+        }
+    })
+    .then(res => res.json())
+    .then(user =>{
+        store.dispatch({type: 'GET_POST', payload: user})
+    })
 }
 
 export const store = createStore(

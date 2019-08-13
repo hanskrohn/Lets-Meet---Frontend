@@ -9,7 +9,18 @@ class Following extends React.Component {
         search: ''
     }
   
+    unfollow = (user) =>{
+        console.log(user)
+        fetch(`http://localhost:3000/unfollow/${user.id}`,{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}` 
+            },
+            body: JSON.stringify(user)
+        })
 
+    }
 
     render(){
         let users;
@@ -27,7 +38,7 @@ class Following extends React.Component {
                     <div style ={{paddingBottom: '50px'}}>
                         <Div >
                             <div style = {{ paddingBottom: '3%'}}> 
-                                {this.props.following.map((user) => < User follow = {this.follow} user = {user} />)}
+                                {this.props.following.map((user) => < User unfollow = {this.unfollow} user = {user} />)}
                             </div> 
                         </Div>
                     </div>
