@@ -1,19 +1,61 @@
-import React from 'react'
+
+import React, {useState, useEffect} from 'react'
 import history from '../../history'
 import styled from 'styled-components'
 import Card from 'react-bootstrap/Card'
 import { connect } from 'react-redux'
 
+const handleView = (props) =>{
+    console.log("in here")
+        this.setState({
+            viewDescription: !this.state.viewDescription
+        })
+}
 
-class Posts extends React.Component {
-    state = {
-        viewDescription: false,
-        user: {},
-        limit: 0
-    }
+const attend = (props) =>{
+    fetch(`http://localhost:3000/attend/${props.id}`,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}` 
+        }
+    })
+    .then(res => res.text())
+    .then(user => {
+        if(user === "Now Attending"){
+            
+        }
+        else if(user === "Already Attending"){
+            fetch(`http://localhost:3000/unattend/${props.id}`,{
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}` 
+                }
+            })
+        }
+        else if(user === "Not enough space"){
+            alert("Not enough space")
+        }
 
-    componentDidMount(){
-        fetch(`http://localhost:3000/user/${this.props.item.user_id}`,{
+
+        
+    })
+   
+}
+
+const Posts = (props) => {
+   
+
+    const [viewDescription, setviewDescription] = useState(false)
+    const [user, setUser] = useState({})
+    const [limit, setLimit] = useState(0)
+
+    useEffect(() => {
+        console.log("item", props.item)
+        fetch(`http://localhost:3000/user/${props.item.user_id}`,{
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -22,50 +64,15 @@ class Posts extends React.Component {
         })
         .then(res => res.json())
         .then(user => {
-            this.setState({
-                user: user,
-                limit: this.props.item.limit
-            })
+            setUser(user)
+            setLimit(props.item.limit)
+            
         })
-    }
-
-    handleView = () =>{
-        console.log("in here")
-            this.setState({
-                viewDescription: !this.state.viewDescription
-            })
-    }
-
-    attend = () =>{
-        fetch(`http://localhost:3000/attend/${this.props.item.id}`,{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}` 
-            }
-        })
-        .then(res => res.text())
-        .then(user => {
-            if(user === "Now Attending"){
-                this.setState({
-                    limit: this.state.limit-1
-                })
-            }
-            else if(user === "Already Attending"){
-                alert("Already Attending")
-            }
-            else if(user === "Not enough space"){
-                alert("Not enough space")
-            }
+    }, [ props.item.id] )
 
 
-            console.log(user)
-        })
-       
-    }
-    render(){
-        console.log("in psots", this.props)
+
+        
         return(
         <div> 
             <CardDiv>
@@ -73,20 +80,20 @@ class Posts extends React.Component {
                     <Card.Header style ={{fontSize: '25px'}}>
                         <Div>
                             <div style = {{flex: '80'}}>
-                                {this.props.item.title}
+                                {props.item.title}
                             </div>
                             <div style ={{flex: '20'}}>
-                                {this.state.user.profile_img}
-                                {this.state.user.username}
+                                {user.profile_img}
+                                {user.username}
                             </div>
                         </Div>
                     </Card.Header>
-                    {this.state.viewDescription
+                    {viewDescription
                         ?
                         <Card.Body>
-                            <Card.Text style ={{fontSize: '16px'}}>Address: {this.props.item.address}</Card.Text>
-                            <Card.Text style ={{fontSize: '16px'}}>Address: {this.props.item.time}</Card.Text>
-                            <Card.Text style ={{fontSize: '16px'}}>Address: {this.props.item.date}</Card.Text>
+                            <Card.Text style ={{fontSize: '16px'}}>Address: {props.item.address}</Card.Text>
+                            <Card.Text style ={{fontSize: '16px'}}>Address: {props.item.time}</Card.Text>
+                            <Card.Text style ={{fontSize: '16px'}}>Address: {props.item.date}</Card.Text>
                             <div style ={{height: '2px', width: '100%', backgroundColor: '#B0B0B0'}}> </div>
                                     <div style ={{paddingTop: '1%'}}>
                                         <Div>
@@ -108,21 +115,21 @@ class Posts extends React.Component {
                         <Card.Body>
                             <Card.Title style ={{fontSize: '16px'}}>Description:</Card.Title>
                             <Card.Text style ={{fontSize: '16px'}}>
-                                {this.props.item.description}
+                                {props.item.description}
                             </Card.Text>
                             <br></br>
                             <Card.Text style ={{fontSize: '16px'}}>
-                                Spots: {this.state.limit}
+                                Spots: {limit}
                             </Card.Text>
                                 <div style ={{height: '2px', width: '100%', backgroundColor: '#B0B0B0'}}> </div>
                                     <div style ={{paddingTop: '1%'}}>
                                         <Div>
                                             <div style ={{flex: '33', height: '100%', fontSize: '2vh',  textAlign: 'center', paddingTop: '0.5%'}}>
-                                                <i style = {{cursor: 'pointer'}} onClick = {this.attend} class="glyphicon glyphicon-bookmark"></i>
+                                                <i style = {{cursor: 'pointer'}} onClick = {() => attend(props.item)} class="glyphicon glyphicon-bookmark"></i>
                                             </div>
                                             <div style ={{height: '40px', width: '2px', backgroundColor: '#B0B0B0'}}> </div>
                                             <div style ={{flex: '33', height: '100%', fontSize: '2vh',  textAlign: 'center', paddingTop: '0.5%'}}> 
-                                                <i style = {{cursor: 'pointer'}} class="glyphicon glyphicon-comment"></i>    
+                                                <i style = {{cursor: 'pointer'}} onClick = {() => history.push(`/comments/post/${props}`)} class="glyphicon glyphicon-comment"></i>    
                                             </div>
                                             <div style ={{height: '40px', width: '2px', backgroundColor: '#B0B0B0'}}> </div>
                                             <div style ={{flex: '33', textAlign: 'center', paddingTop: '0.5%'}}> 
@@ -134,11 +141,12 @@ class Posts extends React.Component {
                     }
                 </Card>
             </CardDiv>        
+               
         </div>
         )
     }
     
-}
+
 
 const mapStateToProps = state => ({
     post: state.post,

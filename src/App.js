@@ -11,6 +11,7 @@ import UserPage from './components/otherUsers/profilePage.js'
 import SearchPage from './components/search/searchPage.js'
 import Following from './components/following-followee/following.js'
 import Followers from './components/following-followee/followers.js'
+import {Comments} from './components/post/comments.js'
 
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
         <Route exact path = '/users/:id' component = {UserPage}></Route>
         <Route exact path = '/following' component = {Following}></Route>
         <Route exact path = '/followers' component = {Followers}></Route>
+        <Route exact path = '/comments/post/:id' component = {Comments}></Route>
     </Router>
   );
 }

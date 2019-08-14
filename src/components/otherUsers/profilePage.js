@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import {Profile} from '../currentUser/profile.js'
-import {UserPosts} from '../currentUser/userPosts.js'
+import Posts from '../post/posts.js'
 
 class ProfilePage extends React.Component {
 
@@ -107,7 +107,7 @@ class ProfilePage extends React.Component {
                                 </Row>
                             </Hub>
                             <PostContainer>
-                                {this.props.chosenUserPost ? this.props.chosenUserPost.map((post) => <UserPosts post = {post}/> ) : null}
+                                {this.props.chosenUserPost ? this.props.chosenUserPost.map((post) => <Posts item = {post}/> ) : null}
                             </PostContainer>
                         </Col>
                     </Row>

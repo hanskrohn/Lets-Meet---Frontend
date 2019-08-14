@@ -1,6 +1,6 @@
 import React from 'react'
 import {PostForm} from './postForm'
-import Posts from './posts'
+import Posts from '../post/posts'
 import { connect } from 'react-redux'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -25,7 +25,6 @@ class Browse extends React.Component {
             'description': e.target['Description'].value
         }
         document.post.reset()
-        console.log('daddyy', data)
         fetch('http://localhost:3000/createPost',{
             method: 'POST',
             headers: {
@@ -60,14 +59,13 @@ class Browse extends React.Component {
                     <Row style={{height: '90vh'}}>
                         <Col  sm = {3} style = {{padding: '0'}}>
                             <DivStyle>
-                                
                                 <PostForm createPost = {this.createPost}/>
                             </DivStyle>    
                             
                         </Col>
                         <Col  sm = {9}>
                             <div style = {{paddingTop: '120px', paddingBottom: '20px'}}>
-                                {this.props.post ? <Div> {this.props.post.map((item) => <Posts currentUser = {this.props.currentUser} item = {item}/> ) }</Div>: null}   
+                                {this.props.post ? <Div> {this.props.post.map((item) => <Posts  currentUser = {this.props.currentUser} item = {item}/> ) }</Div>: null}   
                             </div>
                         </Col>
                     </Row>

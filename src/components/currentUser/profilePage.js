@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col'
 import { Profile } from './profile.js'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { UserPosts } from './userPosts.js'
+import Posts from '../post/posts.js'
 import history from '../../history.js'
 
 const ProfilePage = (props) => {
@@ -104,7 +104,7 @@ const ProfilePage = (props) => {
                         </Row>
                     </Hub>
                     <PostContainer>
-                        {props.usersPost ? props.usersPost.map((post) => <UserPosts post={post} />) : null}
+                        {props.usersPost ? props.usersPost.map((post) => <Posts item={post} />) : null}
                     </PostContainer>
                 </Col>
             </Row>
