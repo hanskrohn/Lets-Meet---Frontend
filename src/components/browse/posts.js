@@ -2,12 +2,29 @@ import React from 'react'
 import history from '../../history'
 import styled from 'styled-components'
 import Card from 'react-bootstrap/Card'
-
+import { connect } from 'react-redux'
 
 
 class Posts extends React.Component {
     state = {
-        viewDescription: false
+        viewDescription: false,
+        user: {}
+    }
+
+    componentDidMount(){
+        fetch(`http://localhost:3000/user/${this.props.item.user_id}`,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}` 
+            }
+        })
+        .then(res => res.json())
+        .then(user => {
+            this.setState({
+                user: user
+            })
+        })
     }
 
     handleView = () =>{
@@ -24,18 +41,13 @@ class Posts extends React.Component {
                 <Card>
                     <Card.Header style ={{fontSize: '25px'}}>
                         <Div>
-                            <div style ={{flex: '82'}}>
+                            <div style = {{flex: '80'}}>
                                 {this.props.item.title}
                             </div>
-                            <div style ={{height: '40px', width: '2px', backgroundColor: '#B0B0B0'}}> </div>
-                            <div style ={{flex: '8', paddingLeft: '5%', color: 'red'}}> 
-                                <i class="glyphicon glyphicon-bookmark"></i>
+                            <div style ={{flex: '20'}}>
+                                {this.state.user.profile_img}
+                                {this.state.user.username}
                             </div>
-                            <div style ={{height: '40px', width: '2px', backgroundColor: '#B0B0B0'}}> </div>
-                            <div style ={{flex: '8', paddingLeft: '5%'}}> 
-                            <i class="glyphicon glyphicon-comment"></i>
-                            </div>
-                            
                         </Div>
                     </Card.Header>
                     {this.state.viewDescription
@@ -45,9 +57,21 @@ class Posts extends React.Component {
                             <Card.Text style ={{fontSize: '16px'}}>Address: {this.props.item.time}</Card.Text>
                             <Card.Text style ={{fontSize: '16px'}}>Address: {this.props.item.date}</Card.Text>
                             <div style ={{height: '2px', width: '100%', backgroundColor: '#B0B0B0'}}> </div>
-                                <div style ={{paddingTop: '2%'}}>
-                                    <h3 className = "float-right" onClick = { () => this.handleView() }><strong style = {{fontSize: '15px'}}>Back</strong></h3>
-                                </div>
+                                    <div style ={{paddingTop: '1%'}}>
+                                        <Div>
+                                            <div style ={{flex: '33', height: '100%', fontSize: '2vh',  textAlign: 'center', paddingTop: '0.5%'}}>
+                                                <i style = {{cursor: 'pointer'}} class="glyphicon glyphicon-bookmark"></i>
+                                            </div>
+                                            <div style ={{height: '40px', width: '2px', backgroundColor: '#B0B0B0'}}> </div>
+                                            <div style ={{flex: '33', height: '100%', fontSize: '2vh',  textAlign: 'center', paddingTop: '0.5%'}}> 
+                                                <i style = {{cursor: 'pointer'}} class="glyphicon glyphicon-comment"></i>    
+                                            </div>
+                                            <div style ={{height: '40px', width: '2px', backgroundColor: '#B0B0B0'}}> </div>
+                                            <div style ={{flex: '33', textAlign: 'center', paddingTop: '0.5%'}}> 
+                                                <h3  style = {{cursor: 'pointer'}} onClick = { () => this.handleView() }><strong style = {{fontSize: '15px'}}>Back</strong></h3>
+                                            </div>
+                                        </Div>
+                                    </div>
                         </Card.Body>
                         :
                         <Card.Body>
@@ -60,9 +84,21 @@ class Posts extends React.Component {
                                 Spots: {this.props.item.limit}
                             </Card.Text>
                                 <div style ={{height: '2px', width: '100%', backgroundColor: '#B0B0B0'}}> </div>
-                                <div style ={{paddingTop: '2%'}}>
-                                    <h3 className = "float-right" onClick = { () => this.handleView() }><strong style = {{fontSize: '15px'}}>View Details</strong></h3>
-                                </div>
+                                    <div style ={{paddingTop: '1%'}}>
+                                        <Div>
+                                            <div style ={{flex: '33', height: '100%', fontSize: '2vh',  textAlign: 'center', paddingTop: '0.5%'}}>
+                                                <i style = {{cursor: 'pointer'}} class="glyphicon glyphicon-bookmark"></i>
+                                            </div>
+                                            <div style ={{height: '40px', width: '2px', backgroundColor: '#B0B0B0'}}> </div>
+                                            <div style ={{flex: '33', height: '100%', fontSize: '2vh',  textAlign: 'center', paddingTop: '0.5%'}}> 
+                                                <i style = {{cursor: 'pointer'}} class="glyphicon glyphicon-comment"></i>    
+                                            </div>
+                                            <div style ={{height: '40px', width: '2px', backgroundColor: '#B0B0B0'}}> </div>
+                                            <div style ={{flex: '33', textAlign: 'center', paddingTop: '0.5%'}}> 
+                                                <h3  style = {{cursor: 'pointer'}} onClick = { () => this.handleView() }><strong style = {{fontSize: '15px'}}>View Details</strong></h3>
+                                            </div>
+                                        </Div>
+                                    </div>
                         </Card.Body>
                     }
                 </Card>
@@ -72,6 +108,24 @@ class Posts extends React.Component {
     }
     
 }
+
+const mapStateToProps = state => ({
+    post: state.post,
+    currentUser: state.currentUser
+})
+
+const mapDispatchToProps = {
+createPost: data => {
+    return { payload: data, type: 'CREATE_POST' }
+},
+getPost: data => {
+    return {type: 'GET_POST', payload: data}
+}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Posts)
+
+
 
 const CardDiv = styled.div`
     border: 2px solid #ccc;
@@ -95,5 +149,3 @@ const Button = styled.button`
 const Div = styled.div`
     display: flex;
 `
-
-export {Posts}

@@ -1,6 +1,6 @@
 import React from 'react'
 import {PostForm} from './postForm'
-import {Posts} from './posts'
+import Posts from './posts'
 import { connect } from 'react-redux'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -67,7 +67,7 @@ class Browse extends React.Component {
                         </Col>
                         <Col  sm = {9}>
                             <div style = {{paddingTop: '120px', paddingBottom: '20px'}}>
-                                {this.props.post ? <Div> {this.props.post.map((item) => <Posts item = {item}/> ) }</Div>: null}   
+                                {this.props.post ? <Div> {this.props.post.map((item) => <Posts currentUser = {this.props.currentUser} item = {item}/> ) }</Div>: null}   
                             </div>
                         </Col>
                     </Row>
