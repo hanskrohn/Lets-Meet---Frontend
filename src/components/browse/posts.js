@@ -8,7 +8,8 @@ import { connect } from 'react-redux'
 class Posts extends React.Component {
     state = {
         viewDescription: false,
-        user: {}
+        user: {},
+        limit: 0
     }
 
     componentDidMount(){
@@ -22,7 +23,8 @@ class Posts extends React.Component {
         .then(res => res.json())
         .then(user => {
             this.setState({
-                user: user
+                user: user,
+                limit: this.props.item.limit
             })
         })
     }
@@ -32,6 +34,35 @@ class Posts extends React.Component {
             this.setState({
                 viewDescription: !this.state.viewDescription
             })
+    }
+
+    attend = () =>{
+        fetch(`http://localhost:3000/attend/${this.props.item.id}`,{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}` 
+            }
+        })
+        .then(res => res.text())
+        .then(user => {
+            if(user === "Now Attending"){
+                this.setState({
+                    limit: this.state.limit-1
+                })
+            }
+            else if(user === "Already Attending"){
+                alert("Already Attending")
+            }
+            else if(user === "Not enough space"){
+                alert("Not enough space")
+            }
+
+
+            console.log(user)
+        })
+       
     }
     render(){
         console.log("in psots", this.props)
@@ -81,13 +112,13 @@ class Posts extends React.Component {
                             </Card.Text>
                             <br></br>
                             <Card.Text style ={{fontSize: '16px'}}>
-                                Spots: {this.props.item.limit}
+                                Spots: {this.state.limit}
                             </Card.Text>
                                 <div style ={{height: '2px', width: '100%', backgroundColor: '#B0B0B0'}}> </div>
                                     <div style ={{paddingTop: '1%'}}>
                                         <Div>
                                             <div style ={{flex: '33', height: '100%', fontSize: '2vh',  textAlign: 'center', paddingTop: '0.5%'}}>
-                                                <i style = {{cursor: 'pointer'}} class="glyphicon glyphicon-bookmark"></i>
+                                                <i style = {{cursor: 'pointer'}} onClick = {this.attend} class="glyphicon glyphicon-bookmark"></i>
                                             </div>
                                             <div style ={{height: '40px', width: '2px', backgroundColor: '#B0B0B0'}}> </div>
                                             <div style ={{flex: '33', height: '100%', fontSize: '2vh',  textAlign: 'center', paddingTop: '0.5%'}}> 
