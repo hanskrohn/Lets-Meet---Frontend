@@ -5,14 +5,11 @@ import styled from 'styled-components'
 import Card from 'react-bootstrap/Card'
 import { connect } from 'react-redux'
 
-const handleView = (props) =>{
-    console.log("in here")
-        this.setState({
-            viewDescription: !this.state.viewDescription
-        })
+const handleView = ( setviewDescription, viewDescription) =>{
+    setviewDescription(!viewDescription)
 }
 
-const attend = (props) =>{
+const attend = (props, setLimit, limit, setAttending, attending) =>{
     fetch(`http://localhost:3000/attend/${props.id}`,{
         method: 'POST',
         headers: {
@@ -24,7 +21,8 @@ const attend = (props) =>{
     .then(res => res.text())
     .then(user => {
         if(user === "Now Attending"){
-            
+            setLimit(limit-1)
+            setAttending(!attending)
         }
         else if(user === "Already Attending"){
             fetch(`http://localhost:3000/unattend/${props.id}`,{
@@ -35,6 +33,7 @@ const attend = (props) =>{
                     'Authorization': `Bearer ${localStorage.getItem('token')}` 
                 }
             })
+            .then( setAttending(!attending), setLimit(limit+1))
         }
         else if(user === "Not enough space"){
             alert("Not enough space")
@@ -52,6 +51,7 @@ const Posts = (props) => {
     const [viewDescription, setviewDescription] = useState(false)
     const [user, setUser] = useState({})
     const [limit, setLimit] = useState(0)
+    const [attending, setAttending] = useState(false)
 
     useEffect(() => {
         console.log("item", props.item)
@@ -66,7 +66,23 @@ const Posts = (props) => {
         .then(user => {
             setUser(user)
             setLimit(props.item.limit)
-            
+            fetch(`http://localhost:3000/attending/${props.item.id}`,{
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}` 
+                }
+            })
+            .then(res => res.text())
+            .then(data => {
+                if(data == "true"){
+                    setAttending(true)
+                }
+                else{
+                    setAttending(false)
+                }
+
+            })
         })
     }, [ props.item.id] )
 
@@ -97,16 +113,21 @@ const Posts = (props) => {
                             <div style ={{height: '2px', width: '100%', backgroundColor: '#B0B0B0'}}> </div>
                                     <div style ={{paddingTop: '1%'}}>
                                         <Div>
-                                            <div style ={{flex: '33', height: '100%', fontSize: '2vh',  textAlign: 'center', paddingTop: '0.5%'}}>
-                                                <i style = {{cursor: 'pointer'}} class="glyphicon glyphicon-bookmark"></i>
+                                            <div style ={{flex: '33', height: '100%', fontSize: '2vh',  textAlign: 'center', paddingTop: '0.5%', cursor: 'pointer'}}  onClick = {() => attend(props.item, setLimit, limit, setAttending, attending)}>
+                                            {attending
+                                                    ?
+                                                    <i style = {{ color: 'red'}} class="glyphicon glyphicon-bookmark"></i>
+                                                    :
+                                                    <i  class="glyphicon glyphicon-bookmark"></i>
+                                                }
                                             </div>
                                             <div style ={{height: '40px', width: '2px', backgroundColor: '#B0B0B0'}}> </div>
-                                            <div style ={{flex: '33', height: '100%', fontSize: '2vh',  textAlign: 'center', paddingTop: '0.5%'}}> 
-                                                <i style = {{cursor: 'pointer'}} class="glyphicon glyphicon-comment"></i>    
+                                            <div style ={{flex: '33', height: '100%', fontSize: '2vh',  textAlign: 'center', paddingTop: '0.5%', cursor: 'pointer'}} onClick = {() => history.push(`/comments/post/${props.item.id}`)}> 
+                                                <i   class="glyphicon glyphicon-comment"></i>    
                                             </div>
                                             <div style ={{height: '40px', width: '2px', backgroundColor: '#B0B0B0'}}> </div>
-                                            <div style ={{flex: '33', textAlign: 'center', paddingTop: '0.5%'}}> 
-                                                <h3  style = {{cursor: 'pointer'}} onClick = { () => this.handleView() }><strong style = {{fontSize: '15px'}}>Back</strong></h3>
+                                            <div style ={{flex: '33', textAlign: 'center', paddingTop: '0.5%', cursor: 'pointer'}}  onClick = { () => handleView( setviewDescription, viewDescription) }> 
+                                                <h3  ><strong style = {{fontSize: '15px'}}>Back</strong></h3>
                                             </div>
                                         </Div>
                                     </div>
@@ -124,16 +145,21 @@ const Posts = (props) => {
                                 <div style ={{height: '2px', width: '100%', backgroundColor: '#B0B0B0'}}> </div>
                                     <div style ={{paddingTop: '1%'}}>
                                         <Div>
-                                            <div style ={{flex: '33', height: '100%', fontSize: '2vh',  textAlign: 'center', paddingTop: '0.5%'}}>
-                                                <i style = {{cursor: 'pointer'}} onClick = {() => attend(props.item)} class="glyphicon glyphicon-bookmark"></i>
+                                            <div style ={{flex: '33', height: '100%', fontSize: '2vh',  textAlign: 'center', paddingTop: '0.5%', cursor: 'pointer'}} onClick = {() => attend(props.item, setLimit, limit, setAttending, attending)} >
+                                                {attending
+                                                    ?
+                                                    <i style = {{ color: 'red'}} class="glyphicon glyphicon-bookmark"></i>
+                                                    :
+                                                    <i  class="glyphicon glyphicon-bookmark"></i>
+                                                }
                                             </div>
                                             <div style ={{height: '40px', width: '2px', backgroundColor: '#B0B0B0'}}> </div>
-                                            <div style ={{flex: '33', height: '100%', fontSize: '2vh',  textAlign: 'center', paddingTop: '0.5%'}}> 
-                                                <i style = {{cursor: 'pointer'}} onClick = {() => history.push(`/comments/post/${props}`)} class="glyphicon glyphicon-comment"></i>    
+                                            <div style ={{flex: '33', height: '100%', fontSize: '2vh',  textAlign: 'center', paddingTop: '0.5%', cursor: 'pointer'}} onClick = {() => history.push(`/comments/post/${props.item.id}`)}> 
+                                                <i class="glyphicon glyphicon-comment"></i>    
                                             </div>
                                             <div style ={{height: '40px', width: '2px', backgroundColor: '#B0B0B0'}}> </div>
-                                            <div style ={{flex: '33', textAlign: 'center', paddingTop: '0.5%'}}> 
-                                                <h3  style = {{cursor: 'pointer'}} onClick = { () => this.handleView() }><strong style = {{fontSize: '15px'}}>View Details</strong></h3>
+                                            <div style ={{flex: '33', textAlign: 'center', paddingTop: '0.5%', cursor: 'pointer'}} onClick = { () => handleView( setviewDescription, viewDescription) }> 
+                                                <h3  ><strong style = {{fontSize: '15px'}}>View Details</strong></h3>
                                             </div>
                                         </Div>
                                     </div>
