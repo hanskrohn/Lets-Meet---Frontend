@@ -10,7 +10,7 @@ const handleView = ( setviewDescription, viewDescription) =>{
 }
 
 const attend = (props, setLimit, limit, setAttending, attending) =>{
-    fetch(`http://localhost:3000/attend/${props.id}`,{
+    fetch(`http://localhost:3000/attend/${props.item.id}`,{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -18,14 +18,15 @@ const attend = (props, setLimit, limit, setAttending, attending) =>{
             'Authorization': `Bearer ${localStorage.getItem('token')}` 
         }
     })
-    .then(res => res.text())
-    .then(user => {
-        if(user === "Now Attending"){
+    .then(res => res.json())
+    .then(post => {
+        if(post.message === "Now Attending"){
             setLimit(limit-1)
             setAttending(!attending)
+            props.attendEvent(post.event)
         }
-        else if(user === "Already Attending"){
-            fetch(`http://localhost:3000/unattend/${props.id}`,{
+        else if(post.message === "Already Attending"){
+            fetch(`http://localhost:3000/unattend/${props.item.id}`,{
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -35,7 +36,7 @@ const attend = (props, setLimit, limit, setAttending, attending) =>{
             })
             .then( setAttending(!attending), setLimit(limit+1))
         }
-        else if(user === "Not enough space"){
+        else if(post.message === "Not enough space"){
             alert("Not enough space")
         }
 
@@ -73,12 +74,13 @@ const Posts = (props) => {
                     'Authorization': `Bearer ${localStorage.getItem('token')}` 
                 }
             })
-            .then(res => res.text())
+            .then(res => res.json())
             .then(data => {
-                if(data == "true"){
+                if(data.message === "true"){
                     setAttending(true)
+                    props.attendEvent(data.event)
                 }
-                else{
+                else if(data.message === "false") {
                     setAttending(false)
                 }
 
@@ -113,7 +115,7 @@ const Posts = (props) => {
                             <div style ={{height: '2px', width: '100%', backgroundColor: '#B0B0B0'}}> </div>
                                     <div style ={{paddingTop: '1%'}}>
                                         <Div>
-                                            <div style ={{flex: '33', height: '100%', fontSize: '2vh',  textAlign: 'center', paddingTop: '0.5%', cursor: 'pointer'}}  onClick = {() => attend(props.item, setLimit, limit, setAttending, attending)}>
+                                            <div style ={{flex: '33', height: '100%', fontSize: '2vh',  textAlign: 'center', paddingTop: '0.5%', cursor: 'pointer'}}  onClick = {() => attend(props, setLimit, limit, setAttending, attending)}>
                                             {attending
                                                     ?
                                                     <i style = {{ color: 'red'}} class="glyphicon glyphicon-bookmark"></i>
@@ -145,7 +147,7 @@ const Posts = (props) => {
                                 <div style ={{height: '2px', width: '100%', backgroundColor: '#B0B0B0'}}> </div>
                                     <div style ={{paddingTop: '1%'}}>
                                         <Div>
-                                            <div style ={{flex: '33', height: '100%', fontSize: '2vh',  textAlign: 'center', paddingTop: '0.5%', cursor: 'pointer'}} onClick = {() => attend(props.item, setLimit, limit, setAttending, attending)} >
+                                            <div style ={{flex: '33', height: '100%', fontSize: '2vh',  textAlign: 'center', paddingTop: '0.5%', cursor: 'pointer'}} onClick = {() => attend(props, setLimit, limit, setAttending, attending)} >
                                                 {attending
                                                     ?
                                                     <i style = {{ color: 'red'}} class="glyphicon glyphicon-bookmark"></i>
@@ -184,7 +186,13 @@ createPost: data => {
     return { payload: data, type: 'CREATE_POST' }
 },
 getPost: data => {
-    return {type: 'GET_POST', payload: data}
+    return { payload: data, type: 'GET_POST'}
+},
+attendEvent: data => {
+    return { payload: data, type: 'ATTEND_POST'}
+},
+unattendEvent: data => {
+    return { payload: data, type: 'UNATTEND_POST'}
 }
 }
 

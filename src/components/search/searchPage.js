@@ -67,7 +67,7 @@ class ProfilePage extends React.Component {
                                 { this.state.search !== "" 
                                     ? 
                                         <div style = {{ paddingBottom: '3%'}}> 
-                                            {users.map((user) => < User follow = {this.follow} unfollow = {this.unfollow} user = {user} />)}
+                                            {users.map((user) => < User key = {user.id} follow = {this.follow} unfollow = {this.unfollow} user = {user} />)}
                                         </div> 
                                     : 
                                         null

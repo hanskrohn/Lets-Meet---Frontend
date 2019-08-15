@@ -9,9 +9,6 @@ import Posts from '../post/posts.js'
 import history from '../../history.js'
 
 const ProfilePage = (props) => {
-
-
-    
     useEffect(() => {
         if (props.currentUser) {
             fetch(`http://localhost:3000/followers/${props.currentUser.id}`, {
@@ -85,7 +82,7 @@ const ProfilePage = (props) => {
                             <Col >
                                 <div style={{ paddingTop: '100px', paddingLeft: '30%', cursor: 'pointer' }} onClick={() => history.push('/followers')}>
                                     <div style={{ fontSize: '75px' }}>
-                                        <strong>{props.followers.length > 0 ? props.followers.length : 0}</strong>
+                                        <strong>{props.followers.length}</strong>
                                     </div>
                                     <div style={{ fontSize: '25px' }}>
                                         <strong>Followers</strong>
@@ -95,7 +92,7 @@ const ProfilePage = (props) => {
                             <Col >
                                 <div style={{ paddingTop: '100px', paddingLeft: '25%', cursor: 'pointer' }} onClick={() => history.push('/following')}>
                                     <div style={{ fontSize: '75px' }}>
-                                        <strong>{props.following.length > 0 ? props.following.length : 0}</strong>
+                                        <strong>{props.following.length}</strong>
                                     </div>
                                     <div style={{ fontSize: '25px' }}>
                                         <strong>Following</strong>

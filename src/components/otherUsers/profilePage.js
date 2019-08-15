@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -7,22 +7,15 @@ import styled from 'styled-components'
 import {Profile} from '../currentUser/profile.js'
 import Posts from '../post/posts.js'
 
-class ProfilePage extends React.Component {
+const ProfilePage = (props) => {
+    const [chosenUser, setchosenUser] = useState({})
+    const [chosenUserFollowers, setchosenUserFollowers] = useState([])
+    const [chosenUserFollowing, setchosenUserFollowing] = useState([])
+    const [chosenUserPost, setchosenUserPost] = useState([])
 
-    componentDidMount(){
-        let id = this.props.match.params.id
+    useEffect(() => {
+        let id = props.match.params.id
         console.log(id)
-        fetch(`http://localhost:3000/post/${id}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}` 
-            }
-        })
-        .then(res => res.json())
-        .then(user =>{
-            this.props.getPost(user)
-        })
         fetch(`http://localhost:3000/user/${id}`,{
             method: 'GET',
             headers: {
@@ -32,9 +25,21 @@ class ProfilePage extends React.Component {
         })
         .then(res => res.json())
         .then(user => {
-            this.props.setUser(user)
+            setchosenUser(user)
         })
 
+
+        fetch(`http://localhost:3000/post/${id}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}` 
+            }
+        })
+        .then(res => res.json())
+        .then(post =>{
+            setchosenUserPost(post)
+        })
 
         fetch(`http://localhost:3000/followers/${id}`, {
             method: 'GET',
@@ -44,10 +49,10 @@ class ProfilePage extends React.Component {
             }
         })
         .then(res => res.json())
-        .then(user =>{
-            this.props.getFollowers(user)
+        .then(followers =>{
+            setchosenUserFollowers(followers)
         })
-
+        
         fetch(`http://localhost:3000/following/${id}`, {
             method: 'GET',
             headers: {
@@ -56,28 +61,26 @@ class ProfilePage extends React.Component {
             }
         })
         .then(res => res.json())
-        .then(user =>{
-            this.props.getFollowing(user)
+        .then(following =>{
+            setchosenUserFollowing(following)
         })
-    }
+    }, [chosenUser.id])
 
-    render(){
-        console.log("my posts ", this.props)
         return(
                 <Container style ={{maxWidth: '100%'}}>
                     <Row style={{height: '90vh'}}>
                         <Col style = {{padding: '0'}} sm = {3}>
                         <DivStyle>
-                        <Profile user = {this.props.chosenUser}/>
+                        <Profile user = {chosenUser}/>
                         </DivStyle>   
                         </Col>
                         <Col sm = {9}>
                             <Hub> 
                                 <Row >
                                     <Col >
-                                        <div style = {{paddingTop: '100px', paddingLeft: '40%'}}>
+                                        <div style = {{paddingTop: '100px', paddingLeft: '40%', cursor: 'pointer' }}>
                                             <div style = {{fontSize: '75px'}}>
-                                                <strong> 16</strong>
+                                                <strong>{chosenUserPost.length}</strong>
                                             </div>
                                             <div style = {{fontSize: '25px'   }}>
                                                 <strong>Post</strong>
@@ -85,9 +88,9 @@ class ProfilePage extends React.Component {
                                         </div>
                                     </Col>
                                     <Col >
-                                        <div style = {{paddingTop: '100px', paddingLeft: '30%'}}>
+                                        <div style = {{paddingTop: '100px', paddingLeft: '30%', cursor: 'pointer' }}>
                                             <div style = {{fontSize: '75px'}}>
-                                                <strong></strong>
+                                                <strong>{chosenUserFollowers.length}</strong>
                                             </div>
                                             <div style = {{fontSize: '25px' }}>
                                                 <strong>Followers</strong>
@@ -95,9 +98,9 @@ class ProfilePage extends React.Component {
                                         </div>
                                     </Col>
                                     <Col >
-                                        <div style = {{paddingTop: '100px', paddingLeft: '25%'}}>
+                                        <div style = {{paddingTop: '100px', paddingLeft: '25%', cursor: 'pointer' }}>
                                             <div style = {{fontSize: '75px'}}>
-                                                <strong></strong>
+                                                <strong>{chosenUserFollowing.length}</strong>
                                             </div>
                                             <div style = {{fontSize: '25px' }}>
                                                 <strong>Following</strong>
@@ -107,7 +110,7 @@ class ProfilePage extends React.Component {
                                 </Row>
                             </Hub>
                             <PostContainer>
-                                {this.props.chosenUserPost ? this.props.chosenUserPost.map((post) => <Posts item = {post}/> ) : null}
+                                {chosenUserPost ? chosenUserPost.map((post) => <Posts item = {post}/> ) : null}
                             </PostContainer>
                         </Col>
                     </Row>
@@ -115,7 +118,7 @@ class ProfilePage extends React.Component {
         )
 
     }
-}
+
 
 const mapStateToProps = state => ({
     chosenUser: state.chosenUser,

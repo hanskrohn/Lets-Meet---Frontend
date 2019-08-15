@@ -12,7 +12,7 @@ import SearchPage from './components/search/searchPage.js'
 import Following from './components/following-followee/following.js'
 import Followers from './components/following-followee/followers.js'
 import CommentsPage from './components/post/commentsPage.js'
-
+import EventsPage from './components/events/eventsPage.js'
 
 const App = () => {
   return (
@@ -27,6 +27,7 @@ const App = () => {
         <Route exact path = '/following' component = {Following}></Route>
         <Route exact path = '/followers' component = {Followers}></Route>
         <Route exact path = '/comments/post/:id' component = {CommentsPage}></Route>
+        <Route exact path = '/events' component = {EventsPage}></Route>
     </Router>
   );
 }

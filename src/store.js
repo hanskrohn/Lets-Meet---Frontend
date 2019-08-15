@@ -12,7 +12,8 @@ const initialState = {
     followers: [],
     following: [],
     chosenUser: {},
-    chosenUserPost: []
+    chosenUserPost: [], 
+    postsAttending: []
 }
 
 
@@ -88,6 +89,27 @@ const reducer = ( state, action ) => {
                 ...state,
                 usersPost: action.payload
             }
+        break
+        case 'ATTEND_POST':
+                state = {
+                    ...state,
+                    postsAttending: [action.payload, ...state.postsAttending]
+                }
+        break
+        case 'POST_ATTENDING':
+                state = {
+                    ...state,
+                    postsAttending: action.payload
+                }
+        break
+        case 'UNATTEND_POST':
+                let post = state.postsAttending.filter((post) => {
+                    return post!==action.payload
+                })
+                state = {
+                    ...state,
+                    postsAttending: post
+                }
         break
 
     }
