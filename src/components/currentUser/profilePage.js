@@ -102,7 +102,7 @@ const ProfilePage = (props) => {
                         </Row>
                     </Hub>
                     <PostContainer>
-                        {props.usersPost ? props.usersPost.map((post) => <Posts item={post} />) : null}
+                        {props.usersPost.length !== 0 ? props.usersPost.map((post) => <Posts item={post} />) : <div style = {{textAlign: 'center', marginTop: '20%', fontSize: '200%'}}>See your Posts here </div>}
                     </PostContainer>
                 </Col>
             </Row>

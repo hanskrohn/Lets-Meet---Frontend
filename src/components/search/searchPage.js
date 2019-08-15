@@ -62,18 +62,31 @@ class ProfilePage extends React.Component {
                         <Search  autocomplete= "off" name = "search" placeholder = "Search" onChange = { (e) => this.setState({search: e.target.value}) }/>
                     </div>
                     <div style ={{paddingBottom: '50px'}}>
-                        <Div >
+                        
                             
                                 { this.state.search !== "" 
                                     ? 
-                                        <div style = {{ paddingBottom: '3%'}}> 
-                                            {users.map((user) => < User key = {user.id} follow = {this.follow} unfollow = {this.unfollow} user = {user} />)}
-                                        </div> 
+                                    <div>
+                                        {users.length !== 0
+                                            ?
+                                                <Div >
+                                                    <div style = {{ paddingBottom: '3%'}}> 
+                                                        {users.map((user) => < User key = {user.id} follow = {this.follow} unfollow = {this.unfollow} user = {user} />)}
+                                                    </div> 
+                                                </Div>
+                                            :
+                                            <div style = {{textAlign: 'center', fontSize: '300%', marginTop: '15%'}}>
+                                                No User with that Username
+                                            </div>
+                                        }
+                                    </div>
                                     : 
-                                        null
+                                    <div style = {{textAlign: 'center', fontSize: '300%', marginTop: '15%'}}>
+                                        Search by Username
+                                    </div>
                                 }
                             
-                        </Div>
+                        
                     </div>
                 </Container>
         )

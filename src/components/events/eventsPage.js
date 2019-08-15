@@ -52,8 +52,13 @@ const EventsPages = (props) =>  {
                 ? 
                 <DisplayDiv>not 0</DisplayDiv>
                 :
-                <div style = {{textAlign: 'center', fontSize: '400%', marginTop: '15%'}}>
-                    Currently Not Attending Any Event
+                <div style = {{textAlign: 'center', fontSize: '300%', marginTop: '15%'}}>
+                    {viewingEvents
+                        ?
+                        <div>Currently Not Attending Any Event</div>
+                        :
+                        <div>No Comments</div>
+                    }
                 </div>
             }
         </Container>
