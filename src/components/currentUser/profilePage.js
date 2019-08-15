@@ -46,8 +46,9 @@ const ProfilePage = (props) => {
                 }
             })
                 .then(res => res.json())
-                .then(user => {
-                    props.getPost(user)
+                .then(post => {
+                    console.log("post", post)
+                    props.getPost(post)
                 })
         }
     }, [ props.currentUser.id ])
@@ -74,7 +75,7 @@ const ProfilePage = (props) => {
                             <Col >
                                 <div style={{ paddingTop: '100px', paddingLeft: '40%' }}>
                                     <div style={{ fontSize: '75px' }}>
-                                        <strong> 16</strong>
+                                        <strong>{props.usersPost.length}</strong>
                                     </div>
                                     <div style={{ fontSize: '25px' }}>
                                         <strong>Post</strong>
@@ -127,7 +128,7 @@ const mapDispatchToProps = {
         return { payload: data, type: 'GET_FOLLOWING' }
     },
     getPost: data => {
-        return { payload: data, type: 'USERS_POSTS' }
+        return { payload: data, type: 'USERS_POST' }
     }
 }
 

@@ -18,7 +18,9 @@ const NavBar = withRouter(({ history }) => (
               }}><i  class="glyphicon glyphicon-home"></i></Nav.Link>
          
           
-            <Nav.Link style = {{ fontSize: '4vh', paddingTop: '1vh', color: 'black', display: 'inline-block' }} href="#features"><i class="glyphicon glyphicon-calendar"></i></Nav.Link>
+            <Nav.Link style = {{ fontSize: '4vh', paddingTop: '1vh', color: 'black', display: 'inline-block' }} onClick={()=>{history.push('/search') 
+            window.scrollTo(0, 0)
+            }}><i class="glyphicon glyphicon-bell"></i></Nav.Link>
     
             <Navbar.Brand style = {{ fontSize: '4vh', paddingTop: '1vh', color: 'black', display: 'inline-block' }} >Navbar</Navbar.Brand>
            

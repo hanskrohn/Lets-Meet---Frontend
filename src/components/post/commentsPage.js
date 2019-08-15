@@ -1,13 +1,35 @@
 import React, {useState, useEffect} from 'react'
+import Comment from './comment.js'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import './comments.css'
 
 
+const createPost = (e, setComments, comments, props) => {
+    e.preventDefault()
+    let id = props.match.params.id
+    const data = {
+        "comment": e.target["comment"].value
+    }
+    document.getElementById("comment").reset()
+    fetch(`http://localhost:3000/comment/${id}`,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}` 
+        },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(newComment => {
+        setComments([...comments, newComment])
+    })
+}
 
-const Comments = (props) => {
+const CommentsPage = (props) => {
     const [post, setPost] = useState({})
     const [postUser, setpostUser] = useState({})
+    const [comments, setComments] = useState([])
 
     useEffect(() => {
         let id = props.match.params.id
@@ -34,12 +56,26 @@ const Comments = (props) => {
             .then(user => {
                 setpostUser(user)   
             })
+
+
+            
         })
-
         
-    }, [ post ] )
+        fetch(`http://localhost:3000/post/comments/${id}`,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}` 
+            }
+        })
+        .then(res => res.json())
+        .then(comments => {
+            setComments(comments)  
+        })
+        
+    }, [ post.id ] )
     
-
+    console.log(comments)
     return(
         <div style = {{paddingTop: '120px', paddingBottom: '20px'}}>
             <MainDiv>
@@ -52,13 +88,15 @@ const Comments = (props) => {
                     </div>
                 </PostDiv>
                 <div style ={{height: '2px', width: '95%', backgroundColor: '#B0B0B0', marginLeft: '2%'}}> </div>
-                <CommentsDiv>
-                    <div style ={{backgroundColor: 'yellow', height: '900px', width: '100%'}}></div>
+                <CommentsDiv> 
+                    <div style ={{width: '100%'}}>
+                        {comments.map((comment) => < Comment comment = {comment}/>)}
+                    </div>
                 </CommentsDiv>
                 <div style ={{height: '2px', width: '95%', backgroundColor: '#B0B0B0', marginLeft: '2%'}}> </div>
                 <FormDiv>
-                    <form class="comment" action="action_page.php">
-                        <input type="text" placeholder="Comment" name="search"></input>
+                    <form id="comment" onSubmit = {(e) => createPost(e, setComments, comments, props)} class="comment" action="action_page.php">
+                        <input type="text" placeholder="Comment" name="comment"></input>
                         <button type="submit">
                             Post
                         </button>
@@ -74,13 +112,9 @@ const mapStateToProps = state => ({
     currentUser: state.currentUser
 })
 
-const mapDispatchToProps = {
-createPost: data => {
-    return { payload: data, type: 'CREATE_POST' }
-}
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Comments)
+
+export default connect(mapStateToProps)(CommentsPage)
 
 
 const MainDiv = styled.div`

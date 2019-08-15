@@ -82,7 +82,16 @@ const reducer = ( state, action ) => {
                 ...state,
                 following: following
             }
+        break
+        case 'USERS_POST':
+            state = {
+                ...state,
+                usersPost: action.payload
+            }
+        break
+
     }
+    console.log("state", state)
     return state
 }
 

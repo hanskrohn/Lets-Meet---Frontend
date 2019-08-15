@@ -2,7 +2,7 @@ import React from 'react'
 import Container from 'react-bootstrap/Container'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import User from '../search/user.js'
+import User from './user.js'
 
 class Following extends React.Component {
     state = {
