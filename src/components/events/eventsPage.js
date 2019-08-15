@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux'
 import Container from 'react-bootstrap/Container'
 import styled from 'styled-components'
-
+import Events from './events.js'
+import Comments from './comments.js'
 
 const EventsPages = (props) =>  {
     const [viewingEvents, setviewingEvents] = useState(true)
@@ -50,7 +51,16 @@ const EventsPages = (props) =>  {
             </SelectorDiv> 
             {props.posts.length !== 0
                 ? 
-                <DisplayDiv>not 0</DisplayDiv>
+                <DisplayDiv>
+                    {viewingEvents
+                            ?
+                                <div>
+                                    {props.posts.map((event) => <Events event = {event}/> )}     
+                                </div>
+                            :
+                                <Comments></Comments>
+                    }
+                </DisplayDiv>
                 :
                 <div style = {{textAlign: 'center', fontSize: '300%', marginTop: '15%'}}>
                     {viewingEvents

@@ -80,10 +80,13 @@ const CommentsPage = (props) => {
         <div style = {{paddingTop: '120px', paddingBottom: '20px'}}>
             <MainDiv>
                 <PostDiv>
-                    <div style = {{flex: '80', fontSize: '250%', paddingLeft: '5%', paddingTop: '8px'}}>
+                    <div style = {{flex: '70', fontSize: '250%', paddingLeft: '5%', paddingTop: '8px'}}>
                         <strong>{post.title}</strong>
                     </div>
-                    <div style ={{flex: '20', fontSize: '250%', paddingTop: '8px'}}>
+                    <div style = {{flex: '10', paddingTop: '8px'}}>
+                        <img style = {{height: '35px', float: 'right'}} src = {postUser.profile_img}></img>
+                    </div>
+                    <div style ={{flex: '20', fontSize: '250%', paddingTop: '8px', paddingLeft: '5px'}}>
                         <strong>{postUser.username}</strong>
                     </div>
                 </PostDiv>

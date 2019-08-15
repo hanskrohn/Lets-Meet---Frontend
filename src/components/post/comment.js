@@ -22,8 +22,8 @@ const Comment = (props) => {
     return(
         <div>
             <CardDiv>
-                <div style ={{flex: '5', minHeight: '60px'}}>
-                    {user.profile_img}
+                <div style ={{flex: '5'}}>
+                    <img style = {{height: '45px', float: 'right'}} src = {user.profile_img}></img>
                 </div>
                 <div style ={{flex: '10', fontSize: '150%', paddingLeft: '2%'}}>
                     <strong>{user.username}</strong>

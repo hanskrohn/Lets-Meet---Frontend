@@ -97,11 +97,13 @@ const Posts = (props) => {
                 <Card>
                     <Card.Header style ={{fontSize: '25px'}}>
                         <Div>
-                            <div style = {{flex: '80'}}>
+                            <div style = {{flex: '70'}}>
                                 {props.item.title}
                             </div>
-                            <div style ={{flex: '20'}}>
-                                {user.profile_img}
+                            <div style ={{flex: '10', paddingTop: '3px'}}>
+                                <img style = {{height: '35px', float: 'right'}} src = {user.profile_img}></img>
+                            </div>
+                            <div style ={{flex: '20', paddingLeft: '10px'}}>
                                 {user.username}
                             </div>
                         </Div>
