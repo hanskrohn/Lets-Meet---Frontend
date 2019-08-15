@@ -1,14 +1,14 @@
-import React, {useState, useEffect} from 'react'
-import { connect } from 'react-redux'
-import Container from 'react-bootstrap/Container'
+import React from 'react'
 import styled from 'styled-components'
-
+import Card from 'react-bootstrap/Card'
 
 const Events = (props) =>  {
     console.log(props)
     return(
         <div>
-            events
+              <Card>
+                  
+              </Card>
         </div>
     )
 }

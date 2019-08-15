@@ -18,9 +18,8 @@ const mapDispatchToProps = {
         body:JSON.stringify(response)
         }).then(res => res.json())
         .then(user => {
-        console.log(user)
         if(user.message === "Login Failed"){
-            alert('Username or Email already taken. Please select another.')
+            alert('Username or Password Incorrect. Please try again.')
         }
         else{
             localStorage.setItem('token', user.auth_token)
