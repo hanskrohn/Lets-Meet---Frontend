@@ -97,6 +97,7 @@ const reducer = ( state, action ) => {
                 }
         break
         case 'POST_ATTENDING':
+                console.log(action.payload)
                 state = {
                     ...state,
                     postsAttending: action.payload
@@ -104,8 +105,9 @@ const reducer = ( state, action ) => {
         break
         case 'UNATTEND_POST':
                 let post = state.postsAttending.filter((post) => {
-                    return post!==action.payload
+                    return post.id!==action.payload.id
                 })
+                console.log(post)
                 state = {
                     ...state,
                     postsAttending: post
@@ -121,20 +123,6 @@ const middleware = compose(
     applyMiddleware(ReduxThunk),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
-
-if(localStorage.getItem('token')){
-    fetch('http://localhost:3000/current_user', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('token')}` 
-        }
-    })
-    .then(res => res.json())
-    .then(user =>{
-        store.dispatch({type: 'CURRENT_USER', payload: user})
-    }) 
-}
 
 export const store = createStore(
     reducer,

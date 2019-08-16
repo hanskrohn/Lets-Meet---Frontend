@@ -8,20 +8,7 @@ import Comments from './comments.js'
 const EventsPages = (props) =>  {
     const [viewingEvents, setviewingEvents] = useState(true)
 
-    useEffect(() => {
-        fetch(`http://localhost:3000/users/events`,{
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('token')}` 
-                }
-            })
-            .then(res => res.json())
-            .then(data => {
-                props.attendEvent(data)
-                
-            })
-    }, [] )
+  
     return(
         <Container style ={{maxWidth: '100%', paddingTop: '120px'}}>
             <SelectorDiv>

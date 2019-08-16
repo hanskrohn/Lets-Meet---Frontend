@@ -23,7 +23,7 @@ const mapDispatchToProps = {
         }
         else{
             localStorage.setItem('token', user.auth_token)
-            history.push('/')
+            history.push('/browse')
         }
         })
                 

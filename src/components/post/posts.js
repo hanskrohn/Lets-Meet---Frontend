@@ -26,6 +26,7 @@ const attend = (props, setLimit, limit, setAttending, attending) =>{
             props.attendEvent(post.event)
         }
         else if(post.message === "Already Attending"){
+            props.unattendEvent(post.event)
             fetch(`http://localhost:3000/unattend/${props.item.id}`,{
                 method: 'DELETE',
                 headers: {
@@ -34,7 +35,8 @@ const attend = (props, setLimit, limit, setAttending, attending) =>{
                     'Authorization': `Bearer ${localStorage.getItem('token')}` 
                 }
             })
-            .then( setAttending(!attending), setLimit(limit+1))
+            .then(setAttending(!attending), setLimit(limit+1) )
+                
         }
         else if(post.message === "Not enough space"){
             alert("Not enough space")
@@ -55,7 +57,6 @@ const Posts = (props) => {
     const [attending, setAttending] = useState(false)
 
     useEffect(() => {
-        console.log("item", props.item)
         fetch(`http://localhost:3000/user/${props.item.user_id}`,{
             method: 'GET',
             headers: {
@@ -78,7 +79,6 @@ const Posts = (props) => {
             .then(data => {
                 if(data.message === "true"){
                     setAttending(true)
-                    props.attendEvent(data.event)
                 }
                 else if(data.message === "false") {
                     setAttending(false)

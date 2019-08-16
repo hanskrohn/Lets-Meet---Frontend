@@ -26,6 +26,7 @@ const Comment = (props) => {
                     <img style = {{height: '45px', float: 'right'}} src = {user.profile_img}></img>
                 </div>
                 <div style ={{flex: '10', fontSize: '150%', paddingLeft: '2%'}}>
+                    
                     <strong>{user.username}</strong>
                 </div>
                 <div style ={{flex: '85', fontSize: '150%', paddingLeft: '2%'}}>

@@ -69,8 +69,8 @@ const ProfilePage = (props) => {
                 <Col sm={9}>
                     <Hub>
                         <Row >
-                            <Col >
-                                <div style={{ paddingTop: '100px', paddingLeft: '40%' }}>
+                            <Col style = {{flex: '40', padding: '0'}}>
+                                <div style={{ paddingTop: '100px', textAlign: 'center' }}>
                                     <div style={{ fontSize: '75px' }}>
                                         <strong>{props.usersPost.length}</strong>
                                     </div>
@@ -79,8 +79,8 @@ const ProfilePage = (props) => {
                                     </div>
                                 </div>
                             </Col>
-                            <Col >
-                                <div style={{ paddingTop: '100px', paddingLeft: '30%', cursor: 'pointer' }} onClick={() => history.push('/followers')}>
+                            <Col style = {{flex: '20', padding: '0'}} >
+                                <div style={{ paddingTop: '100px', cursor: 'pointer', textAlign: 'center'  }} onClick={() => history.push('/followers')}>
                                     <div style={{ fontSize: '75px' }}>
                                         <strong>{props.followers.length}</strong>
                                     </div>
@@ -89,8 +89,8 @@ const ProfilePage = (props) => {
                                     </div>
                                 </div>
                             </Col>
-                            <Col >
-                                <div style={{ paddingTop: '100px', paddingLeft: '25%', cursor: 'pointer' }} onClick={() => history.push('/following')}>
+                            <Col style = {{flex: '40', padding: '0'}}>
+                                <div style={{ paddingTop: '100px', cursor: 'pointer', textAlign: 'center'  }} onClick={() => history.push('/following')}>
                                     <div style={{ fontSize: '75px' }}>
                                         <strong>{props.following.length}</strong>
                                     </div>
