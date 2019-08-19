@@ -13,7 +13,8 @@ const initialState = {
     following: [],
     chosenUser: {},
     chosenUserPost: [], 
-    postsAttending: []
+    postsAttending: [], 
+    postComments: []
 }
 
 
@@ -112,6 +113,12 @@ const reducer = ( state, action ) => {
                     ...state,
                     postsAttending: post
                 }
+        break
+        case 'POST_COMMENTS':
+            state = {
+                ...state,
+                postComments: action.payload
+            }
         break
 
     }

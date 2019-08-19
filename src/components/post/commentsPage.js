@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Comment from './comment.js'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import history from '../../history.js'
 import './comments.css'
 
 
@@ -75,12 +76,15 @@ const CommentsPage = (props) => {
         
     }, [ post.id ] )
     
-    console.log(comments)
+    console.log(history)
     return(
         <div style = {{paddingTop: '120px', paddingBottom: '20px'}}>
             <MainDiv>
                 <PostDiv>
-                    <div style = {{flex: '70', fontSize: '250%', paddingLeft: '5%', paddingTop: '8px'}}>
+                    <div style = {{flex: '3', fontSize: '250%', paddingLeft: '5%', paddingTop: '8px'}} onClick = {() => history.goBack()}>
+                        <i class="glyphicon glyphicon-arrow-left"></i>
+                    </div>
+                    <div style = {{flex: '67', fontSize: '250%', paddingLeft: '5%', paddingTop: '8px'}}>
                         <strong>{post.title}</strong>
                     </div>
                     <div style = {{flex: '10', paddingTop: '8px'}}>

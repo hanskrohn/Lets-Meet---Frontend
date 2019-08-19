@@ -4,16 +4,30 @@ import Container from 'react-bootstrap/Container'
 import styled from 'styled-components'
 import Events from './events.js'
 import Comments from './comments.js'
+import history from '../../history.js'
 
 const EventsPages = (props) =>  {
     const [viewingEvents, setviewingEvents] = useState(true)
 
-  
+    useEffect(()=>{
+        fetch('http://localhost:3000/postComments', {
+            method: 'GET',
+            headers:{
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}` 
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            props.getPostComments(data)
+        })
+    }, [])
     return(
         <Container style ={{maxWidth: '100%', paddingTop: '120px'}}>
             <SelectorDiv>
-                <EventsDiv onClick={ () => setviewingEvents(true)}>
-                    {viewingEvents
+                <EventsDiv onClick={ () => history.push('/notifications')}>
+                    {history.location.pathname == '/notifications'
                         ?
                         <div>
                             <strong>View Events</strong>
@@ -24,8 +38,8 @@ const EventsPages = (props) =>  {
                     }
                 </EventsDiv>
                 <div style ={{height: '50px', width: '2px', backgroundColor: '#B0B0B0', paddingTop: '-15px'}}> </div>
-                <CommentsDiv onClick={ () => setviewingEvents(false)}>
-                    {viewingEvents
+                <CommentsDiv onClick={ () => history.push('/postComments')}>
+                    {history.location.pathname == '/notifications'
                             ?
                             <div>Post Comments</div>
                             :
@@ -39,18 +53,28 @@ const EventsPages = (props) =>  {
             {props.posts.length !== 0
                 ? 
                 <DisplayDiv>
-                    {viewingEvents
+                    {history.location.pathname == '/notifications'
                             ?
                                 <div>
                                     {props.posts.map((event) => <Events event = {event}/> )}     
                                 </div>
-                            :
-                                <Comments></Comments>
+                            :   
+                            <div>
+                                {props.comments.length !==0
+                                    ?
+                                        <div>
+                                            {props.comments.map((comment) => <Comments comment = {comment}/>)}
+                                        </div>
+                                    :
+                                        <div style = {{textAlign: 'center', fontSize: '300%', marginTop: '15%'}}>No Comments</div> 
+                                }
+                            </div>
+                                    
                     }
                 </DisplayDiv>
                 :
                 <div style = {{textAlign: 'center', fontSize: '300%', marginTop: '15%'}}>
-                    {viewingEvents
+                    {history.location.pathname == '/notifications'
                         ?
                         <div>Currently Not Attending Any Event</div>
                         :
@@ -65,16 +89,20 @@ const EventsPages = (props) =>  {
 }
 
 const mapStateToProps = state => ({
-    posts: state.postsAttending
+    posts: state.postsAttending,
+    comments: state.postComments
 })
 
 
 const mapDispatchToProps ={
     getUser: data => {
-        return {type: 'GET_USERS', payload: data}
+        return { type: 'GET_USERS', payload: data }
     },
     attendEvent: data => {
-        return { payload: data, type: 'POST_ATTENDING'}
+        return { type: 'POST_ATTENDING', payload: data}
+    }, 
+    getPostComments: data => {
+        return { type: 'POST_COMMENTS', payload: data}
     }
 }
 

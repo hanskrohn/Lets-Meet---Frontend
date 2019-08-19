@@ -10,7 +10,7 @@ const PostForm = (props) => {
                     <Title placeholder = "Title" name = "Title" required/>
                     <Address placeholder = "Address" name ="Address" required/>
                     <Number placeholder = "Size Limit" type = "Number" name = "limit" required/>
-                    <Date name = "Date" required/>
+                    <Date name = "Date" placeholder = "Date" required/>
                     <Time placeholder = "Time" type = "time" name = "Time" required/>
                     <TextArea placeholder = "Description" name = "Description" required/>
                     <Button style = {{outline: 'none'}} ><strong style = {{fontSize: '15px'}}> Create Meeting</strong></Button>

@@ -58,8 +58,9 @@ const App = (props) => {
         <Route exact path = '/following' component = {Following}></Route>
         <Route exact path = '/followers' component = {Followers}></Route>
         <Route exact path = '/comments/post/:id' component = {CommentsPage}></Route>
-        <Route exact path = '/notifications' component = {EventsPage}></Route>
+        <Route exact path = '/(notifications|postComments)' component = {EventsPage}></Route>
         <Route exact path = '/event/show/:id' component = {EventsShowPage}></Route>
+
     </Router>
   );
 }

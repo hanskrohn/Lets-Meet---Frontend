@@ -18,18 +18,18 @@ const Comment = (props) => {
             setUser(user)
         })
     }, [props.comment.user_id] )
-    console.log(props)
+  
     return(
         <div>
             <CardDiv>
-                <div style ={{flex: '5'}}>
+                <div >
                     <img style = {{height: '45px', float: 'right'}} src = {user.profile_img}></img>
                 </div>
-                <div style ={{flex: '10', fontSize: '150%', paddingLeft: '2%'}}>
+                <div style ={{ fontSize: '150%', paddingLeft: '2%'}}>
                     
-                    <strong>{user.username}</strong>
+                    <strong>{user.username}:</strong>
                 </div>
-                <div style ={{flex: '85', fontSize: '150%', paddingLeft: '2%'}}>
+                <div style ={{ fontSize: '150%', paddingLeft: '1%'}}>
                     {props.comment.comment}
                 </div>
                 
@@ -61,9 +61,7 @@ const Button = styled.button`
     }
 `
 
-const Div = styled.div`
-    display: flex;
-`
+
 
 
 
