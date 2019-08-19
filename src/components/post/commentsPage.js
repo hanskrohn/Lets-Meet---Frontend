@@ -88,7 +88,7 @@ const CommentsPage = (props) => {
                         <strong>{post.title}</strong>
                     </div>
                     <div style = {{flex: '10', paddingTop: '8px'}}>
-                        <img style = {{height: '35px', float: 'right'}} src = {postUser.profile_img}></img>
+                        <img style = {{height: '35px', float: 'right'}} src = {postUser.profile_url}></img>
                     </div>
                     <div style ={{flex: '20', fontSize: '250%', paddingTop: '8px', paddingLeft: '5px'}}>
                         <strong>{postUser.username}</strong>

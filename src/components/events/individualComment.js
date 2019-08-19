@@ -25,7 +25,7 @@ const IndividualComment = (props) =>  {
     return(
         <CardDiv>
             <Div>
-                <Img src = {user.profile_img}></Img>
+                <Img src = {user.profile_url}></Img>
                 <div style = {{display: 'inline-block', verticalAlign: 'middle'}}>
                     <p style = {{fontSize: '15px', float: 'left'}}>{user.username} commented: {props.comment.comment}</p>
                 </div>

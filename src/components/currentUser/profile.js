@@ -6,6 +6,7 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 
 const MyVerticallyCenteredModal = (props)=> {
+    console.log(props.user)
     return (
       <Modal
         {...props}
@@ -16,21 +17,42 @@ const MyVerticallyCenteredModal = (props)=> {
         >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Modal heading
+            Edit
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <h4>Centered Modal</h4>
-          <p>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-            dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-            consectetur ac, vestibulum at eros.
-          </p>
-        </Modal.Body>
-        <Modal.Footer>
-            <Button onClick={props.onHide}>Close</Button>
-            {console.log(props.show)}
-        </Modal.Footer>
+          <form onSubmit={props.handleSubmit} className="login-form">
+            <div style = {{marginBottom: '20px'}}>
+                <div style = {{marginRight: '35%', marginLeft:'35%'}}>
+                    <img style = {{ width: '100%', height: '100%'}} src = {props.user.profile_url}/>
+                </div>
+                <input style = {{marginLeft: '40%'}} type = 'file' id='profile_img' name='profile_img'/>   
+            </div>
+            <div>
+                <input style = {{outline: '0', background: 'white', width: '100%', border: '2px solid #ccc', margin: '0 0 15px', boxSizing: 'border-box', fontSize:'14px'}}  name = "username" type="username" placeholder="Username" required/>
+            </div>
+            <div>
+                <input style = {{outline: '0', background: 'white', width: '100%', border: '2px solid #ccc', margin: '0 0 15px', boxSizing: 'border-box', fontSize:'14px'}}  name = "name" type="name" placeholder="Full Name" required/>    
+            </div>
+            <div>
+                <input style = {{outline: '0', background: 'white', width: '100%', border: '2px solid #ccc', margin: '0 0 15px', boxSizing: 'border-box', fontSize:'14px'}}  name = "email" type="email" placeholder="Email" required/>  
+            </div>
+            <div>
+                <input style = {{outline: '0', background: 'white', width: '100%', border: '2px solid #ccc', margin: '0 0 15px', boxSizing: 'border-box', fontSize:'14px'}} name = "country" type="country" placeholder="Country" required />
+            </div>
+            <div>
+                <input style = {{outline: '0', background: 'white', width: '100%', border: '2px solid #ccc', margin: '0 0 15px', boxSizing: 'border-box', fontSize:'14px'}}  name = "city" type="city" placeholder="City" required />  
+            </div>
+            <div>
+                <input style = {{outline: '0', background: 'white', width: '100%', border: '2px solid #ccc', margin: '0 0 15px', boxSizing: 'border-box', fontSize:'14px'}}  name = "password" type="password" placeholder="password"  required/>  
+            </div>
+            <div>
+                <textarea style = {{ height: '150px', border: '2px solid #ccc', width: '100%', resize: 'none', fontSize:'14px'}} name = "bio" type="bio" placeholder="Tell us About Yourself" /> 
+            </div>
+            <Button onClick={props.onHide} style = {{float: 'right'}} type = "submit">Update</Button>
+        </form>
+        </Modal.Body> 
       </Modal>
     );
   }
@@ -44,14 +66,23 @@ const Profile = (props) => {
             <MyVerticallyCenteredModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
+                user = {props.user}
             />  
             <Div>
-                <div class = "textWithBlurredBg format"> 
-                    <img src = {props.user.profile_img} ></img>
-                    <button style={{textAlign: 'center', fontSize: '150%'}} class = "btn" onClick={() => setModalShow(true)}> 
-                            EDIT 
-                    </button>  
-                </div>
+                {history.location.pathname == '/profile'
+                    ?
+                    <div class = "textWithBlurredBg format"> 
+                        <img src = {props.user.profile_url} ></img>
+                        <button style={{textAlign: 'center', fontSize: '150%'}} class = "btn" onClick={() => setModalShow(true)}> 
+                                EDIT 
+                        </button>  
+                    </div>
+                    :
+                    <div style = {{display: 'inline-block', margin: '4px', position: 'relative', height: '40%', marginLeft: '24%', marginRight: '24%'}}>
+                        <img style = {{height: '100%', width: '100%', borderRadius: '4px'}} src = {props.user.profile_url} ></img>
+                    </div>
+
+                }
                 <br></br>
                 <div>
                     <h1 style = {{fontSize: '400%'}}>{props.user.username}</h1>

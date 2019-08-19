@@ -12,7 +12,7 @@ class User extends React.Component  {
                  <div style = {{paddingTop: '3%'}} > 
                     <Div >
                         <div style = {{ width: '10%'}}>
-                            <Img src = {this.props.user.profile_img}/>
+                            <Img src = {this.props.user.profile_url}/>
                         </div>  
                         <NameDiv>
                             <div style = {{cursor: 'pointer'}} onClick = { () => history.push(`/users/${this.props.user.id}`)}> 

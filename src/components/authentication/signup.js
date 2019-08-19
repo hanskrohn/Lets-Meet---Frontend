@@ -7,24 +7,9 @@ import './Signup.css'
 const mapDispatchToProps = {
   handleSubmit: (e) => dispatch => {
     e.preventDefault()
-    const response = {
-      'username': e.target['username'].value,
-      'name': e.target['name'].value,
-      'email': e.target['email'].value,
-      'country': e.target['country'].value,
-      'city': e.target['city'].value,
-      'password': e.target['password'].value,
-      'bio': e.target['bio'].value
-    }
-    let errors = validate(response)
-    console.log(errors)
-    if( errors.length === 0){
         fetch('http://localhost:3000/signup',{
           method: 'POST',
-          headers:{
-            'Content-Type':'application/json'
-          },
-          body:JSON.stringify(response)
+          body: new FormData(e.target)
         }).then(user => {
           console.log(user)
           if(user.statusText === "Internal Server Error"){
@@ -36,38 +21,6 @@ const mapDispatchToProps = {
         })
         
     }
-    else{
-      let organizedErrors = ''
-      for(let i = 1; i<errors.length; i++){
-        organizedErrors = organizedErrors + '- ' + errors[i] + '\n'
-      }
-      alert(organizedErrors)
-    }
-
-  }
-}
-const validate = (data) => {
-  const errors = []
-  if(data['username'] === '' ){
-    errors.push("Username cannot be empty")
-  }
-  if (data['name'] === '' ) {
-    errors.push("Name cannot be empty")
-  }
-  if (data['email'].length < 5 ) {
-    errors.push("Email should be at least five charcters long") 
-  }
-  if (data['country'] === '' ) {
-    errors.push("Country cannot be empty")
-  }
-  if (data['city'] === '' ) {
-    errors.push("City cannot be empty")
-  }
-  if (data['password'] === '' ) {
-    errors.push("Password cannot be empty")
-  }
-  return errors
-
 }
 const SignupForm = connect(null, mapDispatchToProps)((props) => {
         return(
@@ -81,7 +34,8 @@ const SignupForm = connect(null, mapDispatchToProps)((props) => {
                         <input name = "country" type="country" placeholder="Country" required />
                         <input name = "city" type="city" placeholder="City" required />
                         <input name = "password" type="password" placeholder="password"  required/>
-                        <input name = "bio" type="bio" placeholder="Tell us About Yourself"  required/>
+                        <input type = 'file' id='profile_img' name='profile_img'/>
+                        <textarea name = "bio" type="bio" placeholder="Tell us About Yourself" />
                         <button style={{"border-radius": "7px"}}>Sign Up</button>
                         <p className="message">Already registered? <a onClick={()=>history.push('/sign-in')}>Sign In</a></p>
                     </form>

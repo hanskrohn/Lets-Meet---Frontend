@@ -23,7 +23,7 @@ const Comment = (props) => {
         <div>
             <CardDiv>
                 <div >
-                    <img style = {{height: '45px', float: 'right'}} src = {user.profile_img}></img>
+                    <img style = {{height: '45px', float: 'right'}} src = {user.profile_url}></img>
                 </div>
                 <div style ={{ fontSize: '150%', paddingLeft: '2%'}}>
                     

@@ -95,7 +95,7 @@ const EventsShowPage = (props) =>  {
                         <div style = {{ height: '86%', marginTop: '5%', marginBottom: '7%', marginLeft: '20%', marginRight: '20%'}}>
                             <div style = {{textAlign: 'center', marginLeft: '27%', marginRight: '27%'}}>
                                 <div>
-                                    <img style = {{height: '17vh', width: '100%'}} src = {user.profile_img} ></img>
+                                    <img style = {{height: '17vh', width: '100%'}} src = {user.profile_url} ></img>
                                 </div>
                                 <div style = {{ marginTop: '10%', marginBottom: '25%'}}>
                                     <h2 style = {{fontSize: '350%'}}><strong>{user.username}</strong></h2>

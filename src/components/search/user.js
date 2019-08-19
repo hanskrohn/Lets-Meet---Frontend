@@ -51,7 +51,7 @@ class User extends React.Component  {
                         <div style = {{cursor: 'pointer', flex: '85'}} onClick = { () => history.push(`/users/${this.props.user.id}`)}> 
                             <DivSpecial>
                                 <div style = {{ flex: '10' }}>
-                                    <Img src = {this.props.user.profile_img}/>
+                                    <Img src = {this.props.user.profile_url}/>
                                 </div>
                                 <div style = {{ flex: '90', marginTop: '3%' }}>
                                     <h3 >{this.props.user.username}</h3>
@@ -119,5 +119,6 @@ const Div = styled.div`
 const Img = styled.img`
     padding: 15px;
     height: ${cardHeight}px;
+    width: ${cardHeight}px;
 
 `

@@ -2,6 +2,8 @@
     display: inline-block;
     margin: 4px;
     position: relative;
+    height: 40%;
+    
 }
 .textWithBlurredBg:hover img{
     filter: blur(2px) brightness(60%);
@@ -44,6 +46,7 @@
     border: 1px solid #0177F9;
     text-align: center;
   }
+
 
   
   
