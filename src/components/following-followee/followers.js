@@ -42,7 +42,7 @@ class Followers extends React.Component {
     }
 
     render(){
-        let users = this.props.following;
+        let users = this.props.followers;
         if(this.state.search){   
           users = this.props.followers.filter( (user)=>{
             return user.username.toLowerCase().includes(this.state.search)
@@ -56,18 +56,16 @@ class Followers extends React.Component {
                         <Search  autocomplete= "off" name = "search" placeholder = "Search" onChange = { (e) => this.setState({search: e.target.value}) }/>
                     </div>
                     <div style ={{paddingBottom: '50px'}}>
-                        
-                                {users
-                                    ?
-                                        <Div >
-                                            <div style = {{ paddingBottom: '3%'}}> 
-                                                {users.map((user) => < User follow = {this.follow} unfollow = {this.unfollow} user = {user} />)}
-                                            </div> 
-                                        </Div>  
-                                    :
-                                        <div>test</div>
-                                }
-                         
+                            {users.length>0
+                                ?
+                                <Div >
+                                    <div style = {{ paddingBottom: '3%'}}> 
+                                        {users.map((user) => < User follow = {this.follow} unfollow = {this.unfollow} user = {user} />)}
+                                    </div> 
+                                </Div>  
+                                :
+                                <div style = {{textAlign: 'center', fontSize: '300%', marginTop: '15%'}}>No Followers</div> 
+                            }
                     </div>
                 </Container>
         )

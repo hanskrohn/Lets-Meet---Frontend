@@ -88,7 +88,7 @@ const CommentsPage = (props) => {
                         <strong>{post.title}</strong>
                     </div>
                     <div style = {{flex: '10', paddingTop: '8px'}}>
-                        <img style = {{height: '35px', float: 'right'}} src = {postUser.profile_url}></img>
+                        <img style = {{height: '35px', width: '35px', float: 'right'}} src = {postUser.profile_url}></img>
                     </div>
                     <div style ={{flex: '20', fontSize: '250%', paddingTop: '8px', paddingLeft: '5px'}}>
                         <strong>{postUser.username}</strong>
@@ -103,7 +103,7 @@ const CommentsPage = (props) => {
                 <div style ={{height: '2px', width: '95%', backgroundColor: '#B0B0B0', marginLeft: '2%'}}> </div>
                 <FormDiv>
                     <form id="comment" onSubmit = {(e) => createPost(e, setComments, comments, props)} class="comment" action="action_page.php">
-                        <input type="text" placeholder="Comment" name="comment"></input>
+                        <input type="text" placeholder="Comment" name="comment" required></input>
                         <button type="submit">
                             Post
                         </button>

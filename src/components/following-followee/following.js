@@ -42,11 +42,16 @@ class Following extends React.Component {
                         <Search  autocomplete= "off" name = "search" placeholder = "Search" onChange = { this.handleSearch }/>
                     </div>
                     <div style ={{paddingBottom: '50px'}}>
-                        <Div >
-                            <div style = {{ paddingBottom: '3%'}}> 
-                                {users.map((user) => < User unfollow = {this.unfollow} user = {user} />)}
-                            </div> 
-                        </Div>
+                        {users.lenght>0
+                            ?        
+                            <Div >
+                                <div style = {{ paddingBottom: '3%'}}> 
+                                    {users.map((user) => < User unfollow = {this.unfollow} user = {user} />)}
+                                </div> 
+                            </Div>
+                            :
+                            <div style = {{textAlign: 'center', fontSize: '300%', marginTop: '15%'}}>Not Following Anyone</div> 
+                        }
                     </div>
                 </Container>
         )

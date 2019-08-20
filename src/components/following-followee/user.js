@@ -24,8 +24,8 @@ class User extends React.Component  {
                 
                 <div style = {{flex: '15', paddingTop: '10px' }}>
                     
-                    <UnfollowBtn onClick = {this.unfollow}  style = {{outline: 'none'}} ><strong style = {{fontSize: '15px'}}>Unfollow</strong></UnfollowBtn>
-                   
+                    <UnfollowBtn onClick = {() => this.props.unfollow(this.props.user)}  style = {{outline: 'none'}} ><strong style = {{fontSize: '15px'}}>Unfollow</strong></UnfollowBtn>
+                
                 </div>
             </Div>
         </div>

@@ -101,7 +101,7 @@ const Posts = (props) => {
                                 {props.item.title}
                             </div>
                             <div style ={{flex: '10', paddingTop: '3px'}}>
-                                <img style = {{height: '35px', float: 'right'}} src = {user.profile_url}></img>
+                                <img style = {{height: '35px', width: '35px',float: 'right'}} src = {user.profile_url}></img>
                             </div>
                             <div style ={{flex: '20', paddingLeft: '10px'}}>
                                 {user.username}

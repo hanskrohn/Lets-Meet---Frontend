@@ -6,7 +6,7 @@ import './navbar.css'
 
 //with router makes it update whenever history changes
 const NavBar = withRouter(({ history }) => (
-    ['/sign-in', '/sign-up'].includes(history.location.pathname) ?
+    ['/sign-in', '/sign-up', '/sign-up/2'].includes(history.location.pathname) ?
       null 
         :
      

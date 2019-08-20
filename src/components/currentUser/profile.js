@@ -31,7 +31,7 @@ const MyVerticallyCenteredModal = (props) => {
     const [crop, setCrop] = useState({ aspect: 1 / 1 })
 
     const fileInputRef = React.createRef()
-    const acceptedFileTypes = 'image/x-png, image/png, image/jpg, image/jpeg, image/gif'
+    const acceptedFileTypes = 'image/x-png, image/png, image/jpg, image/jpeg'
     const imageMaxSize = 1000000000
     const acceptedFileTypesArray = acceptedFileTypes.split(",").map((item) => { return item.trim() })
 
@@ -62,10 +62,7 @@ const MyVerticallyCenteredModal = (props) => {
                 const currentFile = files[0]
                 const myFileItemReader = new FileReader()
                 myFileItemReader.addEventListener("load", () => {
-                    //  console.log(myFileItemReader)
-                    // console.log(myFileItemReader.result)
                     const myResult = myFileItemReader.result
-                    // console.log(myResult)
                     setImgSrc(myResult)
                     setImgSrcExt(extractImageFileExtensionFromBase64(myResult))
 

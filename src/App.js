@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import history from './history'
 import Signin from './components/authentication/signin.js'
 import Signup from './components/authentication/signup.js'
+import SelectProfileImage from './components/authentication/SelectProfileImage'
 import Browse from './components/browse/browse.js'
 import NavBar from './components/navBar/navBar.js'
 import ProfilePage from './components/currentUser/profilePage.js'
@@ -50,6 +51,7 @@ const App = (props) => {
     <Router history={history}>
         <NavBar />
         <Route exact path = "/sign-up" component = {Signup}></Route>
+        <Route exact path = "/sign-up/2" component = {SelectProfileImage}></Route>
         <Route exact path = "/sign-in" component = {Signin}></Route>
         <Route exact path = "/browse" component = {Browse}></Route>
         <Route exaxt path = '/profile' component = {ProfilePage}></Route>

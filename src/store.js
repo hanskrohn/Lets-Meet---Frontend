@@ -14,7 +14,8 @@ const initialState = {
     chosenUser: {},
     chosenUserPost: [], 
     postsAttending: [], 
-    postComments: []
+    postComments: [],
+
 }
 
 
