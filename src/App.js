@@ -71,7 +71,7 @@ const mapStateToProps = state => ({
 })
 
 
-const mapDispatchToProps ={
+const mapDispatchToProps = {
   getUser: data => {
       return { payload: data, type: 'GET_USERS',}
   },

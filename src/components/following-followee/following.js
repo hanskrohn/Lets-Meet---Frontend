@@ -6,7 +6,7 @@ import User from './user.js'
 
 class Following extends React.Component {
     state = {
-        search: ''
+        search: false
     }
   
     unfollow = (user) =>{
@@ -22,23 +22,29 @@ class Following extends React.Component {
 
     }
 
+    handleSearch = (e) => {
+        this.setState({
+            search: e.target.value
+        })
+    }
+
     render(){
-        let users;
+        let users = this.props.following;
         if(this.state.search){   
           users = this.props.following.filter( (user)=>{
             return user.username.toLowerCase().includes(this.state.search)
           })
         }
-        
+        console.log(users)
         return(
                 <Container style ={{maxWidth: '100%', paddingTop: '120px'}}>
                     <div>
-                        <Search  autocomplete= "off" name = "search" placeholder = "Search" onChange = { (e) => this.setState({search: e.target.value}) }/>
+                        <Search  autocomplete= "off" name = "search" placeholder = "Search" onChange = { this.handleSearch }/>
                     </div>
                     <div style ={{paddingBottom: '50px'}}>
                         <Div >
                             <div style = {{ paddingBottom: '3%'}}> 
-                                {this.props.following.map((user) => < User unfollow = {this.unfollow} user = {user} />)}
+                                {users.map((user) => < User unfollow = {this.unfollow} user = {user} />)}
                             </div> 
                         </Div>
                     </div>

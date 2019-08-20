@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import {Profile} from '../currentUser/profile.js'
+import Profile from '../currentUser/profile.js'
 import Posts from '../post/posts.js'
 
 const ProfilePage = (props) => {
