@@ -1,12 +1,85 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './profile.css'
 import history from '../../history'
 import styled from 'styled-components'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
+// import imageDataURI from 'image-data-uri'
+import {base64StringtoFile,
+    downloadBase64File,
+    extractImageFileExtensionFromBase64,
+    image64toCanvasRef} from './ReuseableUtils'
+
+
+
 
 const MyVerticallyCenteredModal = (props)=> {
-    console.log(props.user)
+    
+    const [imgSrc, setImgSrc] = useState(null)
+    const [imgSrcExt, setImgSrcExt] = useState(null)
+    const [crop, setCrop] = useState({aspect: 1/1})
+
+    const fileInputRef = React.createRef()
+    const acceptedFileTypes = 'image/x-png, image/png, image/jpg, image/jpeg, image/gif'
+    const imageMaxSize = 1000000000
+    const acceptedFileTypesArray = acceptedFileTypes.split(",").map((item) => {return item.trim()})
+
+    
+    useEffect(() => {
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext('2d');
+
+        const base_image = new Image();
+        base_image.src = props.user.profile_url;
+        console.log(base_image)
+        console.log("ok", base_image)
+        const jpegUrl = canvas.toDataURL('image/jpeg', base_image.src);
+        console.log(jpegUrl)
+        setImgSrc(jpegUrl) 
+    })
+   
+    const verifyFile = (files) => {
+        if (files && files.length > 0){
+            const currentFile = files[0]
+            const currentFileType = currentFile.type
+            const currentFileSize = currentFile.size
+            if(currentFileSize > imageMaxSize) {
+                alert("This file is not allowed. " + currentFileSize + " bytes is too large")
+                return false
+            }
+            if (!acceptedFileTypesArray.includes(currentFileType)){
+                alert("This file is not allowed. Only images are allowed.")
+                return false
+            }
+            return true
+        }
+    }
+
+    const  handleFileSelect = event => {
+        const files = event.target.files
+        if (files && files.length > 0){
+              const isVerified = verifyFile(files)
+             
+             if (isVerified){
+                 // imageBase64Data 
+                 const currentFile = files[0]
+                 const myFileItemReader = new FileReader()
+                 myFileItemReader.addEventListener("load", ()=>{
+                    //  console.log(myFileItemReader)
+                    // console.log(myFileItemReader.result)
+                    const myResult = myFileItemReader.result
+                    // console.log(myResult)
+                    setImgSrc(myResult)
+                    setImgSrcExt(extractImageFileExtensionFromBase64(myResult))
+                    
+                 }, false)
+    
+                 myFileItemReader.readAsDataURL(currentFile)
+    
+             }
+        }
+    }
+    console.log(props.user.profile_url)
     return (
       <Modal
         {...props}
@@ -25,9 +98,9 @@ const MyVerticallyCenteredModal = (props)=> {
           <form onSubmit={props.handleSubmit} className="login-form">
             <div style = {{marginBottom: '20px'}}>
                 <div style = {{marginRight: '35%', marginLeft:'35%'}}>
-                    <img style = {{ width: '100%', height: '100%'}} src = {props.user.profile_url}/>
+                    <img style = {{ width: '100%', height: '100%'}} src = {imgSrc}/>
                 </div>
-                <input style = {{marginLeft: '40%'}} type = 'file' id='profile_img' name='profile_img'/>   
+                <input ref={fileInputRef} accept={acceptedFileTypes}  multiple={false} onChange={handleFileSelect} style = {{marginLeft: '40%'}} type = 'file' id='profile_img' name='profile_img'/>   
             </div>
             <div>
                 <input style = {{outline: '0', background: 'white', width: '100%', border: '2px solid #ccc', margin: '0 0 15px', boxSizing: 'border-box', fontSize:'14px'}}  name = "username" type="username" placeholder="Username" required/>
@@ -60,14 +133,18 @@ const MyVerticallyCenteredModal = (props)=> {
 
 const Profile = (props) => {
     const [modalShow, setModalShow] = useState(false);
-    console.log(modalShow)
     return(
         <div style ={{paddingLeft: '5%'}}> 
-            <MyVerticallyCenteredModal
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-                user = {props.user}
-            />  
+            {modalShow
+                ?
+                <MyVerticallyCenteredModal
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                    user = {props.user}
+                />  
+                :
+                null
+            }
             <Div>
                 {history.location.pathname == '/profile'
                     ?

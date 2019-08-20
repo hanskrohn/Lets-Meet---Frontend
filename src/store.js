@@ -19,7 +19,6 @@ const initialState = {
 
 
 const reducer = ( state, action ) => {
-    console.log("action", action)
     switch(action.type){
         case 'CREATE_POST':
             state = {
@@ -98,7 +97,7 @@ const reducer = ( state, action ) => {
                 }
         break
         case 'POST_ATTENDING':
-                console.log(action.payload)
+  
                 state = {
                     ...state,
                     postsAttending: action.payload
@@ -108,7 +107,7 @@ const reducer = ( state, action ) => {
                 let post = state.postsAttending.filter((post) => {
                     return post.id!==action.payload.id
                 })
-                console.log(post)
+
                 state = {
                     ...state,
                     postsAttending: post
@@ -122,7 +121,7 @@ const reducer = ( state, action ) => {
         break
 
     }
-    console.log("state", state)
+
     return state
 }
 

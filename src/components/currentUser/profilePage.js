@@ -44,7 +44,6 @@ const ProfilePage = (props) => {
             })
                 .then(res => res.json())
                 .then(post => {
-                    console.log("post", post)
                     props.getPost(post)
                 })
         }
