@@ -1,5 +1,11 @@
+   .backGroundImage{
+    height: 100vh;
+    width: 100vw;
+    background-repeat: no-repeat;
+    background-image: url(./background.jpg);
+    background-size: cover;
+  }
 
-  
   .login-page {
       width: 360px;
       padding: 4% 0 0;
@@ -9,7 +15,7 @@
     .form {
       top: 20%;
       z-index: 1;
-      background: #FFFFFF;
+      background: rgb(255, 255, 255);
       max-width: 360px;
       padding: 45px;
       text-align: center;

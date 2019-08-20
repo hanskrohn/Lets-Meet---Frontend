@@ -101,22 +101,27 @@ const SelectProfileImage = connect(null, mapDispatchToProps)((props) => {
     }
     
     return(
-        <div className="login-page">
-            <h1 ><strong>Welcome to Let's Meet</strong></h1>
-            <div className="form">
-                <p> This is your default image.</p>
-                <form onSubmit={handleSubmit} className="login-form">
-                    <div style={{ marginBottom: '20px'}}>
-                        <div style={{ marginBottom: '20px' }}>
-                            <img style={{ width: '22vh', height: '22vh' }} src={imgSrc} />
-                        </div>
-                        <input ref={fileInputRef} accept={acceptedFileTypes} multiple={false} onChange={handleFileSelect}  type='file' id='profile_img' name='profile_img' />
+        <div className = "backGroundImage">
+            <div className="login-page">
+                <div className="form">
+                    <div style = {{marginBottom: '10%'}}>
+                        <h1 ><strong>Add a profile photo so that your friends know it's you.</strong></h1>
                     </div>
-                    <button style={{"border-radius": "7px"}}>Sign-Up</button>
-                    <p className="message">Already registered? <a onClick={()=>history.push('/sign-in')}>Sign In</a></p>
-                </form>
+                    <div>
+                        <form onSubmit={handleSubmit} className="login-form">
+                            <div style={{ marginBottom: '20px'}}>
+                                <div style={{ marginBottom: '20px' }}>
+                                    <img style={{ width: '22vh', height: '22vh' }} src={imgSrc} />
+                                </div>
+                                <input ref={fileInputRef} accept={acceptedFileTypes} multiple={false} onChange={handleFileSelect}  type='file' id='profile_img' name='profile_img' />
+                            </div>
+                            <button style={{"border-radius": "7px"}}>Sign-Up</button>
+                            <p className="message">Already registered? <a onClick={()=>history.push('/sign-in')}>Sign In</a></p>
+                        </form>
+                    </div>
+                </div>
             </div>
-       </div>
+        </div>
     )
 })
 export default SelectProfileImage

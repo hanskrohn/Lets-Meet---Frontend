@@ -48,8 +48,9 @@ class Browse extends React.Component {
             }
         })
         .then(res => res.json())
-        .then(user =>{
-            this.props.getPost(user)
+        .then(post =>{
+            console.log("in browse", post)
+            this.props.getPost(post)
         })
     }
     render(){

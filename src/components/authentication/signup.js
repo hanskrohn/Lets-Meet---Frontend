@@ -51,22 +51,30 @@ const SignupForm =connect(null, mapDispatchToProps)((props) => {
         
     }
         return(
-            <div className="login-page">
-                <h1 ><strong>Welcome to Let's Meet</strong></h1>
-                <div className="form">
-                    <form onSubmit={handleSubmit} className="login-form">
-                        <input name = "username" type="username" placeholder="Username" required/>
-                        <input name = "name" type="name" placeholder="Full Name" required/>
-                        <input name = "email" type="email" placeholder="Email" required/>
-                        <input name = "country" type="country" placeholder="Country" required />
-                        <input name = "city" type="city" placeholder="City" required />
-                        <input name = "password" type="password" placeholder="password"  required/>
-                        <textarea name = "bio" type="bio" placeholder="Tell us About Yourself" />
-                        <button style={{"border-radius": "7px"}}  >Next</button>
-                        <p className="message">Already registered? <a onClick={()=>history.push('/sign-in')}>Sign In</a></p>
-                    </form>
+          
+            <div className = "backGroundImage">
+                <div className="login-page">
+                    <div className="form">
+                        <div style = {{marginBottom: '10%'}}>
+                            <h1 ><strong>Welcome to Let's Meet</strong></h1>
+                        </div>
+                        <div>
+                            <form onSubmit={handleSubmit} className="login-form">
+                                <input name = "username" type="username" placeholder="Username" required/>
+                                <input name = "name" type="name" placeholder="Full Name" required/>
+                                <input name = "email" type="email" placeholder="Email" required/>
+                                <input name = "country" type="country" placeholder="Country" required />
+                                <input name = "city" type="city" placeholder="City" required />
+                                <input name = "password" type="password" placeholder="password"  required/>
+                                <textarea name = "bio" type="bio" placeholder="Tell us About Yourself" />
+                                <button style={{"border-radius": "7px"}}  >Next</button>
+                                <p className="message">Already registered? <a onClick={()=>history.push('/sign-in')}>Sign In</a></p>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-           </div>
+            </div>
+            
         )
 })
 

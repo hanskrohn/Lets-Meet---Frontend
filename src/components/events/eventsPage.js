@@ -52,12 +52,14 @@ const EventsPages = (props) =>  {
             </SelectorDiv> 
             {props.posts.length !== 0
                 ? 
-                <DisplayDiv>
+                <div>
                     {history.location.pathname == '/notifications'
                             ?
+                            <DisplayDiv>
                                 <div>
                                     {props.posts.map((event) => <Events event = {event}/> )}     
                                 </div>
+                                </DisplayDiv>
                             :   
                             <div>
                                 {props.comments.length !==0
@@ -71,7 +73,8 @@ const EventsPages = (props) =>  {
                             </div>
                                     
                     }
-                </DisplayDiv>
+                </div>
+                    
                 :
                 <div style = {{textAlign: 'center', fontSize: '300%', marginTop: '15%'}}>
                     {history.location.pathname == '/notifications'

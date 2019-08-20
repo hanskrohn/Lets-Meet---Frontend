@@ -21,7 +21,8 @@ const attend = (props, setLimit, limit, setAttending, attending) =>{
     .then(res => res.json())
     .then(post => {
         if(post.message === "Now Attending"){
-            setLimit(limit-1)
+            console.log("now attending", post)
+            setLimit(post.event.limit)
             setAttending(!attending)
             props.attendEvent(post.event)
         }
@@ -35,25 +36,26 @@ const attend = (props, setLimit, limit, setAttending, attending) =>{
                     'Authorization': `Bearer ${localStorage.getItem('token')}` 
                 }
             })
-            .then(setAttending(!attending), setLimit(limit+1) )
+            .then(res => res.json())
+            .then(data => {
+                console.log("now unattending", data)
+                setAttending(!attending)
+                setLimit(data.limit) })
                 
         }
         else if(post.message === "Not enough space"){
             alert("Not enough space")
-        }
-
-
-        
+        }       
     })
    
 }
 
 const Posts = (props) => {
-   
-
+    
     const [viewDescription, setviewDescription] = useState(false)
     const [user, setUser] = useState({})
-    const [limit, setLimit] = useState(0)
+    const [limit, setLimit] = useState(props.item.limit)
+    console.log("it is this?", limit) 
     const [attending, setAttending] = useState(false)
 
     useEffect(() => {
@@ -67,7 +69,6 @@ const Posts = (props) => {
         .then(res => res.json())
         .then(user => {
             setUser(user)
-            setLimit(props.item.limit)
             fetch(`http://localhost:3000/attending/${props.item.id}`,{
                 method: 'GET',
                 headers: {
@@ -90,7 +91,6 @@ const Posts = (props) => {
 
 
 
-        
         return(
         <div> 
             <CardDiv>

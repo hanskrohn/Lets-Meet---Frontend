@@ -60,15 +60,23 @@ const mapDispatchToProps = {
 
 const SigninForm = connect(null, mapDispatchToProps)((props) => {
     return(
-        <div className="login-page">
-            <h1 ><strong>Welcome to Let's Meet</strong></h1>
-            <div className="form">
-                <form onSubmit={props.handleSubmit} className="login-form">
-                    <input name = "username" type="username" placeholder="Username"/>
-                    <input name = "password" type="password" placeholder="password" />
-                    <button style={{"border-radius": "7px"}}>login</button>
-                    <p className="message">Not registered? <a onClick={()=>history.push('/sign-up')}>Sign Up</a></p>
-                </form>
+        <div className = "backGroundImage">
+            <div className="login-page">
+                <div className ="blur">
+                <div className="form">
+                    <div style = {{marginBottom: '10%'}}>
+                        <h1 ><strong>Welcome to Let's Meet</strong></h1>
+                    </div>
+                    <div>
+                        <form onSubmit={props.handleSubmit} className="login-form">
+                            <input name = "username" type="username" placeholder="Username"/>
+                            <input name = "password" type="password" placeholder="password" />
+                            <button style={{"border-radius": "7px"}}>login</button>
+                            <p className="message">Not registered? <a onClick={()=>history.push('/sign-up')}>Sign Up</a></p>
+                        </form>
+                    </div>
+                </div>
+                </div>
             </div>
        </div>
     )
