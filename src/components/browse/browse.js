@@ -69,7 +69,7 @@ class Browse extends React.Component {
                                 {this.props.post.length !== 0 
                                     ? 
                                         <Div> 
-                                            {this.props.post.map((item) => <Posts  currentUser = {this.props.currentUser} item = {item}/> )}
+                                            {this.props.post.map((item) => <Posts  currentUser = {this.props.currentUser} item = {item} /> )}
                                         </Div>
                                     : 
                                         <div style = {{textAlign: 'center', marginTop: '20%', fontSize: '250%'}}>

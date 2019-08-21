@@ -173,6 +173,7 @@ const updateProfile = (e, props) => {
         }
         else{
           props.setCurrentUser(user)
+          props.onHide()
         }
       })
 }

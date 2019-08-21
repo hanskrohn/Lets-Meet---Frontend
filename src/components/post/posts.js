@@ -9,7 +9,7 @@ const handleView = ( setviewDescription, viewDescription) =>{
     setviewDescription(!viewDescription)
 }
 
-const attend = (props, setLimit, limit, setAttending, attending) =>{
+const attend = (props, setAttending, attending) =>{
     fetch(`http://localhost:3000/attend/${props.item.id}`,{
         method: 'POST',
         headers: {
@@ -22,7 +22,6 @@ const attend = (props, setLimit, limit, setAttending, attending) =>{
     .then(post => {
         if(post.message === "Now Attending"){
             console.log("now attending", post)
-            setLimit(post.event.limit)
             setAttending(!attending)
             props.attendEvent(post.event)
         }
@@ -40,7 +39,7 @@ const attend = (props, setLimit, limit, setAttending, attending) =>{
             .then(data => {
                 console.log("now unattending", data)
                 setAttending(!attending)
-                setLimit(data.limit) })
+            })
                 
         }
         else if(post.message === "Not enough space"){
@@ -54,11 +53,11 @@ const Posts = (props) => {
     
     const [viewDescription, setviewDescription] = useState(false)
     const [user, setUser] = useState({})
-    const [limit, setLimit] = useState(props.item.limit)
-    console.log("it is this?", limit) 
+    const [limit, setLimit] = useState(0)
     const [attending, setAttending] = useState(false)
 
     useEffect(() => {
+        console.log('effect')
         fetch(`http://localhost:3000/user/${props.item.user_id}`,{
             method: 'GET',
             headers: {
@@ -87,7 +86,20 @@ const Posts = (props) => {
 
             })
         })
-    }, [ props.item.id] )
+        fetch(`http://localhost:3000/comment/post/${props.item.id}`,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}` 
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log("data", data)
+            setLimit(data.limit)
+        })
+        console.log("limit", limit)
+    }, [ attending ] )
 
 
 
@@ -97,14 +109,14 @@ const Posts = (props) => {
                 <Card>
                     <Card.Header style ={{fontSize: '25px'}}>
                         <Div>
-                            <div style = {{flex: '70'}}>
-                                {props.item.title}
+                            <div style = {{flex: '70', paddingTop: '5px'}}>
+                                <h2>{props.item.title}</h2>
                             </div>
                             <div style ={{flex: '10', paddingTop: '3px'}}>
                                 <img style = {{height: '35px', width: '35px',float: 'right'}} src = {user.profile_url}></img>
                             </div>
                             <div style ={{flex: '20', paddingLeft: '10px'}}>
-                                {user.username}
+                                <h2>{user.username}</h2>
                             </div>
                         </Div>
                     </Card.Header>
@@ -117,7 +129,7 @@ const Posts = (props) => {
                             <div style ={{height: '2px', width: '100%', backgroundColor: '#B0B0B0'}}> </div>
                                     <div style ={{paddingTop: '1%'}}>
                                         <Div>
-                                            <div style ={{flex: '33', height: '100%', fontSize: '2vh',  textAlign: 'center', paddingTop: '0.5%', cursor: 'pointer'}}  onClick = {() => attend(props, setLimit, limit, setAttending, attending)}>
+                                            <div style ={{flex: '33', height: '100%', fontSize: '2vh',  textAlign: 'center', paddingTop: '0.5%', cursor: 'pointer'}}  onClick = {() => attend(props, setAttending, attending)}>
                                             {attending
                                                     ?
                                                     <i style = {{ color: 'red'}} class="glyphicon glyphicon-bookmark"></i>
@@ -138,7 +150,7 @@ const Posts = (props) => {
                         </Card.Body>
                         :
                         <Card.Body>
-                            <Card.Title style ={{fontSize: '16px'}}>Description:</Card.Title>
+                            <Card.Title style ={{fontSize: '16px'}}><h2>Description:</h2></Card.Title>
                             <Card.Text style ={{fontSize: '16px'}}>
                                 {props.item.description}
                             </Card.Text>
@@ -149,7 +161,7 @@ const Posts = (props) => {
                                 <div style ={{height: '2px', width: '100%', backgroundColor: '#B0B0B0'}}> </div>
                                     <div style ={{paddingTop: '1%'}}>
                                         <Div>
-                                            <div style ={{flex: '33', height: '100%', fontSize: '2vh',  textAlign: 'center', paddingTop: '0.5%', cursor: 'pointer'}} onClick = {() => attend(props, setLimit, limit, setAttending, attending)} >
+                                            <div style ={{flex: '33', height: '100%', fontSize: '2vh',  textAlign: 'center', paddingTop: '0.5%', cursor: 'pointer'}} onClick = {() => attend(props, setAttending, attending)} >
                                                 {attending
                                                     ?
                                                     <i style = {{ color: 'red'}} class="glyphicon glyphicon-bookmark"></i>
@@ -179,8 +191,7 @@ const Posts = (props) => {
 
 
 const mapStateToProps = state => ({
-    post: state.post,
-    currentUser: state.currentUser
+    post: state.post
 })
 
 const mapDispatchToProps = {

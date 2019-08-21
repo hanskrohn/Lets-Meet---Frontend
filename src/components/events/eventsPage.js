@@ -30,30 +30,30 @@ const EventsPages = (props) =>  {
                     {history.location.pathname == '/notifications'
                         ?
                         <div>
-                            <strong>View Events</strong>
+                            <h1><strong>View Events</strong></h1>
                             <div style ={{height: '2px', width: '80%', backgroundColor: '#B0B0B0', marginLeft: '10%', marginTop: '1%'}}> </div>
                         </div>
                         :
-                        <div>View Events</div>
+                            <h1><div>View Events</div></h1>
                     }
                 </EventsDiv>
                 <div style ={{height: '50px', width: '2px', backgroundColor: '#B0B0B0', paddingTop: '-15px'}}> </div>
                 <CommentsDiv onClick={ () => history.push('/postComments')}>
                     {history.location.pathname == '/notifications'
                             ?
-                            <div>Post Comments</div>
+                            < h1><div>Post Comments</div></h1>
                             :
                             <div>
-                                <strong>Post Comments</strong>
+                                    <h1><strong>Post Comments</strong></h1>
                                 <div style ={{height: '2px', width: '80%', backgroundColor: '#B0B0B0', marginLeft: '10%', marginTop: '1%'}}> </div>
                             </div>
                     }
                 </CommentsDiv>
             </SelectorDiv> 
-            {props.posts.length !== 0
+            {history.location.pathname == '/notifications'
                 ? 
                 <div>
-                    {history.location.pathname == '/notifications'
+                    {props.posts.length !== 0
                             ?
                             <DisplayDiv>
                                 <div>
@@ -61,29 +61,29 @@ const EventsPages = (props) =>  {
                                 </div>
                                 </DisplayDiv>
                             :   
-                            <div>
-                                {props.comments.length !==0
-                                    ?
-                                        <div>
-                                            {props.comments.map((comment) => <Comments comment = {comment}/>)}
-                                        </div>
-                                    :
-                                        <div style = {{textAlign: 'center', fontSize: '300%', marginTop: '15%'}}>No Comments</div> 
-                                }
-                            </div>
-                                    
+                            <div style = {{textAlign: 'center', fontSize: '300%', marginTop: '15%'}}>
+                                <h1>Currently Not Attending Any Event</h1>
+                            </div>             
                     }
                 </div>
                     
                 :
-                <div style = {{textAlign: 'center', fontSize: '300%', marginTop: '15%'}}>
-                    {history.location.pathname == '/notifications'
-                        ?
-                        <div>Currently Not Attending Any Event</div>
-                        :
-                        <div>No Comments</div>
+                
+                <div>
+                    {props.comments.length !==0
+                            ?    
+                                <DisplayDiv>    
+                                    <div>
+                                        {props.comments.map((comment) => <Comments comment = {comment}/>)}
+                                    </div>
+                                 </DisplayDiv>
+                            :
+                                <div style = {{textAlign: 'center', fontSize: '300%', marginTop: '15%'}}>
+                                    <h1>No Comments</h1>
+                                </div>
                     }
                 </div>
+                
             }
         </Container>
     )
@@ -95,6 +95,8 @@ const mapStateToProps = state => ({
     posts: state.postsAttending,
     comments: state.postComments
 })
+
+
 
 
 const mapDispatchToProps ={

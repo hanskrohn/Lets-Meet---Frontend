@@ -65,7 +65,7 @@ const Title = styled.input`
     margin-top: 3%;
     width: 94%;
     margin-left: 3%;
-    padding: 12px 2px;
+    padding: 12px 20px;
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;

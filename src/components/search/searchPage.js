@@ -76,13 +76,13 @@ class ProfilePage extends React.Component {
                                                 </Div>
                                             :
                                             <div style = {{textAlign: 'center', fontSize: '300%', marginTop: '15%'}}>
-                                                No User with that Username
+                                                <h1>No User with that Username</h1>
                                             </div>
                                         }
                                     </div>
                                     : 
                                     <div style = {{textAlign: 'center', fontSize: '300%', marginTop: '15%'}}>
-                                        Search by Username
+                                        <h1>Search by Username</h1>
                                     </div>
                                 }
                             

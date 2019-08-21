@@ -53,7 +53,7 @@ class User extends React.Component  {
                                 <div style = {{ flex: '10' }}>
                                     <Img src = {this.props.user.profile_url}/>
                                 </div>
-                                <div style = {{ flex: '90', marginTop: '3%' }}>
+                                <div style = {{ flex: '90', marginTop: '2%' }}>
                                     <h3 >{this.props.user.username}</h3>
                                 </div>
                             </DivSpecial>

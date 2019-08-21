@@ -17,23 +17,23 @@ const NavBar = withRouter(({ history }) => (
             window.scrollTo(0, 0)
             }}><i  class="glyphicon glyphicon-home"></i>
           </Nav.Link>
-            <p className = "text" style = {{fontSize: '100%', marginLeft: '12px', color: 'black', marginTop: '-7px'}}>Home</p>
+            <p className = "text" style = {{fontSize: '100%', marginLeft: '10px', color: 'black', marginTop: '-7px'}}>Home</p>
         </div>
         <div className = "displayBox">
           <Nav.Link style = {{ fontSize: '3vh', paddingTop: '17px', color: 'black', display: 'inline-block' }} onClick={()=>{history.push('/notifications') 
           window.scrollTo(0, 0)
           }}><i class="glyphicon glyphicon-bell"></i>
           </Nav.Link>
-          <p className = "text" style = {{fontSize: '100%', marginLeft: '-5px', color: 'black', marginTop: '-7px'}}>Notifications</p>
+          <p className = "text" style = {{fontSize: '100%', marginLeft: '-19px', color: 'black', marginTop: '-7px'}}>Notifications</p>
         </div>
-            <Navbar.Brand style = {{ fontSize: '3vh', paddingTop: '17px', color: 'black', display: 'inline-block' }} >Navbar</Navbar.Brand>
+            <Navbar.Brand style = {{color: 'black'}}  ><h1>Let's Meet</h1></Navbar.Brand>
            
         <div className = "displayBox">
           <Nav.Link style = {{ fontSize: '3vh', paddingTop: '17px', color: 'black', display: 'inline-block' }} onClick={()=>{history.push('/search') 
             window.scrollTo(0, 0)
             }}><i class="glyphicon glyphicon-search"></i>
           </Nav.Link>
-          <p className = "text" style = {{fontSize: '100%', marginLeft: '8px', color: 'black', marginTop: '-7px'}}>Search</p>
+          <p className = "text" style = {{fontSize: '100%', marginLeft: '6px', color: 'black', marginTop: '-7px'}}>Search</p>
         </div> 
         <div className = "displayBox">
           <Nav.Link style = {{ fontSize: '3vh', paddingTop: '17px', color: 'black', display: 'inline-block' }} onClick={()=>{
@@ -42,7 +42,7 @@ const NavBar = withRouter(({ history }) => (
             }}>
               <i class="glyphicon glyphicon-user"></i>
           </Nav.Link>
-          <p className = "text" style = {{fontSize: '100%', marginLeft: '11px', color: 'black', marginTop: '-7px'}}>Profile</p>
+          <p className = "text" style = {{fontSize: '100%', marginLeft: '4px', color: 'black', marginTop: '-7px'}}>Profile</p>
         </div>       
       </Navbar>
   ))

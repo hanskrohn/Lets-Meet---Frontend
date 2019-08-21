@@ -12,9 +12,9 @@ const Comments = (props) =>  {
         <div>
             <CardDiv>
                 <Card style = {{cursor: 'pointer'}} onClick = {() => history.push(`/comments/post/${props.comment.post.id}`)}>
-                    <Card.Header style ={{fontSize: '15px'}}>
+                    <Card.Header style ={{fontSize: '15px', paddingTop: '5px'}}>
                         <div >
-                            {props.comment.post.title}
+                            <h2>{props.comment.post.title}</h2>
                         </div>
                     </Card.Header>
                     <Card.Body>
@@ -30,5 +30,5 @@ export default Comments
 
 const CardDiv = styled.div`
     margin: 15px;
-    border: 2px solid #ccc;    
+    border: 2px solid #ccc;  
 `

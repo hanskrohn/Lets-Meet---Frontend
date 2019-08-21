@@ -74,7 +74,7 @@ const ProfilePage = (props) => {
                                         <strong>{props.usersPost.length}</strong>
                                     </div>
                                     <div style={{ fontSize: '25px' }}>
-                                        <strong>Post</strong>
+                                        <h1><strong>Post</strong></h1>
                                     </div>
                                 </div>
                             </Col>
@@ -84,7 +84,7 @@ const ProfilePage = (props) => {
                                         <strong>{props.followers.length}</strong>
                                     </div>
                                     <div style={{ fontSize: '25px' }}>
-                                        <strong>Followers</strong>
+                                        <h1><strong>Followers</strong></h1>
                                     </div>
                                 </div>
                             </Col>
@@ -94,7 +94,7 @@ const ProfilePage = (props) => {
                                         <strong>{props.following.length}</strong>
                                     </div>
                                     <div style={{ fontSize: '25px' }}>
-                                        <strong>Following</strong>
+                                        <h1><strong>Following</strong></h1>
                                     </div>
                                 </div>
                             </Col>
@@ -164,7 +164,7 @@ const Hub = styled.div`
     width: 70%;
     margin-left: 15%;
     margin-right: 15%;
-    z-index: 2;
+    z-index: -1;
     background: white;
 `
 
