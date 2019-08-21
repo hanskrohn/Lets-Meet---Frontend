@@ -86,6 +86,10 @@ const Posts = (props) => {
 
             })
         })
+    }, [])
+
+    useEffect(() => {
+         console.log("in the effect i want")
         fetch(`http://localhost:3000/comment/post/${props.item.id}`,{
             method: 'GET',
             headers: {

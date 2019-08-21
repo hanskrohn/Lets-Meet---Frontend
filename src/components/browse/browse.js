@@ -36,6 +36,7 @@ class Browse extends React.Component {
         .then( res => res.json())
         .then( post =>{
             this.props.createPost(post);
+            this.props.attendEvent(post)
         })
         
     }
@@ -69,7 +70,7 @@ class Browse extends React.Component {
                                 {this.props.post.length !== 0 
                                     ? 
                                         <Div> 
-                                            {this.props.post.map((item) => <Posts  currentUser = {this.props.currentUser} item = {item} /> )}
+                                            {this.props.post.map((item) => <Posts key = {item.id} currentUser = {this.props.currentUser} item = {item} /> )}
                                         </Div>
                                     : 
                                         <div style = {{textAlign: 'center', marginTop: '20%', fontSize: '250%'}}>
@@ -96,6 +97,9 @@ const mapDispatchToProps = {
     },
     getPost: data => {
         return {type: 'GET_POST', payload: data}
+    },
+    attendEvent: data => {
+        return { payload: data, type: 'ATTEND_POST'}
     }
 }
 
