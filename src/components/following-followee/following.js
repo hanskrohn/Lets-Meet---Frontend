@@ -9,6 +9,22 @@ class Following extends React.Component {
         search: false
     }
   
+    componentDidMount(){
+        let id = this.props.match.params.id
+            fetch(`http://localhost:3000/following/${id}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+                .then(res => res.json())
+                .then(user => {
+                    this.props.getFollowing(user)
+                })
+        }
+
+
     unfollow = (user) =>{
         console.log(user)
         fetch(`http://localhost:3000/unfollow/${user.id}`,{
@@ -42,7 +58,7 @@ class Following extends React.Component {
                         <Search  autocomplete= "off" name = "search" placeholder = "Search" onChange = { this.handleSearch }/>
                     </div>
                     <div style ={{paddingBottom: '50px'}}>
-                        {users.lenght>0
+                        {users.length>0
                             ?        
                             <Div >
                                 <div style = {{ paddingBottom: '3%'}}> 
@@ -71,6 +87,9 @@ const mapDispatchToProps ={
     },
     unfollow: data => {
         return {type: 'UNFOLLOW_USER', payload: data}
+    },
+    getFollowing: data => {
+        return { payload: data, type: 'GET_FOLLOWING' }
     }
 }
 

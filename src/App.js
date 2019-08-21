@@ -57,8 +57,8 @@ const App = (props) => {
         <Route exaxt path = '/profile' component = {ProfilePage}></Route>
         <Route exaxt path = '/search' component = {SearchPage}></Route>
         <Route exact path = '/users/:id' component = {UserPage}></Route>
-        <Route exact path = '/following' component = {Following}></Route>
-        <Route exact path = '/followers' component = {Followers}></Route>
+        <Route exact path = '/following/:id' component = {Following}></Route>
+        <Route exact path = '/followers/:id' component = {Followers}></Route>
         <Route exact path = '/comments/post/:id' component = {CommentsPage}></Route>
         <Route exact path = '/(notifications|postComments)' component = {EventsPage}></Route>
         <Route exact path = '/event/show/:id' component = {EventsShowPage}></Route>

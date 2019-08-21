@@ -79,7 +79,7 @@ const ProfilePage = (props) => {
                                 </div>
                             </Col>
                             <Col style = {{flex: '20', padding: '0'}} >
-                                <div style={{ paddingTop: '100px', cursor: 'pointer', textAlign: 'center'  }} onClick={() => history.push('/followers')}>
+                                <div style={{ paddingTop: '100px', cursor: 'pointer', textAlign: 'center'  }} onClick={() => history.push(`/followers/${props.currentUser.id}`)}>
                                     <div style={{ fontSize: '75px' }}>
                                         <strong>{props.followers.length}</strong>
                                     </div>
@@ -89,7 +89,7 @@ const ProfilePage = (props) => {
                                 </div>
                             </Col>
                             <Col style = {{flex: '40', padding: '0'}}>
-                                <div style={{ paddingTop: '100px', cursor: 'pointer', textAlign: 'center'  }} onClick={() => history.push('/following')}>
+                                <div style={{ paddingTop: '100px', cursor: 'pointer', textAlign: 'center'  }} onClick={() => history.push(`/following/${props.currentUser.id}`)}>
                                     <div style={{ fontSize: '75px' }}>
                                         <strong>{props.following.length}</strong>
                                     </div>
@@ -164,7 +164,7 @@ const Hub = styled.div`
     width: 70%;
     margin-left: 15%;
     margin-right: 15%;
-    z-index: -1;
+    z-index: 0;
     background: white;
 `
 

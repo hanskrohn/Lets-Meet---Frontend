@@ -28,7 +28,7 @@ const Events = (props) =>  {
                             <h2>{props.event.title}</h2>
                         </div>
                         <div style = {{ flex: '10' }}>
-                            <img style = {{height: '35px', float: 'right'}} src = {user.profile_url}></img>
+                            <img style = {{height: '35px', width: '35px', float: 'right'}} src = {user.profile_url}></img>
                         </div>
                         <div style = {{ flex : '20' , paddingLeft: '5px', paddingTop: '5px'}}>
                             <h2>{user.username}</h2>

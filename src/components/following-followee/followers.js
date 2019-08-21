@@ -9,6 +9,24 @@ class Followers extends React.Component {
         search: false
     }
   
+
+    componentDidMount(){
+        let id = this.props.match.params.id
+        fetch(`http://localhost:3000/followers/${id}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            .then(res => res.json())
+            .then(user => {
+                this.props.getFollowers(user)
+            })
+
+           
+    }
+
     follow = (user) =>{
         console.log(user)
         fetch(`http://localhost:3000/follow/${user.id}`,{
@@ -85,6 +103,9 @@ const mapDispatchToProps ={
     },
     unfollow: data => {
         return {type: 'UNFOLLOW_USER', payload: data}
+    },
+    getFollowers: data => {
+        return { payload: data, type: 'GET_FOLLOWERS' }
     }
 }
 

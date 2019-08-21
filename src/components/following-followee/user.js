@@ -7,7 +7,7 @@ class User extends React.Component  {
 
 
     render(){
-       
+       console.log(this.props)
         return(
             <div style = {{paddingTop: '3%'}} > 
             <Div > 

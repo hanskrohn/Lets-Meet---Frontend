@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 import Profile from '../currentUser/profile.js'
 import Posts from '../post/posts.js'
+import history from '../../history.js'
 
 const ProfilePage = (props) => {
     const [chosenUser, setchosenUser] = useState({})
@@ -88,7 +89,7 @@ const ProfilePage = (props) => {
                                         </div>
                                     </Col>
                                     <Col >
-                                        <div style = {{paddingTop: '100px', paddingLeft: '30%', cursor: 'pointer' }}>
+                                        <div style = {{paddingTop: '100px', paddingLeft: '30%', cursor: 'pointer' }} onClick={() => history.push(`/followers/${chosenUser.id}`)}>
                                             <div style = {{fontSize: '75px'}}>
                                                 <strong>{chosenUserFollowers.length}</strong>
                                             </div>
@@ -98,7 +99,7 @@ const ProfilePage = (props) => {
                                         </div>
                                     </Col>
                                     <Col >
-                                        <div style = {{paddingTop: '100px', paddingLeft: '25%', cursor: 'pointer' }}>
+                                        <div style = {{paddingTop: '100px', paddingLeft: '25%', cursor: 'pointer' }} onClick={() => history.push(`/following/${chosenUser.id}`)}>
                                             <div style = {{fontSize: '75px'}}>
                                                 <strong>{chosenUserFollowing.length}</strong>
                                             </div>
@@ -164,7 +165,7 @@ const Hub = styled.div`
     width: 70%;
     margin-left: 15%;
     margin-right: 15%;
-    z-index: 2;
+    z-index: 0;
     background: white;
 `
 
