@@ -1,33 +1,50 @@
 import React from 'react'
-import history from '../../history'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import { withRouter } from 'react-router-dom'
+import './navbar.css'
 
 //with router makes it update whenever history changes
-const NavBar = withRouter(() => (
-    ['/sign-in', '/sign-up'].includes(history.location.pathname) ?
+const NavBar = withRouter(({ history }) => (
+    ['/sign-in', '/sign-up', '/sign-up/2'].includes(history.location.pathname) ?
       null 
         :
      
-      <Navbar style={{height: '10vh', borderRadius: '0px', marginBottom: '0px', backgroundColor: '#0177F9', boxShadow: '0 0 25px 0 rgba(0,0,0,0.4)'}}  sticky='top' variant="dark" className="d-flex justify-content-around">
-          
-            <Nav.Link style = {{height: '10vh', fontSize: '5vh', paddingTop: '1vh', color: 'black', display: 'inline-block' }} href="/"><i  class="glyphicon glyphicon-home"></i></Nav.Link>
-         
-          
-            <Nav.Link style = {{height: '10vh', fontSize: '5vh', paddingTop: '1vh', color: 'black', display: 'inline-block' }} href="#features"><i class="glyphicon glyphicon-calendar"></i></Nav.Link>
-    
-            <Navbar.Brand style = {{height: '10vh', fontSize: '5vh', paddingTop: '1vh', color: 'black', display: 'inline-block' }} >Navbar</Navbar.Brand>
+      <Navbar style={{ minHeight: '9vh', borderRadius: '0px', marginBottom: '0px', backgroundColor: '#0177F9', boxShadow: '0 0 25px 0 rgba(0,0,0,0.4)', zIndex: '2', position: 'fixed', width: '100%'}}  variant="dark" className="d-flex justify-content-around">
+        <div className = "displayBox">
+          <Nav.Link style = {{ fontSize: '3vh', paddingTop: '17px', color: 'black', display: 'inline-block' }} onClick={()=>{
+            history.push('/browse')
+            window.scrollTo(0, 0)
+            }}><i  class="glyphicon glyphicon-home"></i>
+          </Nav.Link>
+            <p className = "text" style = {{fontSize: '100%', marginLeft: '10px', color: 'black', marginTop: '-7px'}}>Home</p>
+        </div>
+        <div className = "displayBox">
+          <Nav.Link style = {{ fontSize: '3vh', paddingTop: '17px', color: 'black', display: 'inline-block' }} onClick={()=>{history.push('/notifications') 
+          window.scrollTo(0, 0)
+          }}><i class="glyphicon glyphicon-bell"></i>
+          </Nav.Link>
+          <p className = "text" style = {{fontSize: '100%', marginLeft: '-19px', color: 'black', marginTop: '-7px'}}>Notifications</p>
+        </div>
+            <Navbar.Brand style = {{color: 'black'}}  ><h1>Let's Meet</h1></Navbar.Brand>
            
-            
-            <Nav.Link style = {{height: '10vh', fontSize: '5vh', paddingTop: '1vh', color: 'black', display: 'inline-block' }} href="#pricing"><i class="glyphicon glyphicon-search"></i></Nav.Link>
-           
-            
-            <Nav.Link style = {{height: '10vh', fontSize: '5vh', paddingTop: '1vh', color: 'black', display: 'inline-block' }} href="#pricing"><i class="glyphicon glyphicon-user"></i></Nav.Link>
-           
+        <div className = "displayBox">
+          <Nav.Link style = {{ fontSize: '3vh', paddingTop: '17px', color: 'black', display: 'inline-block' }} onClick={()=>{history.push('/search') 
+            window.scrollTo(0, 0)
+            }}><i class="glyphicon glyphicon-search"></i>
+          </Nav.Link>
+          <p className = "text" style = {{fontSize: '100%', marginLeft: '6px', color: 'black', marginTop: '-7px'}}>Search</p>
+        </div> 
+        <div className = "displayBox">
+          <Nav.Link style = {{ fontSize: '3vh', paddingTop: '17px', color: 'black', display: 'inline-block' }} onClick={()=>{
+            history.push('/profile') 
+            window.scrollTo(0, 0)
+            }}>
+              <i class="glyphicon glyphicon-user"></i>
+          </Nav.Link>
+          <p className = "text" style = {{fontSize: '100%', marginLeft: '4px', color: 'black', marginTop: '-7px'}}>Profile</p>
+        </div>       
       </Navbar>
-     
-  
   ))
   export default NavBar
  

@@ -1,0 +1,44 @@
+
+.text{
+    opacity: 0;
+    transition: all 0.5s;
+}
+.displayBox:hover .text{
+    opacity: 1;
+}
+
+h1 {
+    font-family: 'Oswald', 'cursive';
+    letter-spacing: 0.3rem;
+    text-transform: uppercase;
+ }
+ h2 {
+    font-family: 'Oswald', 'cursive';
+    letter-spacing: 0.3rem;
+    
+ }
+ h3 {
+    font-family: 'Oswald', 'cursive';
+    letter-spacing: 0.3rem;
+    
+ }
+ h4 {
+    font-family: 'Oswald', 'cursive';
+    letter-spacing: 0.3rem;
+   
+ }
+ h5 {
+    font-family: 'Oswald', 'cursive';
+    letter-spacing: 0.3rem;
+   
+ }
+ h6 {
+    font-family: 'Oswald', 'cursive';
+    letter-spacing: 0.3rem;
+    
+ }
+ p {
+    font-family: 'Oswald', 'cursive';
+    letter-spacing: 0.3rem;
+    
+ }

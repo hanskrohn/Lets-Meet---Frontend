@@ -2,28 +2,33 @@ import React from 'react'
 import history from '../../history'
 import styled from 'styled-components'
 
-const PostForm = () => {
+const PostForm = (props) => {
     return(
-        <div> 
-            <Div>
-                <form>
-                    <Title placeholder="Title"/>
-                    <Address placeholder="Address"/>
-                    <Number placeholder = "Size Limit" type = "Number"/>
-                    <Date type = "date"/>
-                    <Time type = "Time"/>
-                    <TextArea placeholder = "Description"/>
-                    <Button><strong style = {{fontSize: '15px'}}> Create Meeting</strong> </Button>
+        <div style ={{paddingLeft: '5%'}}>
+            <Div >
+                <form onSubmit = { (e) => props.createPost(e) } name = "post">
+                    <Title placeholder = "Title" name = "Title" required/>
+                    <Address placeholder = "Address" name ="Address" required/>
+                    <Number placeholder = "Size Limit" type = "Number" name = "limit" required/>
+                    <Date name = "Date" placeholder = "Date" required/>
+                    <Time placeholder = "Time" type = "time" name = "Time" required/>
+                    <TextArea placeholder = "Description" name = "Description" required/>
+                    <Button style = {{outline: 'none'}} ><strong style = {{fontSize: '15px'}}> Create Meeting</strong></Button>
                 </form>
             </Div>
         </div>
     )
 }
+
 const Div = styled.div`
     border: 2px solid #ccc;
     resize: none;
     height: 530px;
     box-shadow: 0 0 50px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    position: fixed;
+    width: 22%;
+    top: 16%;
+    
 `
 const Button = styled.button`
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
@@ -34,6 +39,8 @@ const Button = styled.button`
     border: 2px solid #ccc;
     color: #0177F9;
     transition: 0.25s all ease-out;
+    
+    
     &:hover {
         background-color: #0177F9; /* Green */
         color: white;
@@ -52,6 +59,7 @@ const TextArea = styled.textarea`
     font-size: 16px;
     resize: none;
     margin-bottom: 5px;
+   
 `
 const Title = styled.input`
     margin-top: 3%;
@@ -65,6 +73,7 @@ const Title = styled.input`
     font-size: 16px;
     resize: none;
     margin-bottom: 5px;
+    
 `
 const Address = styled.input`
     width: 94%;

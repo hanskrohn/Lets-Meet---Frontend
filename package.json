@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.3.1",
+    "image-data-uri": "^2.0.1",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.10",
     "react-dom": "^16.8.6",
@@ -11,6 +12,7 @@
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
+    "react-sticky": "^6.0.3",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "styled-components": "^4.3.2"

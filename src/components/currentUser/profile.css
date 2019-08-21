@@ -1,0 +1,55 @@
+.textWithBlurredBg{
+    display: inline-block;
+    margin: 4px;
+    position: relative;
+    height: 40%;
+    
+}
+.textWithBlurredBg:hover img{
+    filter: blur(2px) brightness(60%);
+    box-shadow: 0 0 16px #0177F9;
+}
+.textWithBlurredBg img{
+    height: 100%;
+    width: 100%;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+
+.textWithBlurredBg :not(img){
+    position: absolute;
+    margin-top: -22%;
+    left:35%;
+    z-index: 1;
+    text-align: center;
+    color: #fff;
+    text-align: center;
+    opacity: 0;
+    transition: 0.3s;
+    
+}
+
+.textWithBlurredBg button{
+    top: 50%;
+}
+.textWithBlurredBg:hover :not(img){
+    opacity: 1;
+}
+.format{
+   margin-left: 20%;
+   margin-right: 20%;
+}
+.btn {
+    height: 30%;
+    width: 30%;
+    border: 1px solid #0177F9;
+    text-align: center;
+  }
+
+
+  
+  
+  
+  
+ 
