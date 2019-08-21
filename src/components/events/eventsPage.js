@@ -24,6 +24,10 @@ const EventsPages = (props) =>  {
         })
     }, [])
     return(
+
+        <div>
+                {localStorage.getItem('token')
+                    ?
         <Container style ={{maxWidth: '100%', paddingTop: '120px'}}>
             <SelectorDiv>
                 <EventsDiv onClick={ () => history.push('/notifications')}>
@@ -86,6 +90,12 @@ const EventsPages = (props) =>  {
                 
             }
         </Container>
+          :
+          <div>
+              {history.push('/sign-in')}
+          </div>
+      }
+      </div>
     )
 
     

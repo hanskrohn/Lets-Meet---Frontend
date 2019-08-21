@@ -76,6 +76,9 @@ const EventsShowPage = (props) =>  {
 
     console.log(" in show", post)
     return(
+        <div>
+                {localStorage.getItem('token')
+                    ?
         <div style = {{paddingTop: '120px', paddingBottom: '20px'}}>
             <MainDiv>
                 <PostDiv>
@@ -130,6 +133,12 @@ const EventsShowPage = (props) =>  {
                 </Div>
             </MainDiv>
         </div>
+          :
+          <div>
+              {history.push('/sign-in')}
+          </div>
+      }
+      </div>
     )
 }
 

@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import User from '../search/user.js'
+import history from '../../history.js'
 
 class Followers extends React.Component {
     state = {
@@ -69,6 +70,9 @@ class Followers extends React.Component {
         console.log(users)
         
         return(
+            <div>
+                {localStorage.getItem('token')
+                    ?
                 <Container style ={{maxWidth: '100%', paddingTop: '120px'}}>
                     <div>
                         <Search  autocomplete= "off" name = "search" placeholder = "Search" onChange = { (e) => this.setState({search: e.target.value}) }/>
@@ -86,6 +90,12 @@ class Followers extends React.Component {
                             }
                     </div>
                 </Container>
+                 :
+                 <div>
+                     {history.push('/sign-in')}
+                 </div>
+             }
+             </div>
         )
 
     }

@@ -68,6 +68,9 @@ const ProfilePage = (props) => {
     }, [chosenUser.id])
 
         return(
+            <div>
+            {localStorage.getItem('token')
+                ?
                 <Container style ={{maxWidth: '100%'}}>
                     <Row style={{height: '90vh'}}>
                         <Col style = {{padding: '0'}} sm = {3}>
@@ -116,6 +119,12 @@ const ProfilePage = (props) => {
                         </Col>
                     </Row>
                 </Container>
+                 :
+                 <div>
+                     {history.push('/sign-in')}
+                 </div>
+             }
+             </div>
         )
 
     }

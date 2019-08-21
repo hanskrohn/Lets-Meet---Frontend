@@ -50,62 +50,71 @@ const ProfilePage = (props) => {
     }, [ props.currentUser.id ])
 
     return (
-        <Container style={{ maxWidth: '100%' }}>
-            <Row style={{ height: '90vh' }}>
-                <Col style={{ padding: '0' }} sm={3}>
-                    <DivStyle>
-                        <Profile user={props.currentUser} />
-                        <SignOut>
-                            <Btn  onClick={() => {
-                                localStorage.clear()
-                                props.history.push('/sign-in')}
-                            }>
-                                <h3><strong>Sign-Out</strong></h3>
-                            </Btn>
-                        </SignOut>
-                    </DivStyle>
-                </Col>
-                <Col sm={9}>
-                    <Hub>
-                        <Row >
-                            <Col style = {{flex: '40', padding: '0'}}>
-                                <div style={{ paddingTop: '100px', textAlign: 'center' }}>
-                                    <div style={{ fontSize: '75px' }}>
-                                        <strong>{props.usersPost.length}</strong>
-                                    </div>
-                                    <div style={{ fontSize: '25px' }}>
-                                        <h1><strong>Post</strong></h1>
-                                    </div>
-                                </div>
+        <div>
+                {localStorage.getItem('token')
+                    ?
+                    <Container style={{ maxWidth: '100%' }}>
+                        <Row style={{ height: '90vh' }}>
+                            <Col style={{ padding: '0' }} sm={3}>
+                                <DivStyle>
+                                    <Profile user={props.currentUser} />
+                                    <SignOut>
+                                        <Btn  onClick={() => {
+                                            localStorage.clear()
+                                            props.history.push('/sign-in')}
+                                        }>
+                                            <h3><strong>Sign-Out</strong></h3>
+                                        </Btn>
+                                    </SignOut>
+                                </DivStyle>
                             </Col>
-                            <Col style = {{flex: '20', padding: '0'}} >
-                                <div style={{ paddingTop: '100px', cursor: 'pointer', textAlign: 'center'  }} onClick={() => history.push(`/followers/${props.currentUser.id}`)}>
-                                    <div style={{ fontSize: '75px' }}>
-                                        <strong>{props.followers.length}</strong>
-                                    </div>
-                                    <div style={{ fontSize: '25px' }}>
-                                        <h1><strong>Followers</strong></h1>
-                                    </div>
-                                </div>
-                            </Col>
-                            <Col style = {{flex: '40', padding: '0'}}>
-                                <div style={{ paddingTop: '100px', cursor: 'pointer', textAlign: 'center'  }} onClick={() => history.push(`/following/${props.currentUser.id}`)}>
-                                    <div style={{ fontSize: '75px' }}>
-                                        <strong>{props.following.length}</strong>
-                                    </div>
-                                    <div style={{ fontSize: '25px' }}>
-                                        <h1><strong>Following</strong></h1>
-                                    </div>
-                                </div>
+                            <Col sm={9}>
+                                <Hub>
+                                    <Row >
+                                        <Col style = {{flex: '40', padding: '0'}}>
+                                            <div style={{ paddingTop: '100px', textAlign: 'center' }}>
+                                                <div style={{ fontSize: '75px' }}>
+                                                    <strong>{props.usersPost.length}</strong>
+                                                </div>
+                                                <div style={{ fontSize: '25px' }}>
+                                                    <h1><strong>Post</strong></h1>
+                                                </div>
+                                            </div>
+                                        </Col>
+                                        <Col style = {{flex: '20', padding: '0'}} >
+                                            <div style={{ paddingTop: '100px', cursor: 'pointer', textAlign: 'center'  }} onClick={() => history.push(`/followers/${props.currentUser.id}`)}>
+                                                <div style={{ fontSize: '75px' }}>
+                                                    <strong>{props.followers.length}</strong>
+                                                </div>
+                                                <div style={{ fontSize: '25px' }}>
+                                                    <h1><strong>Followers</strong></h1>
+                                                </div>
+                                            </div>
+                                        </Col>
+                                        <Col style = {{flex: '40', padding: '0'}}>
+                                            <div style={{ paddingTop: '100px', cursor: 'pointer', textAlign: 'center'  }} onClick={() => history.push(`/following/${props.currentUser.id}`)}>
+                                                <div style={{ fontSize: '75px' }}>
+                                                    <strong>{props.following.length}</strong>
+                                                </div>
+                                                <div style={{ fontSize: '25px' }}>
+                                                    <h1><strong>Following</strong></h1>
+                                                </div>
+                                            </div>
+                                        </Col>
+                                    </Row>
+                                </Hub>
+                                <PostContainer>
+                                    {props.usersPost.length !== 0 ? props.usersPost.map((post) => <Posts item={post} />) : <div style = {{textAlign: 'center', marginTop: '20%', fontSize: '200%'}}>See your Posts here </div>}
+                                </PostContainer>
                             </Col>
                         </Row>
-                    </Hub>
-                    <PostContainer>
-                        {props.usersPost.length !== 0 ? props.usersPost.map((post) => <Posts item={post} />) : <div style = {{textAlign: 'center', marginTop: '20%', fontSize: '200%'}}>See your Posts here </div>}
-                    </PostContainer>
-                </Col>
-            </Row>
-        </Container>
+                    </Container>
+                     :
+                     <div>
+                         {history.push('/sign-in')}
+                     </div>
+                 }
+                 </div>
     )
 }
 

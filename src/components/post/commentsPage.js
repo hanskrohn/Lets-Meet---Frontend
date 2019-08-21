@@ -78,6 +78,9 @@ const CommentsPage = (props) => {
     
     console.log(history)
     return(
+        <div>
+                {localStorage.getItem('token')
+                    ?
         <div style = {{paddingTop: '120px', paddingBottom: '20px'}}>
             <MainDiv>
                 <PostDiv>
@@ -111,6 +114,12 @@ const CommentsPage = (props) => {
                 </FormDiv>
             </MainDiv>
         </div>
+        :
+        <div>
+            {history.push('/sign-in')}
+        </div>
+    }
+    </div>
     )
 }
 

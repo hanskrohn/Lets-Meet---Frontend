@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import styled from 'styled-components'
-
+import history from '../../history.js'
 
 import './Browse.css'
 
@@ -57,30 +57,39 @@ class Browse extends React.Component {
     render(){
         console.log("props", this.props)
         return(
-                <Container style ={{maxWidth: '100%'}}>
-                    <Row style={{height: '90vh'}}>
-                        <Col  sm = {3} style = {{padding: '0'}}>
-                            <DivStyle>
-                                <PostForm createPost = {this.createPost}/>
-                            </DivStyle>    
-                            
-                        </Col>
-                        <Col  sm = {9}>
-                            <div style = {{paddingTop: '120px', paddingBottom: '20px'}}>
-                                {this.props.post.length !== 0 
-                                    ? 
-                                        <Div> 
-                                            {this.props.post.map((item) => <Posts key = {item.id} currentUser = {this.props.currentUser} item = {item} /> )}
-                                        </Div>
-                                    : 
-                                        <div style = {{textAlign: 'center', marginTop: '20%', fontSize: '250%'}}>
-                                            Create or Follow Users to see Posts 
-                                        </div>
-                                }   
-                            </div>
-                        </Col>
-                    </Row>
-                </Container>
+                <div>
+                {localStorage.getItem('token')
+                    ?
+                    <Container style ={{maxWidth: '100%'}}>
+                        <Row style={{height: '90vh'}}>
+                            <Col  sm = {3} style = {{padding: '0'}}>
+                                <DivStyle>
+                                    <PostForm createPost = {this.createPost}/>
+                                </DivStyle>    
+                                
+                            </Col>
+                            <Col  sm = {9}>
+                                <div style = {{paddingTop: '120px', paddingBottom: '20px'}}>
+                                    {this.props.post.length !== 0 
+                                        ? 
+                                            <Div> 
+                                                {this.props.post.map((item) => <Posts key = {item.id} currentUser = {this.props.currentUser} item = {item} /> )}
+                                            </Div>
+                                        : 
+                                            <div style = {{textAlign: 'center', marginTop: '20%', fontSize: '250%'}}>
+                                                Create or Follow Users to see Posts 
+                                            </div>
+                                    }   
+                                </div>
+                            </Col>
+                        </Row>
+                    </Container>
+                    :
+                    <div>
+                        {history.push('/sign-in')}
+                    </div>
+                }
+                </div>
         )
 
     }

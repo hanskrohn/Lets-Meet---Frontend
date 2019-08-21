@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import User from './user.js'
+import history from '../../history.js'
 
 class ProfilePage extends React.Component {
     state = {
@@ -57,7 +58,10 @@ class ProfilePage extends React.Component {
         }
         
         return(
-                <Container style ={{maxWidth: '100%', paddingTop: '120px'}}>
+            <div>
+            {localStorage.getItem('token')
+                ? 
+               <Container style ={{maxWidth: '100%', paddingTop: '120px'}}>
                     <div>
                         <Search  autocomplete= "off" name = "search" placeholder = "Search" onChange = { (e) => this.setState({search: e.target.value}) }/>
                     </div>
@@ -89,6 +93,12 @@ class ProfilePage extends React.Component {
                         
                     </div>
                 </Container>
+                 :
+                 <div>
+                     {history.push('/sign-in')}
+                 </div>
+             }
+             </div>
         )
 
     }

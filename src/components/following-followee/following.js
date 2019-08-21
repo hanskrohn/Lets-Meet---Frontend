@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import User from './user.js'
+import history from '../../history.js'
 
 class Following extends React.Component {
     state = {
@@ -53,6 +54,9 @@ class Following extends React.Component {
         }
         console.log(users)
         return(
+            <div>
+                {localStorage.getItem('token')
+                    ?
                 <Container style ={{maxWidth: '100%', paddingTop: '120px'}}>
                     <div>
                         <Search  autocomplete= "off" name = "search" placeholder = "Search" onChange = { this.handleSearch }/>
@@ -70,6 +74,13 @@ class Following extends React.Component {
                         }
                     </div>
                 </Container>
+                  :
+                  <div>
+                      {history.push('/sign-in')}
+                  </div>
+              }
+              </div>
+                
         )
 
     }
