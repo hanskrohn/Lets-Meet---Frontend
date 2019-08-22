@@ -1,7 +1,7 @@
 import React from 'react'
 import history from '../../history'
 import styled from 'styled-components'
-
+import { connect } from 'react-redux'
 
 class User extends React.Component  {
 
@@ -16,7 +16,7 @@ class User extends React.Component  {
                         <div style = {{ flex: '10' }}>
                             <Img src = {this.props.user.profile_url}/>
                         </div>
-                        <div style = {{ flex: '90', marginTop: '3%' }}>
+                        <div style = {{ flex: '90', marginTop: '2%' }}>
                             <h3 >{this.props.user.username}</h3>
                         </div>
                     </DivSpecial>
@@ -24,8 +24,12 @@ class User extends React.Component  {
                 
                 <div style = {{flex: '15', paddingTop: '10px' }}>
                     
-                    <UnfollowBtn onClick = {() => this.props.unfollow(this.props.user)}  style = {{outline: 'none'}} ><strong style = {{fontSize: '15px'}}>Unfollow</strong></UnfollowBtn>
-                
+                    {this.props.user.id !== this.props.currentUser.id
+                        ?
+                        <UnfollowBtn onClick = {this.unfollow}  style = {{outline: 'none'}} ><strong style = {{fontSize: '15px'}}>Unfollow</strong></UnfollowBtn>
+                        :
+                        null
+                    }
                 </div>
             </Div>
         </div>
@@ -33,7 +37,11 @@ class User extends React.Component  {
     }
 }
 
-export default (User)
+const mapStateToProps = state => ({
+    currentUser: state.currentUser
+})
+
+export default connect (mapStateToProps)(User)
 
 const cardHeight = 75
 

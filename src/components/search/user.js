@@ -1,6 +1,7 @@
 import React from 'react'
 import history from '../../history'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
 
 
 class User extends React.Component  {
@@ -44,7 +45,7 @@ class User extends React.Component  {
     }
 
     render(){
-        console.log(this.state.follow)
+        console.log(this.props)
         return(
                  <div style = {{paddingTop: '3%'}} > 
                     <Div > 
@@ -62,9 +63,23 @@ class User extends React.Component  {
                         <div style = {{flex: '15', paddingTop: '10px' }}>
                             {this.state.follow 
                             ? 
-                            <UnfollowBtn onClick = {this.unfollow}  style = {{outline: 'none'}} ><strong style = {{fontSize: '15px'}}>Unfollow</strong></UnfollowBtn>
+                            <div>
+                                {this.props.user.id !== this.props.currentUser.id
+                                    ?
+                                    <UnfollowBtn onClick = {this.unfollow}  style = {{outline: 'none'}} ><strong style = {{fontSize: '15px'}}>Unfollow</strong></UnfollowBtn>
+                                    :
+                                    null
+                                }
+                            </div>
                             :
-                            <FollowBtn onClick = {this.follow}  style = {{outline: 'none'}} ><strong style = {{fontSize: '15px'}}>Follow</strong></FollowBtn>
+                            <div>
+                                {this.props.user.id !== this.props.currentUser.id
+                                    ?
+                                    <FollowBtn onClick = {this.follow}  style = {{outline: 'none'}} ><strong style = {{fontSize: '15px'}}>Follow</strong></FollowBtn>
+                                   :
+                                    null
+                                }
+                            </div>
                             }
                         </div>
                     </Div>
@@ -74,7 +89,11 @@ class User extends React.Component  {
     }
 }
 
-export default (User)
+const mapStateToProps = state => ({
+    currentUser: state.currentUser
+})
+
+export default connect (mapStateToProps)(User)
 
 const cardHeight = 75
 
