@@ -50,6 +50,25 @@
 
   
   
-  
+  @media only screen and (max-height: 1000px){
+    .bio{
+        height: 33vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        width: 100%;
+
+    }
+
+    }
+    @media only screen and (max-height: 800px){
+        .bio{
+            height: 20vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            width: 100%;
+    
+        }
+    
+        }
   
  

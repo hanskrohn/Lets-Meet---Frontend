@@ -76,8 +76,8 @@ const ProfilePage = (props) => {
                                                 <div style={{ fontSize: '75px' }}>
                                                     <strong>{props.usersPost.length}</strong>
                                                 </div>
-                                                <div style={{ fontSize: '25px' }}>
-                                                    <h1><strong>Post</strong></h1>
+                                                <div >
+                                                    <h1 style={{ fontSize: '20px' }}><strong>Post</strong></h1>
                                                 </div>
                                             </div>
                                         </Col>
@@ -86,8 +86,8 @@ const ProfilePage = (props) => {
                                                 <div style={{ fontSize: '75px' }}>
                                                     <strong>{props.followers.length}</strong>
                                                 </div>
-                                                <div style={{ fontSize: '25px' }}>
-                                                    <h1><strong>Followers</strong></h1>
+                                                <div >
+                                                    <h1 style={{ fontSize: '20px' }}><strong>Followers</strong></h1>
                                                 </div>
                                             </div>
                                         </Col>
@@ -96,8 +96,8 @@ const ProfilePage = (props) => {
                                                 <div style={{ fontSize: '75px' }}>
                                                     <strong>{props.following.length}</strong>
                                                 </div>
-                                                <div style={{ fontSize: '25px' }}>
-                                                    <h1><strong>Following</strong></h1>
+                                                <div >
+                                                    <h1 style={{ fontSize: '20px' }}><strong>Following</strong></h1>
                                                 </div>
                                             </div>
                                         </Col>
