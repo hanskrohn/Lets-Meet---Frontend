@@ -18,38 +18,31 @@ const SignupForm =connect(null, mapDispatchToProps)((props) => {
           'username': e.target['username'].value,
           'password': e.target['password'].value,
         }
-          fetch('http://localhost:3000/signup',{
-              method: 'POST',
-              body: new FormData(e.target)
-            }).then(res => {
-              if(res.statusText === "Internal Server Error"){
-                  alert('Username or Email already taken. Please select another.')
-              }
-              else{
-                  res.json()
-              }
-            })
-            .then(user => {
+        fetch('http://localhost:3000/signup',{
+            method: 'POST',
+            body: new FormData(e.target)
+        }).then(res => res.json())
+        .then(user => {
+            if(user.message == "Success"){
                 fetch('http://localhost:3000/login',{
-                    method: 'POST',
-                    headers:{
-                        'Content-Type':'application/json'
-                    },
-                    body:JSON.stringify(response)
-                    })
-                    .then(res => res.json())
-                    .then(user => {
-                    if(user.message === "Login Failed"){
-                        alert('Username or Password Incorrect. Please try again.')
-                    }
-                    else{
-                        localStorage.setItem('token', user.auth_token)
-                        history.push('/sign-up/2')
-                    }
+                method: 'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify(response)
+                })
+                .then(res => res.json())
+                .then(user => {
+                    localStorage.setItem('token', user.auth_token)
+                    history.push('/sign-up/2')
+                })
+            }
+            else{
+                alert(user.message)
+            }   
             })
-        })
+        }
         
-    }
         return(
           
             <div className = "backGroundImage">

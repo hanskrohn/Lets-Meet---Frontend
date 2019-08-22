@@ -229,7 +229,7 @@ const Profile = (props) => {
                     <h4>{props.user.city}</h4>
                 </div>
                 <br></br>
-                <div>
+                <div style = {{height: '22vh', overflowY: 'auto', overflowX: 'hidden', width: '100%'}}>
                     <h5>{props.user.bio}</h5>
                 </div>
             </Div>
