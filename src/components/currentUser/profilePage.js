@@ -61,7 +61,7 @@ const ProfilePage = (props) => {
                                     <SignOut>
                                         <Btn  onClick={() => {
                                             localStorage.clear()
-                                            props.history.push('/sign-in')}
+                                            window.location = '/sign-in'}
                                         }>
                                             <h3><strong>Sign-Out</strong></h3>
                                         </Btn>
