@@ -73,6 +73,7 @@ class Browse extends React.Component {
                                     {this.props.post.length !== 0 
                                         ? 
                                             <Div> 
+                                                {console.log(this.props.post)}
                                                 {this.props.post.map((item) => <Posts key = {item.id} currentUser = {this.props.currentUser} item = {item} /> )}
                                             </Div>
                                         : 
